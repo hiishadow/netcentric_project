@@ -10,12 +10,17 @@ enum Message {
 	updateLeaderBoard,
 	sendTimeUsage,
 	confirmConnection,
-	test
+	requestSeed,
+	setSeed,
+	getUserCount,
+	showModal
 }
 
+var game = preload("res://scenes/front/game.tscn")
 var peer = WebSocketMultiplayerPeer.new()
 var id = -1  # Initialize to -1 to check for unassigned ID
 var player_attributes = {"name": "", "score": 0}  # Self attributes for the player
+
 
 func _process(delta: float) -> void:
 	peer.poll()
@@ -24,6 +29,7 @@ func _process(delta: float) -> void:
 		if packet != null:
 			var dataString = packet.get_string_from_utf8()
 			var data = JSON.parse_string(dataString)
+			#print(OS.get_process_id())
 			print("Client received packet: " + str(data))
 			
 			match int(data.message):
@@ -32,6 +38,12 @@ func _process(delta: float) -> void:
 				Message.setID:
 					id = data.data
 					print("Assigned ID: " + str(id))
+					#FIXME
+					#request for seed
+					send_to_server({
+						"message": Message.requestSeed,
+						"client_id": id
+					})
 				Message.newUserConnected:
 					print("User connected: " + str(data.data))
 					handleNewUserConnected(data.data)
@@ -40,6 +52,14 @@ func _process(delta: float) -> void:
 				Message.updateUserAttributes:
 					print("Player attributes updated: " + str(data.data))
 					handleUpdateUserAttributes(data.data)
+				Message.setSeed:
+					setSeed(data.data)
+				Message.getUserCount:
+					if data.data == 2:
+						get_parent().get_node("Game").get_node("ReadyPanel").change()
+					get_parent().get_node("Game").get_node("GameManager").display_player_count(data.data)
+				Message.showModal:
+					show_modal(data.data)
 				_:
 					print("Unknown message type")
 
@@ -49,9 +69,14 @@ func connectToServer(ip):
 		print("Error connecting to server: " + str(error))
 	else:
 		print("Started client")
-
-func _on_start_client_pressed() -> void:
-	connectToServer("127.0.0.1")
+		#wait for client to connect to server (poll to open) or 
+		#just send to server and let it send back as packet and run on client that time
+		await get_tree().create_timer(0.05).timeout
+		var game_instant = game.instantiate()
+		get_parent().add_child(game_instant)
+		send_to_server({"message": Message.getUserCount,"client_id": id})
+		send_to_server({"message": Message.showModal,"client_id": id})
+		show_modal("Welcome")
 
 func handleNewUserConnected(data) -> void:
 	# pop up show new user connected
@@ -63,7 +88,15 @@ func handleUpdateUserAttributes(data)-> void:
 func handleConfirmConnection():
 	# close home page to start game page
 	pass
-	
+
+func setSeed(seed):
+	print(seed)
+	get_parent().rng.seed = seed
+
+func send_to_server(message):
+	peer.get_peer(1).put_packet(JSON.stringify(message).to_utf8_buffer())
+	pass
+
 func assignPlayerName(name) -> void:
 	if id != -1:
 		player_attributes["name"] = name
@@ -77,3 +110,5 @@ func assignPlayerName(name) -> void:
 	else:
 		print("Client ID not assigned yet.")
 	
+func show_modal(name):
+	get_parent().get_node("Game").get_node(name).visible = true

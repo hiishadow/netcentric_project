@@ -4,17 +4,3 @@
 
 [node name="Client" type="Node"]
 script = ExtResource("1_e6yjr")
-
-[node name="GameView" type="Panel" parent="."]
-visible = false
-offset_right = 686.0
-offset_bottom = 402.0
-
-[node name="Button" type="Button" parent="GameView"]
-layout_mode = 0
-offset_left = 248.0
-offset_top = 163.0
-offset_right = 457.0
-offset_bottom = 245.0
-text = "Pluem
-"

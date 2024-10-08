@@ -1,7 +1,7 @@
 extends Node
 
+var main
 var sign_node = preload("res://scenes/front/sign_panel.tscn")
-var rng = RandomNumberGenerator.new()
 var play_zone = []
 var play_zone_card_slot = []
 var play_zone_sign_slot = []
@@ -17,15 +17,13 @@ var can_submit: bool = false
 var can_delete: bool = false
 
 func _ready() -> void:
-	rng.randomize()
-	#rng.seed = -1826293103988934521
-	print(rng.seed)
+	main = get_tree().root.get_child(0)
 	
 	slot_path()
 	
-	generate_target_and_numbers()
+	#generate_target_and_numbers()
 	
-	set_up_card_panel()
+	#set_up_card_panel()
 
 func slot_path():
 	play_zone_card_slot = [
@@ -74,7 +72,7 @@ func generate_target_and_numbers():
 	var used_num = []
 	var j = 0
 	while j < 5:
-		var num = rng.randi_range(1, 9)
+		var num = main.rng.randi_range(1, 9)
 		if used_num.find(num) != - 1: continue
 		used_num.append(num)
 		j += 1
@@ -98,7 +96,7 @@ func generate_target_and_numbers():
 				$"../Numbers/CardPanel5".number = used_num[4]
 				$"../Numbers/CardPanel5".set_label()
 	
-	var num = rng.randi_range(1, 9)
+	var num = main.rng.randi_range(1, 9)
 	%TargetPanel.get_node("Label").text = str(num)
 
 func calculate_card_slot(card):
@@ -144,6 +142,17 @@ func calculate_sign_slot(sign_):
 		get_tree().root.get_node("main").get_node("Game").add_child(signn_, true)
 		recent_sign_slot += 1
 		play_zone.append(signn_)
+
+func display_player_count(count):
+	print(count) #TODO
+	if count == 1:
+		$"../P1Name".visible = true
+		$"../P1Score".visible = true
+	elif count == 2:
+		$"../P1Name".visible = true
+		$"../P1Score".visible = true
+		$"../P2Name".visible = true
+		$"../P2Score".visible = true
 
 func delete():
 	if play_zone.size() == 0: return

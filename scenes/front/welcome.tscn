@@ -1,5 +1,6 @@
-[gd_scene load_steps=10 format=3 uid="uid://bgpv5q10qgg3r"]
+[gd_scene load_steps=11 format=3 uid="uid://bgpv5q10qgg3r"]
 
+[ext_resource type="Script" path="res://scripts/front/welcome.gd" id="1_fe1r1"]
 [ext_resource type="Shader" path="res://tres/blur_shader.gdshader" id="1_fjgli"]
 [ext_resource type="Texture2D" uid="uid://drhpp5pp5uh63" path="res://icon.svg" id="2_xsnlg"]
 [ext_resource type="FontFile" uid="uid://bt5pn0ptnei0q" path="res://fonts/Bungee/Bungee-Regular.ttf" id="3_l60vq"]
@@ -51,9 +52,11 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+script = ExtResource("1_fe1r1")
 
 [node name="TextureRect" type="TextureRect" parent="."]
 material = SubResource("ShaderMaterial_h6wv1")
+layout_mode = 0
 offset_left = -805.0
 offset_top = -602.0
 offset_right = 2125.0
@@ -61,11 +64,13 @@ offset_bottom = 1484.0
 texture = ExtResource("2_xsnlg")
 
 [node name="Panel" type="Panel" parent="."]
+layout_mode = 0
 offset_right = 1200.0
 offset_bottom = 600.0
 theme_override_styles/panel = SubResource("StyleBoxFlat_027ds")
 
 [node name="Panel2" type="Panel" parent="."]
+layout_mode = 0
 offset_left = 10.0
 offset_top = 10.0
 offset_right = 1190.0
@@ -73,6 +78,7 @@ offset_bottom = 590.0
 theme_override_styles/panel = SubResource("StyleBoxFlat_stn4u")
 
 [node name="Label" type="Label" parent="."]
+layout_mode = 0
 offset_top = 40.0
 offset_right = 1200.0
 offset_bottom = 240.0
@@ -84,6 +90,7 @@ horizontal_alignment = 1
 vertical_alignment = 1
 
 [node name="Label2" type="Label" parent="."]
+layout_mode = 0
 offset_top = 200.0
 offset_right = 1200.0
 offset_bottom = 400.0
@@ -95,6 +102,7 @@ horizontal_alignment = 1
 vertical_alignment = 1
 
 [node name="Close" type="Control" parent="."]
+unique_name_in_owner = true
 layout_mode = 3
 anchors_preset = 0
 offset_left = 660.0
@@ -134,6 +142,7 @@ offset_right = 320.0
 offset_bottom = 110.0
 
 [node name="Rules" type="Control" parent="."]
+unique_name_in_owner = true
 layout_mode = 3
 anchors_preset = 0
 offset_left = 215.0
@@ -141,7 +150,7 @@ offset_top = 420.0
 offset_right = 255.0
 offset_bottom = 460.0
 
-[node name="Panel3" type="Panel" parent="Rules"]
+[node name="Panel33" type="Panel" parent="Rules"]
 layout_mode = 0
 offset_right = 320.0
 offset_bottom = 110.0
@@ -166,7 +175,15 @@ horizontal_alignment = 1
 vertical_alignment = 1
 
 [node name="ClickArea2" type="Panel" parent="Rules"]
+unique_name_in_owner = true
 self_modulate = Color(1, 1, 1, 0)
 layout_mode = 0
 offset_right = 320.0
 offset_bottom = 110.0
+
+[connection signal="gui_input" from="Close/ClickArea" to="." method="_on_click_area_gui_input"]
+[connection signal="mouse_entered" from="Close/ClickArea" to="." method="_on_click_area_mouse_entered"]
+[connection signal="mouse_exited" from="Close/ClickArea" to="." method="_on_click_area_mouse_exited"]
+[connection signal="gui_input" from="Rules/ClickArea2" to="." method="_on_click_area_2_gui_input"]
+[connection signal="mouse_entered" from="Rules/ClickArea2" to="." method="_on_click_area_2_mouse_entered"]
+[connection signal="mouse_exited" from="Rules/ClickArea2" to="." method="_on_click_area_2_mouse_exited"]

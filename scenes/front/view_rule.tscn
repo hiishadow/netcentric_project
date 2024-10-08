@@ -1,6 +1,7 @@
-[gd_scene load_steps=5 format=3 uid="uid://2sqnqctq3w11"]
+[gd_scene load_steps=6 format=3 uid="uid://2sqnqctq3w11"]
 
 [ext_resource type="FontFile" uid="uid://bt5pn0ptnei0q" path="res://fonts/Bungee/Bungee-Regular.ttf" id="1_4n7oj"]
+[ext_resource type="Script" path="res://scripts/front/view_rule.gd" id="1_a0tdp"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_jaufc"]
 bg_color = Color(0.980392, 0.980392, 0.980392, 1)
@@ -28,8 +29,11 @@ layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
+offset_right = -150.0
+offset_bottom = -740.0
 grow_horizontal = 2
 grow_vertical = 2
+script = ExtResource("1_a0tdp")
 
 [node name="PlayZone" type="Panel" parent="."]
 layout_mode = 0
@@ -50,6 +54,7 @@ horizontal_alignment = 1
 vertical_alignment = 1
 
 [node name="Close" type="Control" parent="."]
+unique_name_in_owner = true
 layout_mode = 3
 anchors_preset = 0
 offset_left = 1120.0
@@ -88,3 +93,7 @@ self_modulate = Color(1, 1, 1, 0)
 layout_mode = 0
 offset_right = 450.0
 offset_bottom = 240.0
+
+[connection signal="gui_input" from="Close/ClickArea" to="." method="_on_click_area_gui_input"]
+[connection signal="mouse_entered" from="Close/ClickArea" to="." method="_on_click_area_mouse_entered"]
+[connection signal="mouse_exited" from="Close/ClickArea" to="." method="_on_click_area_mouse_exited"]

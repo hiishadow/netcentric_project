@@ -8,7 +8,10 @@ enum Message {
 	updateLeaderBoard,
 	sendTimeUsage,
 	confirmConnection,
-	test
+	requestSeed,
+	setSeed,
+	getUserCount,
+	showModal
 }
 
 var peer = WebSocketMultiplayerPeer.new()
@@ -26,19 +29,27 @@ func _process(delta: float) -> void:
 			var dataString = packet.get_string_from_utf8()
 			var data = JSON.parse_string(dataString)
 			var sender_id = data.client_id # Get the ID of the sender
+			#print(OS.get_process_id())
 			print("Server received from peer " + str(sender_id) + ": " + str(data))
 
 			if data.has("message"):
 				handle_message(data, sender_id)
 
 func handle_message(data, sender_id):
-	match data.message:
+	match int(data.message):
 		Message.updateUserAttributes:
 			# Update the user's attributes on the server
 			if data.has("data") and sender_id in clients:
 				clients[sender_id].attributes = data.data
 				broadcast_to_all({"message": Message.updateUserAttributes, "data": clients[sender_id]})
-		# Add more cases as needed
+		Message.requestSeed:
+			send_to_client(sender_id, {"message": Message.setSeed,"data": get_parent().rng.seed})
+		Message.getUserCount:
+			broadcast_to_all({"message": Message.getUserCount, "data": clients.size()})
+		Message.showModal:
+			if clients.size() >= 2:
+				broadcast_to_all({"message": Message.showModal,"data": "ViewRule"})
+			
 
 func peer_connected(id):
 	print("Peer Connected: " + str(id))
@@ -59,6 +70,7 @@ func peer_connected(id):
 		"message": Message.newUserConnected,
 		"data": clients[id]
 	})
+	
 
 func peer_disconnected(id):
 	print("Peer Disconnected: " + str(id))
@@ -82,6 +94,7 @@ func startServer():
 		print("Error starting server: " + str(error))
 	else:
 		print("Started Server")
+		
 
 func _on_start_server_pressed() -> void:
 	startServer()

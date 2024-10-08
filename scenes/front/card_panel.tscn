@@ -1,0 +1,66 @@
+[gd_scene load_steps=5 format=3 uid="uid://kgybfj0gkb47"]
+
+[ext_resource type="FontFile" uid="uid://cte7cnlvusfar" path="res://fonts/Bungee_Shade/BungeeShade-Regular.ttf" id="1_jow5b"]
+[ext_resource type="Script" path="res://scripts/front/card_panel.gd" id="1_mn2w0"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_uaiyo"]
+resource_local_to_scene = true
+bg_color = Color(1, 1, 1, 1)
+corner_radius_top_left = 12
+corner_radius_top_right = 12
+corner_radius_bottom_right = 12
+corner_radius_bottom_left = 12
+shadow_color = Color(0, 0, 0, 0.0980392)
+shadow_size = 6
+shadow_offset = Vector2(0, 4)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_p4if5"]
+bg_color = Color(0.882353, 0.341176, 0.301961, 1)
+corner_radius_top_left = 8
+corner_radius_top_right = 8
+corner_radius_bottom_right = 8
+corner_radius_bottom_left = 8
+
+[node name="CardPanel" type="Control"]
+z_index = 1
+layout_mode = 3
+anchors_preset = 0
+offset_right = 144.0
+offset_bottom = 206.0
+script = ExtResource("1_mn2w0")
+
+[node name="Panel2" type="Panel" parent="."]
+layout_mode = 0
+offset_right = 144.0
+offset_bottom = 206.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_uaiyo")
+
+[node name="Panel" type="Panel" parent="."]
+layout_mode = 0
+offset_left = 5.0
+offset_top = 5.0
+offset_right = 139.0
+offset_bottom = 201.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_p4if5")
+
+[node name="Label" type="Label" parent="."]
+unique_name_in_owner = true
+layout_mode = 0
+offset_right = 144.0
+offset_bottom = 206.0
+theme_override_fonts/font = ExtResource("1_jow5b")
+theme_override_font_sizes/font_size = 110
+text = "1"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="ClickArea" type="Panel" parent="."]
+self_modulate = Color(1, 1, 1, 0)
+z_index = 100
+layout_mode = 0
+offset_right = 144.0
+offset_bottom = 206.0
+
+[connection signal="gui_input" from="ClickArea" to="." method="_on_click_area_gui_input"]
+[connection signal="mouse_entered" from="ClickArea" to="." method="_on_click_area_mouse_entered"]
+[connection signal="mouse_exited" from="ClickArea" to="." method="_on_click_area_mouse_exited"]

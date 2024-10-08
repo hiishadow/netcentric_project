@@ -1,0 +1,17 @@
+[gd_scene load_steps=2 format=3 uid="uid://cw2c8fcsrep15"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_auo0u"]
+resource_local_to_scene = true
+bg_color = Color(0.984314, 0.917647, 0.913725, 1)
+corner_radius_top_left = 12
+corner_radius_top_right = 12
+corner_radius_bottom_right = 12
+corner_radius_bottom_left = 12
+shadow_color = Color(0, 0, 0, 0.0980392)
+shadow_size = 6
+shadow_offset = Vector2(0, 5)
+
+[node name="PlayCardHolderPanel" type="Panel"]
+offset_right = 172.0
+offset_bottom = 247.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_auo0u")

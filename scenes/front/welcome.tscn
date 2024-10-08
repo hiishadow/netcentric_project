@@ -1,0 +1,172 @@
+[gd_scene load_steps=10 format=3 uid="uid://bgpv5q10qgg3r"]
+
+[ext_resource type="Shader" path="res://tres/blur_shader.gdshader" id="1_fjgli"]
+[ext_resource type="Texture2D" uid="uid://drhpp5pp5uh63" path="res://icon.svg" id="2_xsnlg"]
+[ext_resource type="FontFile" uid="uid://bt5pn0ptnei0q" path="res://fonts/Bungee/Bungee-Regular.ttf" id="3_l60vq"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_h6wv1"]
+shader = ExtResource("1_fjgli")
+shader_parameter/lod = 1.0
+shader_parameter/mix_percentage = 0.0
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_027ds"]
+bg_color = Color(0.894118, 0.533333, 0.235294, 1)
+corner_radius_top_left = 20
+corner_radius_top_right = 20
+corner_radius_bottom_right = 20
+corner_radius_bottom_left = 20
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_stn4u"]
+bg_color = Color(0.988235, 0.952941, 0.92549, 1)
+corner_radius_top_left = 20
+corner_radius_top_right = 20
+corner_radius_bottom_right = 20
+corner_radius_bottom_left = 20
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_nwlpb"]
+bg_color = Color(1, 1, 1, 1)
+corner_radius_top_left = 20
+corner_radius_top_right = 20
+corner_radius_bottom_right = 20
+corner_radius_bottom_left = 20
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_omul2"]
+bg_color = Color(0.882353, 0.341176, 0.301961, 1)
+corner_radius_top_left = 8
+corner_radius_top_right = 8
+corner_radius_bottom_right = 8
+corner_radius_bottom_left = 8
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_c2rnv"]
+bg_color = Color(0.933333, 0.619608, 0.596078, 1)
+corner_radius_top_left = 8
+corner_radius_top_right = 8
+corner_radius_bottom_right = 8
+corner_radius_bottom_left = 8
+
+[node name="Welcome" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="TextureRect" type="TextureRect" parent="."]
+material = SubResource("ShaderMaterial_h6wv1")
+offset_left = -805.0
+offset_top = -602.0
+offset_right = 2125.0
+offset_bottom = 1484.0
+texture = ExtResource("2_xsnlg")
+
+[node name="Panel" type="Panel" parent="."]
+offset_right = 1200.0
+offset_bottom = 600.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_027ds")
+
+[node name="Panel2" type="Panel" parent="."]
+offset_left = 10.0
+offset_top = 10.0
+offset_right = 1190.0
+offset_bottom = 590.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_stn4u")
+
+[node name="Label" type="Label" parent="."]
+offset_top = 40.0
+offset_right = 1200.0
+offset_bottom = 240.0
+theme_override_colors/font_color = Color(0.882353, 0.341176, 0.301961, 1)
+theme_override_fonts/font = ExtResource("3_l60vq")
+theme_override_font_sizes/font_size = 100
+text = "WELCOME!"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Label2" type="Label" parent="."]
+offset_top = 200.0
+offset_right = 1200.0
+offset_bottom = 400.0
+theme_override_colors/font_color = Color(0.85098, 0.176471, 0.12549, 1)
+theme_override_fonts/font = ExtResource("3_l60vq")
+theme_override_font_sizes/font_size = 150
+text = "PLY1NAME"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Close" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+offset_left = 660.0
+offset_top = 420.0
+offset_right = 700.0
+offset_bottom = 460.0
+
+[node name="Panel3" type="Panel" parent="Close"]
+layout_mode = 0
+offset_right = 320.0
+offset_bottom = 110.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_nwlpb")
+
+[node name="Panel4" type="Panel" parent="Close"]
+layout_mode = 0
+offset_left = 10.0
+offset_top = 10.0
+offset_right = 310.0
+offset_bottom = 100.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_omul2")
+
+[node name="Label3" type="Label" parent="Close"]
+layout_mode = 0
+offset_right = 320.0
+offset_bottom = 110.0
+theme_override_fonts/font = ExtResource("3_l60vq")
+theme_override_font_sizes/font_size = 65
+text = "CLOSE"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="ClickArea" type="Panel" parent="Close"]
+unique_name_in_owner = true
+self_modulate = Color(1, 1, 1, 0)
+layout_mode = 0
+offset_right = 320.0
+offset_bottom = 110.0
+
+[node name="Rules" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+offset_left = 215.0
+offset_top = 420.0
+offset_right = 255.0
+offset_bottom = 460.0
+
+[node name="Panel3" type="Panel" parent="Rules"]
+layout_mode = 0
+offset_right = 320.0
+offset_bottom = 110.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_nwlpb")
+
+[node name="Panel4" type="Panel" parent="Rules"]
+layout_mode = 0
+offset_left = 10.0
+offset_top = 10.0
+offset_right = 310.0
+offset_bottom = 100.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_c2rnv")
+
+[node name="Label3" type="Label" parent="Rules"]
+layout_mode = 0
+offset_right = 320.0
+offset_bottom = 110.0
+theme_override_fonts/font = ExtResource("3_l60vq")
+theme_override_font_sizes/font_size = 65
+text = "RULES"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="ClickArea2" type="Panel" parent="Rules"]
+self_modulate = Color(1, 1, 1, 0)
+layout_mode = 0
+offset_right = 320.0
+offset_bottom = 110.0

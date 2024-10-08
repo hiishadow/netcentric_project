@@ -1,12 +1,13 @@
-[gd_scene load_steps=5 format=3 uid="uid://bxprnu2uijnhj"]
+[gd_scene load_steps=6 format=3 uid="uid://bxprnu2uijnhj"]
 
-[ext_resource type="Script" path="res://scripts/main.gd" id="1_n7skm"]
+[ext_resource type="Script" path="res://scripts/back/main.gd" id="1_pxi0j"]
 [ext_resource type="Texture2D" uid="uid://cxnrd5wi3h60k" path="res://resources/7991634.jpg" id="2_p7jeu"]
-[ext_resource type="PackedScene" uid="uid://00r08b5jr0ki" path="res://scenes/client.tscn" id="3_wvk0r"]
-[ext_resource type="PackedScene" uid="uid://cyv5wvqsa34yg" path="res://scenes/server.tscn" id="4_u47lj"]
+[ext_resource type="PackedScene" uid="uid://00r08b5jr0ki" path="res://scenes/back/client.tscn" id="3_wvk0r"]
+[ext_resource type="PackedScene" uid="uid://cyv5wvqsa34yg" path="res://scenes/back/server.tscn" id="4_u47lj"]
+[ext_resource type="PackedScene" uid="uid://yucu3qavvca2" path="res://scenes/front/game.tscn" id="5_ba73v"]
 
 [node name="main" type="Node"]
-script = ExtResource("1_n7skm")
+script = ExtResource("1_pxi0j")
 
 [node name="HUD" type="CanvasLayer" parent="."]
 
@@ -78,6 +79,8 @@ unique_name_in_owner = true
 
 [node name="Server" parent="." instance=ExtResource("4_u47lj")]
 unique_name_in_owner = true
+
+[node name="Game" parent="." instance=ExtResource("5_ba73v")]
 
 [connection signal="pressed" from="Opening/StartAsClient" to="." method="_on_start_as_client_pressed"]
 [connection signal="pressed" from="Opening/StartAsServer" to="." method="_on_start_as_server_pressed"]

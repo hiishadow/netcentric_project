@@ -1,0 +1,83 @@
+[gd_scene load_steps=5 format=3 uid="uid://bxprnu2uijnhj"]
+
+[ext_resource type="Script" path="res://scripts/main.gd" id="1_n7skm"]
+[ext_resource type="Texture2D" uid="uid://cxnrd5wi3h60k" path="res://resources/7991634.jpg" id="2_p7jeu"]
+[ext_resource type="PackedScene" uid="uid://00r08b5jr0ki" path="res://scenes/client.tscn" id="3_wvk0r"]
+[ext_resource type="PackedScene" uid="uid://cyv5wvqsa34yg" path="res://scenes/server.tscn" id="4_u47lj"]
+
+[node name="main" type="Node"]
+script = ExtResource("1_n7skm")
+
+[node name="HUD" type="CanvasLayer" parent="."]
+
+[node name="header" type="Label" parent="HUD"]
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -190.0
+offset_top = 3.0
+offset_right = 195.0
+offset_bottom = 71.0
+grow_horizontal = 2
+text = "USER "
+
+[node name="user1" type="Label" parent="HUD"]
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -198.0
+offset_top = 174.0
+offset_right = 187.0
+offset_bottom = 242.0
+grow_horizontal = 2
+
+[node name="user2" type="Label" parent="HUD"]
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -196.0
+offset_top = 92.0
+offset_right = 189.0
+offset_bottom = 160.0
+grow_horizontal = 2
+
+[node name="Opening" type="Panel" parent="."]
+unique_name_in_owner = true
+offset_left = 3.0
+offset_top = 2.0
+offset_right = 1922.0
+offset_bottom = 1080.0
+
+[node name="StartAsClient" type="Button" parent="Opening"]
+layout_mode = 0
+offset_left = 1098.0
+offset_top = 220.0
+offset_right = 1615.0
+offset_bottom = 575.0
+text = "Start as Client
+"
+
+[node name="StartAsServer" type="Button" parent="Opening"]
+layout_mode = 0
+offset_left = 387.0
+offset_top = 209.0
+offset_right = 918.0
+offset_bottom = 571.0
+text = "Start As Server"
+
+[node name="ParallaxBackground" type="ParallaxBackground" parent="."]
+visible = false
+
+[node name="Sprite2D" type="Sprite2D" parent="ParallaxBackground"]
+scale = Vector2(0.75, 0.676875)
+texture = ExtResource("2_p7jeu")
+centered = false
+
+[node name="Client" parent="." instance=ExtResource("3_wvk0r")]
+unique_name_in_owner = true
+
+[node name="Server" parent="." instance=ExtResource("4_u47lj")]
+unique_name_in_owner = true
+
+[connection signal="pressed" from="Opening/StartAsClient" to="." method="_on_start_as_client_pressed"]
+[connection signal="pressed" from="Opening/StartAsServer" to="." method="_on_start_as_server_pressed"]

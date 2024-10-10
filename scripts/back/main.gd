@@ -3,7 +3,6 @@ extends Node
 var is_server = false
 var server = null
 var client = null
-var rng = RandomNumberGenerator.new()
 
 
 func _on_start_as_server_pressed() -> void:
@@ -12,11 +11,6 @@ func _on_start_as_server_pressed() -> void:
 	%HUD.get_node("header").text = "SERVER" + str(OS.get_process_id())
 	is_server = true
 	%Client.connectToServer("127.0.0.1")
-	
-	#FIXME LATER, works for now
-	rng.randomize()
-	print(rng.seed)
-
 
 
 func _on_start_as_client_pressed() -> void:

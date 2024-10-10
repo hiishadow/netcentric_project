@@ -1,66 +1,66 @@
-[gd_scene load_steps=10 format=3 uid="uid://dwxtua5310fs6"]
+[gd_scene load_steps=10 format=3 uid="uid://bv74qvfpjwmcy"]
 
-[ext_resource type="Script" path="res://scripts/front/correct_answer.gd" id="1_h1m7q"]
-[ext_resource type="FontFile" uid="uid://bt5pn0ptnei0q" path="res://fonts/Bungee/Bungee-Regular.ttf" id="2_5gjy3"]
-[ext_resource type="Shader" path="res://tres/blur_shader.gdshader" id="2_pnpv3"]
-[ext_resource type="Texture2D" uid="uid://drhpp5pp5uh63" path="res://icon.svg" id="3_xrdib"]
+[ext_resource type="Script" path="res://scripts/front/timeup_answer.gd" id="1_1thsa"]
+[ext_resource type="Shader" path="res://tres/blur_shader.gdshader" id="1_j2ghh"]
+[ext_resource type="Texture2D" uid="uid://drhpp5pp5uh63" path="res://icon.svg" id="2_dbu7w"]
+[ext_resource type="FontFile" uid="uid://bt5pn0ptnei0q" path="res://fonts/Bungee/Bungee-Regular.ttf" id="3_3w4og"]
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_70asp"]
-shader = ExtResource("2_pnpv3")
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_qrils"]
+shader = ExtResource("1_j2ghh")
 shader_parameter/lod = 1.0
 shader_parameter/mix_percentage = 0.0
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_3yl6m"]
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_qtats"]
 bg_color = Color(0.894118, 0.533333, 0.235294, 1)
 corner_radius_top_left = 20
 corner_radius_top_right = 20
 corner_radius_bottom_right = 20
 corner_radius_bottom_left = 20
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_37noc"]
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_hbn5c"]
 bg_color = Color(0.988235, 0.952941, 0.92549, 1)
 corner_radius_top_left = 20
 corner_radius_top_right = 20
 corner_radius_bottom_right = 20
 corner_radius_bottom_left = 20
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_m7c8l"]
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_exo06"]
 bg_color = Color(1, 1, 1, 1)
 corner_radius_top_left = 20
 corner_radius_top_right = 20
 corner_radius_bottom_right = 20
 corner_radius_bottom_left = 20
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_lm8r3"]
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_wgs6t"]
 bg_color = Color(0.882353, 0.341176, 0.301961, 1)
 corner_radius_top_left = 8
 corner_radius_top_right = 8
 corner_radius_bottom_right = 8
 corner_radius_bottom_left = 8
 
-[node name="CorrectAnswer" type="Control"]
+[node name="timeup_answer" type="Control"]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-script = ExtResource("1_h1m7q")
+script = ExtResource("1_1thsa")
 
 [node name="TextureRect" type="TextureRect" parent="."]
-material = SubResource("ShaderMaterial_70asp")
+material = SubResource("ShaderMaterial_qrils")
 layout_mode = 0
 offset_left = -805.0
 offset_top = -602.0
 offset_right = 2125.0
 offset_bottom = 1484.0
-texture = ExtResource("3_xrdib")
+texture = ExtResource("2_dbu7w")
 
 [node name="Panel" type="Panel" parent="."]
 layout_mode = 0
 offset_right = 1200.0
 offset_bottom = 600.0
-theme_override_styles/panel = SubResource("StyleBoxFlat_3yl6m")
+theme_override_styles/panel = SubResource("StyleBoxFlat_qtats")
 
 [node name="Panel2" type="Panel" parent="."]
 layout_mode = 0
@@ -68,44 +68,46 @@ offset_left = 10.0
 offset_top = 10.0
 offset_right = 1190.0
 offset_bottom = 590.0
-theme_override_styles/panel = SubResource("StyleBoxFlat_37noc")
+theme_override_styles/panel = SubResource("StyleBoxFlat_hbn5c")
 
 [node name="Label" type="Label" parent="."]
+visible = false
 layout_mode = 0
 offset_right = 1200.0
 offset_bottom = 200.0
 theme_override_colors/font_color = Color(0.85098, 0.176471, 0.12549, 1)
-theme_override_fonts/font = ExtResource("2_5gjy3")
-theme_override_font_sizes/font_size = 100
-text = "CONGRATULATIONS"
+theme_override_fonts/font = ExtResource("3_3w4og")
+theme_override_font_sizes/font_size = 70
+text = "THE EQUATION IS"
 horizontal_alignment = 1
 vertical_alignment = 1
 
 [node name="Label2" type="Label" parent="."]
 layout_mode = 0
-offset_top = 140.0
+offset_top = 80.0
 offset_right = 1200.0
-offset_bottom = 340.0
+offset_bottom = 280.0
 theme_override_colors/font_color = Color(0.85098, 0.176471, 0.12549, 1)
-theme_override_fonts/font = ExtResource("2_5gjy3")
-theme_override_font_sizes/font_size = 60
-text = "YOU USED XX SECONDS"
+theme_override_fonts/font = ExtResource("3_3w4og")
+theme_override_font_sizes/font_size = 140
+text = "time's up!"
 horizontal_alignment = 1
 vertical_alignment = 1
 
 [node name="Close" type="Control" parent="."]
 unique_name_in_owner = true
+layout_mode = 3
 anchors_preset = 0
 offset_left = 425.0
-offset_top = 310.0
+offset_top = 320.0
 offset_right = 465.0
-offset_bottom = 350.0
+offset_bottom = 360.0
 
 [node name="Panel3" type="Panel" parent="Close"]
 layout_mode = 0
 offset_right = 350.0
 offset_bottom = 140.0
-theme_override_styles/panel = SubResource("StyleBoxFlat_m7c8l")
+theme_override_styles/panel = SubResource("StyleBoxFlat_exo06")
 
 [node name="Panel4" type="Panel" parent="Close"]
 layout_mode = 0
@@ -113,13 +115,13 @@ offset_left = 10.0
 offset_top = 10.0
 offset_right = 340.0
 offset_bottom = 130.0
-theme_override_styles/panel = SubResource("StyleBoxFlat_lm8r3")
+theme_override_styles/panel = SubResource("StyleBoxFlat_wgs6t")
 
 [node name="Label3" type="Label" parent="Close"]
 layout_mode = 0
 offset_right = 350.0
 offset_bottom = 140.0
-theme_override_fonts/font = ExtResource("2_5gjy3")
+theme_override_fonts/font = ExtResource("3_3w4og")
 theme_override_font_sizes/font_size = 70
 text = "CLOSE"
 horizontal_alignment = 1
@@ -138,7 +140,7 @@ offset_top = 420.0
 offset_right = 1200.0
 offset_bottom = 620.0
 theme_override_colors/font_color = Color(0.882353, 0.341176, 0.301961, 1)
-theme_override_fonts/font = ExtResource("2_5gjy3")
+theme_override_fonts/font = ExtResource("3_3w4og")
 theme_override_font_sizes/font_size = 60
 text = "AUTOCLOSE IN 5 SECONDS"
 horizontal_alignment = 1

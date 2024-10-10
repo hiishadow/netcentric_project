@@ -15,8 +15,14 @@ var final_time: int
 var modal_is_on: bool = false
 var can_submit: bool = false
 var can_delete: bool = false
+var used_num
+var target_num
+
+var client
+var your_turn: bool = false
 
 func _ready() -> void:
+	client = get_tree().root.get_child(0).get_node("Client")
 	main = get_tree().root.get_child(0)
 	
 	slot_path()
@@ -68,16 +74,11 @@ func set_up_card_panel():
 	$"../Numbers/CardPanel4".global_position =$"../Numbers/CardHolderPanel4".global_position
 	$"../Numbers/CardPanel5".global_position =$"../Numbers/CardHolderPanel5".global_position
 
+func setSeed(_used_num, _target_num):
+	used_num = _used_num
+	target_num = _target_num
+
 func generate_target_and_numbers():
-	var used_num = []
-	var j = 0
-	while j < 5:
-		var num = main.rng.randi_range(1, 9)
-		if used_num.find(num) != - 1: continue
-		used_num.append(num)
-		j += 1
-	
-	used_num.sort()
 	for i in used_num.size():
 		match i:
 			0:
@@ -96,8 +97,19 @@ func generate_target_and_numbers():
 				$"../Numbers/CardPanel5".number = used_num[4]
 				$"../Numbers/CardPanel5".set_label()
 	
-	var num = main.rng.randi_range(1, 9)
-	%TargetPanel.get_node("Label").text = str(num)
+	%TargetPanel.get_node("Label").text = str(target_num)
+
+func reverse_set_up_card_panel():
+	while play_zone.size() != 0:
+			delete()
+
+	$"../Numbers/CardPanel".global_position = Vector2(-1000,1000)
+	$"../Numbers/CardPanel2".global_position =Vector2(-1000,1000)
+	$"../Numbers/CardPanel3".global_position = Vector2(-1000,1000)
+	$"../Numbers/CardPanel4".global_position =Vector2(-1000,1000)
+	$"../Numbers/CardPanel5".global_position = Vector2(-1000,1000)
+
+	%TargetPanel.get_node("Label").text = "#"
 
 func calculate_card_slot(card):
 	if recent_card_slot < 5 and recent_card_slot <= recent_sign_slot and card.zone == "number":
@@ -131,7 +143,7 @@ func calculate_card_slot(card):
 func calculate_sign_slot(sign_):
 	if recent_sign_slot < 4 and recent_card_slot > recent_sign_slot and sign_.zone == "number":
 		var signn_ = sign_node.instantiate()
-		signn_.sign = sign_.sign
+		signn_._sign = sign_._sign
 		signn_.zone = "play"
 		signn_.get_node("Panel").size = signn_.get_node("Panel").size + Vector2(16,16)
 		signn_.get_node("Panel2").size = signn_.get_node("Panel2").size + Vector2(16,16)
@@ -199,7 +211,7 @@ func submit():
 	var play_zone_ = []
 	for i in play_zone.size():
 		if play_zone[i].node_type == "sign":
-			play_zone_.append(play_zone[i].sign)
+			play_zone_.append(play_zone[i]._sign)
 		elif play_zone[i].node_type == "card":
 			play_zone_.append(play_zone[i].number)
 	var i = 1  # Start at the first operator (index 1)
@@ -235,22 +247,43 @@ func submit():
 		%WrongAnswer.visible = true
 		modal_is_on = true
 		%ModalTimer.start()
+		final_time = 0
 	else:
 		%GameTimer.stop()
 		final_time = int($"../Time".get_node("Label").text)
-		
+		client.send_to_server({
+			"message": client.Message.sendTimeUsage, "client_id": client.id, "data": 60 - final_time, "equation": send_equation()
+		})
 		%CorrectAnswer.visible = true
 		modal_is_on = true
 		%CorrectAnswer.get_node("Label2").text = "YOU USED " + str(60 - final_time) + " SECONDS"
 		%ModalTimer.start()
 
+func send_equation():
+	var equation = ""
+	for i in play_zone.size():
+		equation += (str(play_zone[i].get_node("Label").text))
+	return equation
 
+#GameTimer
 func _on_timer_timeout() -> void:
 	if game_time == 0: 
 		%GameTimer.stop()
+		if your_turn:
+			client.send_to_server({
+				"message": client.Message.sendTimeUsage, "client_id": client.id, "data": 999, "equation": "DNF"
+			})
+			%timeup_answer.visible = true
+			%ModalTimer.start()
+		
+		game_time = 60
 		return
+	
 	game_time -= 1
-	$"../Time".get_node("Label").text = "TIME : " + str(game_time)
+	if %EnemyTime.visible:
+		%EnemyTime.get_node("Label").text = "TIME : " + str(game_time)
+	if %Time.visible:
+		%Time.get_node("Label").text = "TIME : " + str(game_time)
 
 
 func _on_modal_timer_timeout() -> void:
@@ -260,13 +293,67 @@ func _on_modal_timer_timeout() -> void:
 			%WrongAnswer.visible = false
 		if %CorrectAnswer.visible:
 			%CorrectAnswer.visible = false
+			if client.turn_num != client.clients_num - 1:
+				client.send_to_server({
+					"message": client.Message.runningGame,
+					"client_id": client.id,
+					"data": "NextTurn"
+				})
+			else:
+				client.send_to_server({
+					"message": client.Message.runningGame,
+					"client_id": client.id,
+					"data": "CalculateWinner"
+				})
+		if %timeup_answer.visible:
+			%timeup_answer.visible = false
+			if client.turn_num != client.clients_num - 1:
+				client.send_to_server({
+					"message": client.Message.runningGame,
+					"client_id": client.id,
+					"data": "NextTurn"
+				})
+			else:
+				client.send_to_server({
+					"message": client.Message.runningGame,
+					"client_id": client.id,
+					"data": "CalculateWinner"
+				})
+		if %TurnOfEnemy.visible:
+			if your_turn:
+				generate_target_and_numbers()
+				set_up_card_panel()
+				%Turn.get_node("Label").text = "your turn"
+				%EnemyTime.visible = false
+				%Time.visible = true
+				%GameTimer.start()
+				client.send_to_server({"message": client.Message.updateTimer, "client_id": client.id, "data": "GameTimer"})
+				
+			else:
+				reverse_set_up_card_panel()
+				%EnemyTime.visible = true
+				%Time.visible = false
+				%Turn.get_node("Label").text = "enemy's turn"
+			%TurnOfEnemy.visible = false
+			%ReadyPanel.visible = false
+			%DeletePanel.visible = true
+			%SubmitPanel.visible = true
+			%Turn.visible = true
+			
+		modal_is_on = false
+		modal_time = 5
 		return
+		
 	modal_time -= 1
 	if %WrongAnswer.visible:
 		%WrongAnswer.get_node("Label3").text = "AUTOCLOSE IN " + str(modal_time) + " SECONDS"
 	if %CorrectAnswer.visible:
 		%CorrectAnswer.get_node("Label3").text = "AUTOCLOSE IN " + str(modal_time) + " SECONDS"
-	modal_is_on = false
+	if %TurnOfEnemy.visible:
+		%TurnOfEnemy.get_node("Label3").text = "AUTOSTART IN " + str(modal_time) + " SECONDS"
+	if %timeup_answer.visible:
+		%timeup_answer.get_node("Label3").text = "AUTOCLOSE IN " + str(modal_time) + " SECONDS"
+	
 
 func reset(event: InputEvent) -> void:
 	#dev
@@ -284,3 +371,36 @@ func reset(event: InputEvent) -> void:
 		
 		while play_zone.size() != 0:
 			delete()
+
+func runningGame(data):
+	game_time = 60
+	match data.data:
+		"ShowModalAsTurn": 
+			%TurnOfEnemy.get_node("Label3").text = "AUTOSTART IN " + "5" + " SECONDS"
+			your_turn = true
+			%TurnOfEnemy.get_node("Label2").text = str(data.turn_name)
+			%TurnOfEnemy.get_node("Close").get_node("Label3").text = "start"
+			%TurnOfEnemy.visible = true
+			%EnemyTime.visible = false
+			modal_is_on = true
+			%ModalTimer.start()
+		"ShowModal":
+			%TurnOfEnemy.get_node("Label3").text = "AUTOSTART IN " + "5" + " SECONDS"
+			your_turn = false
+			%TurnOfEnemy.get_node("Label2").text =  str(data.turn_name)
+			%TurnOfEnemy.get_node("Close").get_node("Label3").text = "close"
+			%TurnOfEnemy.visible = true
+			%EnemyTime.visible = false
+			modal_is_on = true
+			%ModalTimer.start()
+		"CalculateWinner":
+			for i in data.equations.size():
+				if i == 0: #TODO NAME
+					%Winner.get_node("Player1").get_node("Label2").text = data.equations[data.equations.keys()[i]]
+					%Winner.get_node("Player1").get_node("Label3").text = "TIME USE : " + data.equations[data.time_usage.keys()[i]]
+				elif i == 1:
+					%Winner.get_node("Player2").get_node("Label2").text = data.equations[data.equations.keys()[i]]
+					%Winner.get_node("Player2").get_node("Label3").text = "TIME USE : " + data.equations[data.time_usage.keys()[i]]
+			%Winner.get_node("Label3").text = "AUTOCLOSE IN " + "5" + " SECONDS"
+			%Winner.visible = true
+			modal_is_on = true

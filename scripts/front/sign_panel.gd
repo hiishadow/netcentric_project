@@ -2,11 +2,11 @@ extends Control
 
 const node_type = "sign"
 
-@export var sign: String
+@export var _sign: String
 var zone = "number"
 
 func _ready() -> void:
-	match sign:
+	match _sign:
 		"plus":
 			%Label.text = "+"
 		"minus":

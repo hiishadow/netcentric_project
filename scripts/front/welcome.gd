@@ -2,7 +2,6 @@ extends Node
 
 
 
-
 func _on_click_area_gui_input(event: InputEvent) -> void:
 	#Close
 	if event is InputEventMouseButton and event.is_pressed():

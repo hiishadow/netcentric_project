@@ -1,6 +1,7 @@
-[gd_scene load_steps=9 format=3 uid="uid://6llspxbxiacd"]
+[gd_scene load_steps=10 format=3 uid="uid://6llspxbxiacd"]
 
 [ext_resource type="FontFile" uid="uid://bt5pn0ptnei0q" path="res://fonts/Bungee/Bungee-Regular.ttf" id="1_barr6"]
+[ext_resource type="Script" path="res://scripts/front/turn_of_enemy.gd" id="1_klk1s"]
 [ext_resource type="Shader" path="res://tres/blur_shader.gdshader" id="1_mqejf"]
 [ext_resource type="Texture2D" uid="uid://drhpp5pp5uh63" path="res://icon.svg" id="2_ujc5w"]
 
@@ -44,6 +45,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+script = ExtResource("1_klk1s")
 
 [node name="TextureRect" type="TextureRect" parent="."]
 material = SubResource("ShaderMaterial_fh7il")
@@ -92,6 +94,7 @@ horizontal_alignment = 1
 vertical_alignment = 1
 
 [node name="Close" type="Control" parent="."]
+unique_name_in_owner = true
 layout_mode = 3
 anchors_preset = 0
 offset_left = 425.0
@@ -141,3 +144,7 @@ theme_override_font_sizes/font_size = 60
 text = "AUTOSTART IN 5 SECONDS"
 horizontal_alignment = 1
 vertical_alignment = 1
+
+[connection signal="gui_input" from="Close/ClickArea" to="." method="_on_click_area_gui_input"]
+[connection signal="mouse_entered" from="Close/ClickArea" to="." method="_on_click_area_mouse_entered"]
+[connection signal="mouse_exited" from="Close/ClickArea" to="." method="_on_click_area_mouse_exited"]

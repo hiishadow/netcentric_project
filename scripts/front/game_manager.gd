@@ -156,7 +156,6 @@ func calculate_sign_slot(sign_):
 		play_zone.append(signn_)
 
 func display_player_count(count):
-	print(count) #TODO
 	if count == 1:
 		$"../P1Name".visible = true
 		$"../P1Score".visible = true

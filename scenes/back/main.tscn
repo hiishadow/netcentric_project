@@ -1,8 +1,9 @@
-[gd_scene load_steps=4 format=3 uid="uid://bxprnu2uijnhj"]
+[gd_scene load_steps=5 format=3 uid="uid://bxprnu2uijnhj"]
 
 [ext_resource type="Script" path="res://scripts/back/main.gd" id="1_pxi0j"]
 [ext_resource type="PackedScene" uid="uid://00r08b5jr0ki" path="res://scenes/back/client.tscn" id="3_wvk0r"]
 [ext_resource type="PackedScene" uid="uid://cyv5wvqsa34yg" path="res://scenes/back/server.tscn" id="4_u47lj"]
+[ext_resource type="PackedScene" uid="uid://phqqbkxeyk7u" path="res://scenes/front/mainmenu.tscn" id="4_ywqig"]
 
 [node name="main" type="Node"]
 script = ExtResource("1_pxi0j")
@@ -20,35 +21,34 @@ offset_right = -554.0
 offset_bottom = 79.0
 grow_horizontal = 2
 
-[node name="Opening" type="Panel" parent="."]
-unique_name_in_owner = true
-offset_left = 3.0
-offset_top = 2.0
-offset_right = 1922.0
-offset_bottom = 1080.0
-
-[node name="StartAsClient" type="Button" parent="Opening"]
-layout_mode = 0
-offset_left = 1098.0
-offset_top = 220.0
-offset_right = 1615.0
-offset_bottom = 575.0
-text = "Start as Client
-"
-
-[node name="StartAsServer" type="Button" parent="Opening"]
-layout_mode = 0
-offset_left = 387.0
-offset_top = 209.0
-offset_right = 918.0
-offset_bottom = 571.0
-text = "Start As Server"
-
 [node name="Client" parent="." instance=ExtResource("3_wvk0r")]
 unique_name_in_owner = true
 
 [node name="Server" parent="." instance=ExtResource("4_u47lj")]
 unique_name_in_owner = true
 
-[connection signal="pressed" from="Opening/StartAsClient" to="." method="_on_start_as_client_pressed"]
-[connection signal="pressed" from="Opening/StartAsServer" to="." method="_on_start_as_server_pressed"]
+[node name="MainMenu" parent="." instance=ExtResource("4_ywqig")]
+unique_name_in_owner = true
+
+[node name="BecomeHost" type="Button" parent="."]
+unique_name_in_owner = true
+z_index = 1
+offset_left = 1516.0
+offset_top = 823.0
+offset_right = 1869.0
+offset_bottom = 900.0
+theme_override_font_sizes/font_size = 50
+text = "start as server"
+
+[node name="JoinAsClient" type="Button" parent="."]
+unique_name_in_owner = true
+z_index = 1
+offset_left = 1519.0
+offset_top = 943.0
+offset_right = 1853.0
+offset_bottom = 1020.0
+theme_override_font_sizes/font_size = 50
+text = "start as client"
+
+[connection signal="pressed" from="BecomeHost" to="." method="_on_start_as_server_pressed"]
+[connection signal="pressed" from="JoinAsClient" to="." method="_on_start_as_client_pressed"]

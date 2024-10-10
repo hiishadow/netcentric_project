@@ -292,6 +292,7 @@ offset_bottom = 110.0
 [node name="PlayZone2" type="Panel" parent="."]
 visible = false
 z_index = -10
+layout_mode = 0
 offset_right = 1770.0
 offset_bottom = 340.0
 theme_override_styles/panel = SubResource("StyleBoxFlat_j7mko")

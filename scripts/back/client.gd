@@ -21,10 +21,12 @@ enum Message {
 
 var game = preload("res://scenes/front/game.tscn")
 var peer = WebSocketMultiplayerPeer.new()
-var id = -1  # Initialize to -1 to check for unassigned ID
+var id: int = -1  # Initialize to -1 to check for unassigned ID
 var player_attributes = {"name": "", "score": 0}  # Self attributes for the player
 var turn_num
 var clients_num
+var _name
+var _avatar
 
 func _process(delta: float) -> void:
 	peer.poll()
@@ -96,6 +98,8 @@ func connectToServer(ip):
 		get_parent().add_child(game_instant)
 		send_to_server({"message": Message.getUserCount,"client_id": id})
 		send_to_server({"message": Message.showModal,"client_id": id})
+		assignPlayerName()
+		get_parent().get_node("Game").get_node("Welcome").get_node("Label2").text = _name
 		show_modal("Welcome")
 
 func handleNewUserConnected(data) -> void:
@@ -114,8 +118,10 @@ func send_to_server(message):
 	peer.get_peer(1).put_packet(JSON.stringify(message).to_utf8_buffer())
 	pass
 
-func assignPlayerName(_name) -> void:
+func assignPlayerName() -> void:
 	if id != -1:
+		_name = get_parent().get_node("MainMenu").get_node("MainBox").get_node("LineEdit").text
+		_avatar = get_parent().get_node("MainMenu").get_node("AvatarChange").selected_texture
 		player_attributes["name"] = _name
 		# Send player attributes to the server
 		var message = {

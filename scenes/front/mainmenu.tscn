@@ -1,0 +1,753 @@
+[gd_scene load_steps=55 format=3 uid="uid://phqqbkxeyk7u"]
+
+[ext_resource type="Texture2D" uid="uid://cgxiwy3ntovsc" path="res://bg.png" id="1_3qn0k"]
+[ext_resource type="Texture2D" uid="uid://dytb7b80up81t" path="res://resources/mainmenu/Gamee IQ180 (2).png" id="2_r0ttp"]
+[ext_resource type="FontFile" uid="uid://bt5pn0ptnei0q" path="res://fonts/Bungee/Bungee-Regular.ttf" id="2_rkpgl"]
+[ext_resource type="Script" path="res://scripts/front/main_box.gd" id="2_yvuct"]
+[ext_resource type="Texture2D" uid="uid://clcapspghdq6i" path="res://resources/mainmenu/text.png" id="3_qyj06"]
+[ext_resource type="Texture2D" uid="uid://c8rgikyfppuys" path="res://resources/mainmenu/Gamee Line 1.png" id="4_7hxwy"]
+[ext_resource type="Texture2D" uid="uid://bnodvp1mvnn66" path="res://resources/mainmenu/Gamee Frame 45 (1).png" id="5_xbr1l"]
+[ext_resource type="Texture2D" uid="uid://cj16vupiduw48" path="res://resources/mainmenu/Close button (1).png" id="7_p2at1"]
+[ext_resource type="Texture2D" uid="uid://deydy23ssje4b" path="res://resources/mainmenu/avatar/Gamee Avatar (3).png" id="8_o5jtf"]
+[ext_resource type="Texture2D" uid="uid://coefdjw6tgab2" path="res://resources/mainmenu/avatar/Gamee Avatar.png" id="9_ett7x"]
+[ext_resource type="Script" path="res://scripts/front/avatar_change.gd" id="9_ex67f"]
+[ext_resource type="Texture2D" uid="uid://bnf8j05bflh57" path="res://resources/mainmenu/avatar/Gamee Avatar (1).png" id="10_c1vhn"]
+[ext_resource type="Texture2D" uid="uid://y0vk75bsls3g" path="res://resources/mainmenu/avatar/Gamee Avatar (2).png" id="11_6htd2"]
+[ext_resource type="Script" path="res://scripts/front/bald.gd" id="11_odric"]
+[ext_resource type="Script" path="res://scripts/front/bald_2.gd" id="12_d5kww"]
+[ext_resource type="Texture2D" uid="uid://c5g8bt0wpsul4" path="res://resources/mainmenu/avatar/Gamee Avatar 5.png" id="12_ixvdn"]
+[ext_resource type="Texture2D" uid="uid://1rff0llm8aeu" path="res://resources/mainmenu/avatar/Gamee Avatar 6.png" id="13_6ftfs"]
+[ext_resource type="Script" path="res://scripts/front/bald_3.gd" id="14_kfsi6"]
+[ext_resource type="Texture2D" uid="uid://b1jq1uunrupx5" path="res://resources/mainmenu/avatar/Gamee Avatar 7.png" id="14_mifp1"]
+[ext_resource type="Texture2D" uid="uid://8ico781wkc14" path="res://resources/mainmenu/avatar/Gamee Avatar 8.png" id="15_4vtyx"]
+[ext_resource type="Script" path="res://scripts/front/bald_4.gd" id="16_ifr2k"]
+[ext_resource type="Texture2D" uid="uid://bueab3oysge02" path="res://resources/mainmenu/avatar/Gamee Avatar 9.png" id="16_r0xkg"]
+[ext_resource type="Texture2D" uid="uid://cafc53jouvhcs" path="res://resources/mainmenu/avatar/Avatar 10.png" id="17_h6hty"]
+[ext_resource type="Script" path="res://scripts/front/bald_5.gd" id="18_1i4sp"]
+[ext_resource type="Script" path="res://scripts/front/bald_6.gd" id="20_f2nyu"]
+[ext_resource type="Script" path="res://scripts/front/bald_7.gd" id="22_ppnwj"]
+[ext_resource type="Script" path="res://scripts/front/bald_8.gd" id="24_yht38"]
+[ext_resource type="Script" path="res://scripts/front/bald_9.gd" id="26_rpoe2"]
+[ext_resource type="Script" path="res://scripts/front/bald_10.gd" id="28_0rqnn"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ngd7p"]
+bg_color = Color(0.894118, 0.533333, 0.235294, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_woksp"]
+bg_color = Color(0.980392, 0.980392, 0.980392, 1)
+corner_radius_top_left = 26
+corner_radius_top_right = 26
+corner_radius_bottom_right = 26
+corner_radius_bottom_left = 26
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_wb3r7"]
+bg_color = Color(0.882353, 0.341176, 0.301961, 1)
+border_width_left = 11
+border_width_top = 11
+border_width_right = 11
+border_width_bottom = 11
+border_color = Color(0.988235, 0.952941, 0.92549, 1)
+corner_radius_top_left = 26
+corner_radius_top_right = 26
+corner_radius_bottom_right = 26
+corner_radius_bottom_left = 26
+
+[sub_resource type="Theme" id="Theme_7qrr4"]
+default_font = ExtResource("2_rkpgl")
+default_font_size = 64
+Button/colors/font_color = Color(1, 1, 1, 1)
+Button/styles/normal = SubResource("StyleBoxFlat_wb3r7")
+
+[sub_resource type="LabelSettings" id="LabelSettings_7digr"]
+font = ExtResource("2_rkpgl")
+font_size = 66
+font_color = Color(0.85098, 0.176471, 0.12549, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_0kvuy"]
+bg_color = Color(0.984314, 0.917647, 0.913725, 1)
+border_width_left = 4
+border_width_top = 4
+border_width_right = 4
+border_width_bottom = 4
+border_color = Color(0.933333, 0.619608, 0.596078, 1)
+corner_radius_top_left = 26
+corner_radius_top_right = 26
+corner_radius_bottom_right = 26
+corner_radius_bottom_left = 26
+
+[sub_resource type="Theme" id="Theme_8a88m"]
+LineEdit/colors/font_color = Color(0.882353, 0.341176, 0.301961, 1)
+LineEdit/colors/font_placeholder_color = Color(0.933333, 0.619608, 0.596078, 1)
+LineEdit/font_sizes/font_size = 16
+LineEdit/styles/normal = SubResource("StyleBoxFlat_0kvuy")
+
+[sub_resource type="Theme" id="Theme_rpwll"]
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_eaqnk"]
+texture = ExtResource("8_o5jtf")
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_fftko"]
+bg_color = Color(0.882353, 0.341176, 0.301961, 1)
+border_width_left = 7
+border_width_top = 7
+border_width_right = 7
+border_width_bottom = 7
+border_color = Color(0.984314, 0.917647, 0.913725, 1)
+corner_radius_top_left = 20
+corner_radius_top_right = 20
+corner_radius_bottom_right = 20
+corner_radius_bottom_left = 20
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_7q2ob"]
+bg_color = Color(0.980392, 0.980392, 0.980392, 1)
+corner_radius_top_left = 13
+corner_radius_top_right = 13
+corner_radius_bottom_right = 13
+corner_radius_bottom_left = 13
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_p8n56"]
+bg_color = Color(0.984314, 0.917647, 0.913725, 1)
+corner_radius_top_left = 13
+corner_radius_top_right = 13
+corner_radius_bottom_right = 13
+corner_radius_bottom_left = 13
+shadow_color = Color(0, 0, 0, 1)
+shadow_offset = Vector2(0, 5.3)
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_qpbb0"]
+texture = ExtResource("8_o5jtf")
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_3p208"]
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_6uopy"]
+texture = ExtResource("9_ett7x")
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_7qsfp"]
+texture = ExtResource("10_c1vhn")
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_q0xtd"]
+texture = ExtResource("11_6htd2")
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_272pw"]
+texture = ExtResource("12_ixvdn")
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_kw34g"]
+texture = ExtResource("13_6ftfs")
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_2q06t"]
+texture = ExtResource("14_mifp1")
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_dmc7b"]
+texture = ExtResource("15_4vtyx")
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_uhsxh"]
+texture = ExtResource("16_r0xkg")
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_xkxcl"]
+texture = ExtResource("17_h6hty")
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ernua"]
+bg_color = Color(1, 0.72549, 0.141176, 1)
+border_width_left = 8
+border_width_top = 8
+border_width_right = 8
+border_width_bottom = 8
+border_color = Color(0.988235, 0.952941, 0.92549, 1)
+corner_radius_top_left = 26
+corner_radius_top_right = 26
+corner_radius_bottom_right = 26
+corner_radius_bottom_left = 26
+
+[sub_resource type="Theme" id="Theme_8tnk6"]
+default_font_size = 37
+Button/colors/font_color = Color(1, 1, 1, 1)
+Button/fonts/font = ExtResource("2_rkpgl")
+Button/styles/normal = SubResource("StyleBoxFlat_ernua")
+
+[node name="MainMenu" type="Node"]
+
+[node name="Background" type="Control" parent="."]
+custom_minimum_size = Vector2(1920, 1080)
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="Panel" type="Panel" parent="Background"]
+custom_minimum_size = Vector2(1920, 1080)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_ngd7p")
+
+[node name="TextureRect" type="TextureRect" parent="Background"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("1_3qn0k")
+
+[node name="MainBox" type="Control" parent="."]
+custom_minimum_size = Vector2(1404, 794.72)
+layout_mode = 3
+anchors_preset = 0
+offset_left = 258.0
+offset_top = 193.09
+offset_right = 1662.0
+offset_bottom = 987.81
+script = ExtResource("2_yvuct")
+
+[node name="Panel" type="Panel" parent="MainBox"]
+custom_minimum_size = Vector2(1404, 794.72)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_woksp")
+
+[node name="QuickPlay" type="Button" parent="MainBox"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -278.15
+offset_top = 243.71
+offset_right = 279.55
+offset_bottom = 364.74
+grow_horizontal = 2
+grow_vertical = 2
+theme = SubResource("Theme_7qrr4")
+text = "QUICK PLAY"
+
+[node name="HowToPlay" type="Label" parent="MainBox"]
+custom_minimum_size = Vector2(529.81, 74.17)
+layout_mode = 0
+offset_left = 793.39
+offset_top = 66.23
+offset_right = 1323.2
+offset_bottom = 154.23
+theme_override_colors/font_color = Color(0.85098, 0.176471, 0.12549, 1)
+text = "HOW TO PLAY"
+label_settings = SubResource("LabelSettings_7digr")
+horizontal_alignment = 1
+
+[node name="Rule" type="TextureRect" parent="MainBox"]
+custom_minimum_size = Vector2(627.83, 467.56)
+layout_mode = 0
+offset_left = 740.41
+offset_top = 164.24
+offset_right = 1368.24
+offset_bottom = 631.8
+texture = ExtResource("3_qyj06")
+stretch_mode = 2
+
+[node name="TextureRect" type="TextureRect" parent="MainBox"]
+custom_minimum_size = Vector2(0, 556.3)
+layout_mode = 0
+offset_left = 702.0
+offset_top = 56.95
+offset_right = 708.0
+offset_bottom = 618.95
+texture = ExtResource("4_7hxwy")
+stretch_mode = 2
+
+[node name="LineEdit" type="LineEdit" parent="MainBox"]
+custom_minimum_size = Vector2(458.29, 121.86)
+layout_mode = 0
+offset_left = 132.45
+offset_top = 488.75
+offset_right = 590.74
+offset_bottom = 610.61
+theme = SubResource("Theme_8a88m")
+theme_override_fonts/font = ExtResource("2_rkpgl")
+theme_override_font_sizes/font_size = 32
+placeholder_text = "enter your name"
+alignment = 1
+max_length = 8
+
+[node name="AvatarContainer" type="Panel" parent="MainBox"]
+custom_minimum_size = Vector2(397.36, 421.44)
+layout_mode = 0
+offset_left = 157.62
+offset_top = 30.0
+offset_right = 554.98
+offset_bottom = 451.44
+theme = SubResource("Theme_rpwll")
+theme_override_styles/panel = SubResource("StyleBoxTexture_eaqnk")
+
+[node name="EditAvatar" type="TextureButton" parent="MainBox"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(105.96, 105.96)
+layout_mode = 0
+offset_left = 450.34
+offset_top = 79.47
+offset_right = 557.34
+offset_bottom = 186.47
+texture_normal = ExtResource("5_xbr1l")
+
+[node name="IQ180" type="TextureRect" parent="."]
+offset_left = 827.55
+offset_top = 1.0
+offset_right = 1093.55
+offset_bottom = 303.0
+texture = ExtResource("2_r0ttp")
+
+[node name="AvatarChange" type="Control" parent="."]
+visible = false
+custom_minimum_size = Vector2(1059.62, 662.26)
+layout_mode = 3
+anchors_preset = 0
+offset_left = 430.19
+offset_top = 252.69
+offset_right = 1489.81
+offset_bottom = 914.95
+script = ExtResource("9_ex67f")
+
+[node name="Panel" type="Panel" parent="AvatarChange"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_fftko")
+
+[node name="CloseAvatarMenu" type="TextureButton" parent="AvatarChange"]
+layout_mode = 0
+offset_left = 980.15
+offset_top = 10.6
+offset_right = 1043.73
+offset_bottom = 87.42
+texture_normal = ExtResource("7_p2at1")
+
+[node name="WhiteBox" type="Panel" parent="AvatarChange"]
+layout_mode = 0
+offset_left = 66.23
+offset_top = 96.69
+offset_right = 993.4
+offset_bottom = 515.24
+theme_override_styles/panel = SubResource("StyleBoxFlat_7q2ob")
+
+[node name="bald" type="Control" parent="AvatarChange/WhiteBox"]
+custom_minimum_size = Vector2(158.94, 174.84)
+anchors_preset = 0
+offset_left = 23.84
+offset_top = 23.84
+offset_right = 182.78
+offset_bottom = 198.68
+script = ExtResource("11_odric")
+
+[node name="Bald" type="Panel" parent="AvatarChange/WhiteBox/bald"]
+custom_minimum_size = Vector2(158.94, 174.84)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_p8n56")
+
+[node name="Panel" type="Panel" parent="AvatarChange/WhiteBox/bald"]
+custom_minimum_size = Vector2(132.45, 140.48)
+layout_mode = 0
+offset_left = 13.25
+offset_top = 13.25
+offset_right = 145.7
+offset_bottom = 153.73
+theme_override_styles/panel = SubResource("StyleBoxTexture_qpbb0")
+
+[node name="ClickArea" type="Panel" parent="AvatarChange/WhiteBox/bald"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxEmpty_3p208")
+
+[node name="bald2" type="Control" parent="AvatarChange/WhiteBox"]
+custom_minimum_size = Vector2(158.94, 174.84)
+anchors_preset = 0
+offset_left = 203.98
+offset_top = 23.84
+offset_right = 362.92
+offset_bottom = 198.68
+script = ExtResource("12_d5kww")
+
+[node name="blackhawaiian" type="Panel" parent="AvatarChange/WhiteBox/bald2"]
+custom_minimum_size = Vector2(158.94, 174.84)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_p8n56")
+
+[node name="Panel" type="Panel" parent="AvatarChange/WhiteBox/bald2"]
+custom_minimum_size = Vector2(132.45, 140.48)
+layout_mode = 0
+offset_left = 13.25
+offset_top = 13.25
+offset_right = 145.7
+offset_bottom = 153.73
+theme_override_styles/panel = SubResource("StyleBoxTexture_6uopy")
+
+[node name="ClickArea2" type="Panel" parent="AvatarChange/WhiteBox/bald2"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxEmpty_3p208")
+
+[node name="bald3" type="Control" parent="AvatarChange/WhiteBox"]
+custom_minimum_size = Vector2(158.94, 174.84)
+anchors_preset = 0
+offset_left = 384.11
+offset_top = 23.84
+offset_right = 543.05
+offset_bottom = 198.68
+script = ExtResource("14_kfsi6")
+
+[node name="hijabgirl" type="Panel" parent="AvatarChange/WhiteBox/bald3"]
+custom_minimum_size = Vector2(158.94, 174.84)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_p8n56")
+
+[node name="Panel" type="Panel" parent="AvatarChange/WhiteBox/bald3"]
+custom_minimum_size = Vector2(132.45, 140.48)
+layout_mode = 0
+offset_left = 13.25
+offset_top = 13.25
+offset_right = 145.7
+offset_bottom = 153.73
+theme_override_styles/panel = SubResource("StyleBoxTexture_7qsfp")
+
+[node name="ClickArea3" type="Panel" parent="AvatarChange/WhiteBox/bald3"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxEmpty_3p208")
+
+[node name="bald4" type="Control" parent="AvatarChange/WhiteBox"]
+custom_minimum_size = Vector2(158.94, 174.84)
+anchors_preset = 0
+offset_left = 564.25
+offset_top = 23.84
+offset_right = 723.19
+offset_bottom = 198.68
+script = ExtResource("16_ifr2k")
+
+[node name="baldwithmustache" type="Panel" parent="AvatarChange/WhiteBox/bald4"]
+custom_minimum_size = Vector2(158.94, 174.84)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_p8n56")
+
+[node name="Panel" type="Panel" parent="AvatarChange/WhiteBox/bald4"]
+custom_minimum_size = Vector2(132.45, 140.48)
+layout_mode = 0
+offset_left = 13.25
+offset_top = 13.25
+offset_right = 145.7
+offset_bottom = 153.73
+theme_override_styles/panel = SubResource("StyleBoxTexture_q0xtd")
+
+[node name="ClickArea4" type="Panel" parent="AvatarChange/WhiteBox/bald4"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxEmpty_3p208")
+
+[node name="bald5" type="Control" parent="AvatarChange/WhiteBox"]
+custom_minimum_size = Vector2(158.94, 174.84)
+anchors_preset = 0
+offset_left = 744.39
+offset_top = 23.84
+offset_right = 903.33
+offset_bottom = 198.68
+script = ExtResource("18_1i4sp")
+
+[node name="chemoguy" type="Panel" parent="AvatarChange/WhiteBox/bald5"]
+custom_minimum_size = Vector2(158.94, 174.84)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_p8n56")
+
+[node name="Panel" type="Panel" parent="AvatarChange/WhiteBox/bald5"]
+custom_minimum_size = Vector2(132.45, 140.48)
+layout_mode = 0
+offset_left = 13.25
+offset_top = 13.25
+offset_right = 145.7
+offset_bottom = 153.73
+theme_override_styles/panel = SubResource("StyleBoxTexture_272pw")
+
+[node name="ClickArea5" type="Panel" parent="AvatarChange/WhiteBox/bald5"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxEmpty_3p208")
+
+[node name="bald6" type="Control" parent="AvatarChange/WhiteBox"]
+custom_minimum_size = Vector2(158.94, 174.84)
+anchors_preset = 0
+offset_left = 23.84
+offset_top = 219.87
+offset_right = 182.78
+offset_bottom = 394.71
+script = ExtResource("20_f2nyu")
+
+[node name="femtwit" type="Panel" parent="AvatarChange/WhiteBox/bald6"]
+custom_minimum_size = Vector2(158.94, 174.84)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_p8n56")
+
+[node name="Panel" type="Panel" parent="AvatarChange/WhiteBox/bald6"]
+custom_minimum_size = Vector2(132.45, 140.48)
+layout_mode = 0
+offset_left = 13.25
+offset_top = 13.25
+offset_right = 145.7
+offset_bottom = 153.73
+theme_override_styles/panel = SubResource("StyleBoxTexture_kw34g")
+
+[node name="ClickArea6" type="Panel" parent="AvatarChange/WhiteBox/bald6"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxEmpty_3p208")
+
+[node name="bald7" type="Control" parent="AvatarChange/WhiteBox"]
+custom_minimum_size = Vector2(158.94, 174.84)
+anchors_preset = 0
+offset_left = 203.98
+offset_top = 219.87
+offset_right = 362.92
+offset_bottom = 394.71
+script = ExtResource("22_ppnwj")
+
+[node name="girlfromthehood" type="Panel" parent="AvatarChange/WhiteBox/bald7"]
+custom_minimum_size = Vector2(158.94, 174.84)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_p8n56")
+
+[node name="Panel" type="Panel" parent="AvatarChange/WhiteBox/bald7"]
+custom_minimum_size = Vector2(132.45, 140.48)
+layout_mode = 0
+offset_left = 13.25
+offset_top = 13.25
+offset_right = 145.7
+offset_bottom = 153.73
+theme_override_styles/panel = SubResource("StyleBoxTexture_2q06t")
+
+[node name="ClickArea7" type="Panel" parent="AvatarChange/WhiteBox/bald7"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxEmpty_3p208")
+
+[node name="bald8" type="Control" parent="AvatarChange/WhiteBox"]
+custom_minimum_size = Vector2(158.94, 174.84)
+anchors_preset = 0
+offset_left = 384.11
+offset_top = 219.87
+offset_right = 543.05
+offset_bottom = 394.71
+script = ExtResource("24_yht38")
+
+[node name="blacksparrow" type="Panel" parent="AvatarChange/WhiteBox/bald8"]
+custom_minimum_size = Vector2(158.94, 174.84)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_p8n56")
+
+[node name="Panel" type="Panel" parent="AvatarChange/WhiteBox/bald8"]
+custom_minimum_size = Vector2(132.45, 140.48)
+layout_mode = 0
+offset_left = 13.25
+offset_top = 13.25
+offset_right = 145.7
+offset_bottom = 153.73
+theme_override_styles/panel = SubResource("StyleBoxTexture_dmc7b")
+
+[node name="ClickArea8" type="Panel" parent="AvatarChange/WhiteBox/bald8"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxEmpty_3p208")
+
+[node name="bald9" type="Control" parent="AvatarChange/WhiteBox"]
+custom_minimum_size = Vector2(158.94, 174.84)
+anchors_preset = 0
+offset_left = 564.25
+offset_top = 219.87
+offset_right = 723.19
+offset_bottom = 394.71
+script = ExtResource("26_rpoe2")
+
+[node name="salon" type="Panel" parent="AvatarChange/WhiteBox/bald9"]
+custom_minimum_size = Vector2(158.94, 174.84)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_p8n56")
+
+[node name="Panel" type="Panel" parent="AvatarChange/WhiteBox/bald9"]
+custom_minimum_size = Vector2(132.45, 140.48)
+layout_mode = 0
+offset_left = 13.25
+offset_top = 13.25
+offset_right = 145.7
+offset_bottom = 153.73
+theme_override_styles/panel = SubResource("StyleBoxTexture_uhsxh")
+
+[node name="ClickArea9" type="Panel" parent="AvatarChange/WhiteBox/bald9"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxEmpty_3p208")
+
+[node name="bald10" type="Control" parent="AvatarChange/WhiteBox"]
+custom_minimum_size = Vector2(158.94, 174.84)
+anchors_preset = 0
+offset_left = 744.39
+offset_top = 219.87
+offset_right = 903.33
+offset_bottom = 394.71
+script = ExtResource("28_0rqnn")
+
+[node name="sonicirl" type="Panel" parent="AvatarChange/WhiteBox/bald10"]
+custom_minimum_size = Vector2(158.94, 174.84)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_p8n56")
+
+[node name="Panel" type="Panel" parent="AvatarChange/WhiteBox/bald10"]
+custom_minimum_size = Vector2(132.45, 140.48)
+layout_mode = 0
+offset_left = 13.25
+offset_top = 13.25
+offset_right = 145.7
+offset_bottom = 153.73
+theme_override_styles/panel = SubResource("StyleBoxTexture_xkxcl")
+
+[node name="ClickArea10" type="Panel" parent="AvatarChange/WhiteBox/bald10"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxEmpty_3p208")
+
+[node name="Confirm" type="Button" parent="AvatarChange"]
+custom_minimum_size = Vector2(264.91, 79.47)
+layout_mode = 0
+offset_left = 397.17
+offset_top = 545.71
+offset_right = 662.08
+offset_bottom = 625.18
+theme = SubResource("Theme_8tnk6")
+text = "confirm"
+
+[connection signal="gui_input" from="AvatarChange/WhiteBox/bald/Bald" to="MainBox" method="_on_bald_gui_input"]
+[connection signal="gui_input" from="AvatarChange/WhiteBox/bald/Bald" to="AvatarChange" method="_on_bald_gui_input"]
+[connection signal="gui_input" from="AvatarChange/WhiteBox/bald/ClickArea" to="AvatarChange" method="_on_click_area_gui_input"]
+[connection signal="gui_input" from="AvatarChange/WhiteBox/bald/ClickArea" to="AvatarChange/WhiteBox/bald" method="_on_click_area_gui_input"]
+[connection signal="mouse_entered" from="AvatarChange/WhiteBox/bald/ClickArea" to="AvatarChange/WhiteBox/bald" method="_on_click_area_mouse_entered"]
+[connection signal="mouse_exited" from="AvatarChange/WhiteBox/bald/ClickArea" to="AvatarChange/WhiteBox/bald" method="_on_click_area_mouse_exited"]
+[connection signal="gui_input" from="AvatarChange/WhiteBox/bald2/ClickArea2" to="AvatarChange" method="_on_click_area_2_gui_input"]
+[connection signal="mouse_entered" from="AvatarChange/WhiteBox/bald2/ClickArea2" to="AvatarChange/WhiteBox/bald2" method="_on_click_area_2_mouse_entered"]
+[connection signal="mouse_exited" from="AvatarChange/WhiteBox/bald2/ClickArea2" to="AvatarChange/WhiteBox/bald2" method="_on_click_area_2_mouse_exited"]
+[connection signal="gui_input" from="AvatarChange/WhiteBox/bald3/ClickArea3" to="AvatarChange" method="_on_click_area_3_gui_input"]
+[connection signal="mouse_entered" from="AvatarChange/WhiteBox/bald3/ClickArea3" to="AvatarChange/WhiteBox/bald3" method="_on_click_area_3_mouse_entered"]
+[connection signal="mouse_exited" from="AvatarChange/WhiteBox/bald3/ClickArea3" to="AvatarChange/WhiteBox/bald3" method="_on_click_area_3_mouse_exited"]
+[connection signal="gui_input" from="AvatarChange/WhiteBox/bald4/ClickArea4" to="AvatarChange" method="_on_click_area_4_gui_input"]
+[connection signal="mouse_entered" from="AvatarChange/WhiteBox/bald4/ClickArea4" to="AvatarChange/WhiteBox/bald4" method="_on_click_area_4_mouse_entered"]
+[connection signal="mouse_exited" from="AvatarChange/WhiteBox/bald4/ClickArea4" to="AvatarChange/WhiteBox/bald4" method="_on_click_area_4_mouse_exited"]
+[connection signal="gui_input" from="AvatarChange/WhiteBox/bald5/ClickArea5" to="AvatarChange" method="_on_click_area_5_gui_input"]
+[connection signal="mouse_entered" from="AvatarChange/WhiteBox/bald5/ClickArea5" to="AvatarChange/WhiteBox/bald5" method="_on_click_area_5_mouse_entered"]
+[connection signal="mouse_exited" from="AvatarChange/WhiteBox/bald5/ClickArea5" to="AvatarChange/WhiteBox/bald5" method="_on_click_area_5_mouse_exited"]
+[connection signal="gui_input" from="AvatarChange/WhiteBox/bald6/ClickArea6" to="AvatarChange" method="_on_click_area_6_gui_input"]
+[connection signal="mouse_entered" from="AvatarChange/WhiteBox/bald6/ClickArea6" to="AvatarChange/WhiteBox/bald6" method="_on_click_area_6_mouse_entered"]
+[connection signal="mouse_exited" from="AvatarChange/WhiteBox/bald6/ClickArea6" to="AvatarChange/WhiteBox/bald6" method="_on_click_area_6_mouse_exited"]
+[connection signal="gui_input" from="AvatarChange/WhiteBox/bald7/ClickArea7" to="AvatarChange" method="_on_click_area_7_gui_input"]
+[connection signal="mouse_entered" from="AvatarChange/WhiteBox/bald7/ClickArea7" to="AvatarChange/WhiteBox/bald7" method="_on_click_area_7_mouse_entered"]
+[connection signal="mouse_exited" from="AvatarChange/WhiteBox/bald7/ClickArea7" to="AvatarChange/WhiteBox/bald7" method="_on_click_area_7_mouse_exited"]
+[connection signal="gui_input" from="AvatarChange/WhiteBox/bald8/ClickArea8" to="AvatarChange" method="_on_click_area_8_gui_input"]
+[connection signal="mouse_entered" from="AvatarChange/WhiteBox/bald8/ClickArea8" to="AvatarChange/WhiteBox/bald8" method="_on_click_area_8_mouse_entered"]
+[connection signal="mouse_exited" from="AvatarChange/WhiteBox/bald8/ClickArea8" to="AvatarChange/WhiteBox/bald8" method="_on_click_area_8_mouse_exited"]
+[connection signal="gui_input" from="AvatarChange/WhiteBox/bald9/ClickArea9" to="AvatarChange" method="_on_click_area_9_gui_input"]
+[connection signal="mouse_entered" from="AvatarChange/WhiteBox/bald9/ClickArea9" to="AvatarChange/WhiteBox/bald9" method="_on_click_area_9_mouse_entered"]
+[connection signal="mouse_exited" from="AvatarChange/WhiteBox/bald9/ClickArea9" to="AvatarChange/WhiteBox/bald9" method="_on_click_area_9_mouse_exited"]
+[connection signal="gui_input" from="AvatarChange/WhiteBox/bald10/ClickArea10" to="AvatarChange" method="_on_click_area_10_gui_input"]
+[connection signal="mouse_entered" from="AvatarChange/WhiteBox/bald10/ClickArea10" to="AvatarChange/WhiteBox/bald10" method="_on_click_area_10_mouse_entered"]
+[connection signal="mouse_exited" from="AvatarChange/WhiteBox/bald10/ClickArea10" to="AvatarChange/WhiteBox/bald10" method="_on_click_area_10_mouse_exited"]
+[connection signal="pressed" from="AvatarChange/Confirm" to="AvatarChange" method="_on_confirm_pressed"]

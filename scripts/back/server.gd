@@ -43,13 +43,13 @@ func _process(delta: float) -> void:
 			print("Server received from peer " + str(sender_id) + ": " + str(data))
 
 			if data.has("message"):
-				handle_message(data, sender_id)
+				handle_message(data, int(sender_id))
 
 func handle_message(data, sender_id):
 	match int(data.message):
 		Message.updateUserAttributes:
 			# Update the user's attributes on the server
-			if data.has("data") and sender_id in clients:
+			if data.has("data"):
 				clients[sender_id].attributes = data.data
 				broadcast_to_all({"message": Message.updateUserAttributes, "data": clients[sender_id]})
 		Message.getUserCount:

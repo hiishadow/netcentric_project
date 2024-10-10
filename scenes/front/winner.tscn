@@ -131,6 +131,7 @@ horizontal_alignment = 1
 vertical_alignment = 1
 
 [node name="Label2" type="Label" parent="Player1"]
+layout_mode = 0
 offset_top = 65.0
 offset_right = 580.0
 offset_bottom = 135.0
@@ -142,6 +143,7 @@ horizontal_alignment = 1
 vertical_alignment = 1
 
 [node name="Label3" type="Label" parent="Player1"]
+layout_mode = 0
 offset_top = 135.0
 offset_right = 580.0
 offset_bottom = 190.0
@@ -179,6 +181,7 @@ horizontal_alignment = 1
 vertical_alignment = 1
 
 [node name="Label2" type="Label" parent="Player2"]
+layout_mode = 0
 offset_top = 65.0
 offset_right = 580.0
 offset_bottom = 135.0
@@ -190,6 +193,7 @@ horizontal_alignment = 1
 vertical_alignment = 1
 
 [node name="Label3" type="Label" parent="Player2"]
+layout_mode = 0
 offset_top = 135.0
 offset_right = 580.0
 offset_bottom = 190.0

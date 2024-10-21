@@ -30,6 +30,7 @@ var _name
 var _avatar
 var clients
 
+
 func _process(delta: float) -> void:
 	peer.poll()
 	if peer.get_available_packet_count() > 0:
@@ -84,7 +85,7 @@ func _process(delta: float) -> void:
 				Message.updateTimer:
 					get_parent().get_node("Game").get_node(data.data).start()
 				Message.sendSeed:
-					get_parent().get_node("Game").get_node("GameManager").setSeed(data.used_num, data.target_num)
+					get_parent().get_node("Game").get_node("GameManager").setSeed(data.used_num, data.target_num, data.seed_answer)
 				Message.forceClosed:
 					get_parent().get_node("Game").get_node("ModalTimer").stop()
 					get_parent().get_node("Game").get_node("GameManager").modal_time = 5
@@ -164,6 +165,8 @@ func assignPlayerName() -> void:
 	if id != -1:
 		_name = get_parent().get_node("MainMenu").get_node("MainBox").get_node("LineEdit").text
 		_avatar = get_parent().get_node("MainMenu").get_node("AvatarChange").selected_avatar_number
+		if _name == "":
+			_name = str(id)
 		player_attributes["name"] = _name
 		player_attributes["avatar"] = _avatar
 		# Send player attributes to the server

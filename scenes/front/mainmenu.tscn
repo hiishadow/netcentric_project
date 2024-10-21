@@ -40,7 +40,7 @@ corner_radius_top_right = 26
 corner_radius_bottom_right = 26
 corner_radius_bottom_left = 26
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_wb3r7"]
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_b3kbb"]
 bg_color = Color(0.882353, 0.341176, 0.301961, 1)
 border_width_left = 11
 border_width_top = 11
@@ -56,7 +56,7 @@ corner_radius_bottom_left = 26
 default_font = ExtResource("2_rkpgl")
 default_font_size = 64
 Button/colors/font_color = Color(1, 1, 1, 1)
-Button/styles/normal = SubResource("StyleBoxFlat_wb3r7")
+Button/styles/normal = SubResource("StyleBoxFlat_b3kbb")
 
 [sub_resource type="LabelSettings" id="LabelSettings_7digr"]
 font = ExtResource("2_rkpgl")
@@ -213,6 +213,7 @@ grow_vertical = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_woksp")
 
 [node name="QuickPlay" type="Button" parent="MainBox"]
+visible = false
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5

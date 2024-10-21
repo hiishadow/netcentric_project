@@ -1,9 +1,28 @@
-[gd_scene load_steps=5 format=3 uid="uid://bxprnu2uijnhj"]
+[gd_scene load_steps=8 format=3 uid="uid://bxprnu2uijnhj"]
 
 [ext_resource type="Script" path="res://scripts/back/main.gd" id="1_pxi0j"]
 [ext_resource type="PackedScene" uid="uid://00r08b5jr0ki" path="res://scenes/back/client.tscn" id="3_wvk0r"]
 [ext_resource type="PackedScene" uid="uid://cyv5wvqsa34yg" path="res://scenes/back/server.tscn" id="4_u47lj"]
 [ext_resource type="PackedScene" uid="uid://phqqbkxeyk7u" path="res://scenes/front/mainmenu.tscn" id="4_ywqig"]
+[ext_resource type="FontFile" uid="uid://bt5pn0ptnei0q" path="res://fonts/Bungee/Bungee-Regular.ttf" id="5_6ebgq"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_wb3r7"]
+bg_color = Color(0.882353, 0.341176, 0.301961, 1)
+border_width_left = 11
+border_width_top = 11
+border_width_right = 11
+border_width_bottom = 11
+border_color = Color(0.988235, 0.952941, 0.92549, 1)
+corner_radius_top_left = 26
+corner_radius_top_right = 26
+corner_radius_bottom_right = 26
+corner_radius_bottom_left = 26
+
+[sub_resource type="Theme" id="Theme_tj5ac"]
+default_font = ExtResource("5_6ebgq")
+default_font_size = 64
+Button/colors/font_color = Color(1, 1, 1, 1)
+Button/styles/normal = SubResource("StyleBoxFlat_wb3r7")
 
 [node name="main" type="Node"]
 script = ExtResource("1_pxi0j")
@@ -50,5 +69,23 @@ offset_bottom = 1020.0
 theme_override_font_sizes/font_size = 50
 text = "start as client"
 
+[node name="QuickPlay" type="Button" parent="."]
+unique_name_in_owner = true
+visible = false
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -278.15
+offset_top = 300.0
+offset_right = 279.55
+offset_bottom = 421.03
+grow_horizontal = 2
+grow_vertical = 2
+theme = SubResource("Theme_tj5ac")
+text = "QUICK PLAY"
+
 [connection signal="pressed" from="BecomeHost" to="." method="_on_start_as_server_pressed"]
 [connection signal="pressed" from="JoinAsClient" to="." method="_on_start_as_client_pressed"]
+[connection signal="pressed" from="QuickPlay" to="." method="_on_quick_play_pressed"]

@@ -24,3 +24,12 @@ func _on_start_as_client_pressed() -> void:
 	#%Client.connectToServer("26.26.253.235")
 	%Client.connectToServer("127.0.0.1")
 	%Server.queue_free()
+
+
+func _on_quick_play_pressed() -> void:
+	#fix when show to teacher
+	var be_server = true
+	if be_server:
+		_on_start_as_server_pressed()
+	else:
+		_on_start_as_client_pressed()

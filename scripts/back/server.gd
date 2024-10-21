@@ -27,8 +27,13 @@ var ready_count = []
 var time_usage = {}
 var turn_index = 0
 var equations = {}
+var used_num = []
+var target_num = 0
+var used_pool = []
+var seed_answer = ""
 
 func _ready() -> void:
+	rng.randomize()
 	peer.connect("peer_connected",peer_connected)
 	peer.connect("peer_disconnected", peer_disconnected)
 
@@ -182,20 +187,21 @@ func startServer():
 
 func runningGame():
 	if turn_index == 0: #set new seed only first round
-		rng.randomize()
-		#FIXME fix seed for debug
-		rng.seed = 3672018741301020184
-		print("Seed: ", rng.seed)
-		var used_num = []
-		var j = 0
-		while j < 5:
-			var num = rng.randi_range(1, 9)
-			if used_num.find(num) != - 1: continue
-			used_num.append(num)
-			j += 1
-		used_num.sort()
-		var target_num = rng.randi_range(1, 9)
-		broadcast_to_all({"message": Message.sendSeed, "used_num": used_num, "target_num": target_num})
+		#rng.randomize()
+		#rng.seed = 3672018741301020184
+		#print("Seed: ", rng.seed)
+		#var used_num = []
+		#var j = 0
+		#while j < 5:
+		#	var num = rng.randi_range(1, 9)
+		#	if used_num.find(num) != - 1: continue
+		#	used_num.append(num)
+		#	j += 1
+		#used_num.sort()
+		#var target_num = rng.randi_range(1, 9)
+		
+		random_from_pool()
+		broadcast_to_all({"message": Message.sendSeed, "used_num": used_num, "target_num": target_num, "seed_answer": seed_answer})
 	
 	var turn_name = clients[clients.keys()[turn_index]].attributes.name
 	for client_id in clients.keys():
@@ -214,6 +220,45 @@ func runningGame():
 				"turn_num": turn_index
 			})
 
+func random_from_pool():
+	used_num = []
+	target_num = 0
+	var pool = [
+		[1,3,4,5,6,7],#3+4-7+6-5
+		[2,1,4,5,6,8],#8/4-1+6-5
+		[3,1,2,3,5,7],#7-5+3-2x1
+		[4,1,2,3,6,8],#8-6-2+1+3
+		[5,2,3,5,7,8],#7-3-8/2+5
+		[6,1,2,3,5,7],#7-1+2+3-5
+		[7,1,2,4,7,8],#8-2x4x1+7
+		[8,2,4,5,6,9],#2+6+9-4-5
+		[9,5,6,7,8,9] #9+5+8-6-7
+		]
+	
+	var pool_answer = [
+		"3+4-7+6-5",
+		"8/4-1+6-5",
+		"7-5+3-2x1",
+		"8-6-2+1+3",
+		"7-3-8/2+5",
+		"7-1+2+3-5",
+		"8-2x4x1+7",
+		"2+6+9-4-5",
+		"9+5+8-6-7"
+	]
+	
+	var arr = pool[rng.randi_range(0, pool.size() -1)]
+	while used_pool.find(arr) != -1:
+		arr = pool[rng.randi_range(0, pool.size() -1)]
+	target_num = arr[0]
+	for i in arr.size():
+		if i != 0:
+			used_num.append(arr[i])
+	used_num.sort()
+	used_pool.append(arr)
+	print("seed_pool:", pool.find(arr))
+	seed_answer = pool_answer[pool.find(arr)]
+	print(seed_answer)
 
 func _on_start_server_pressed() -> void:
 	startServer()

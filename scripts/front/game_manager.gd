@@ -17,6 +17,7 @@ var can_submit: bool = false
 var can_delete: bool = false
 var used_num
 var target_num
+var seed_answer
 var is_clicked = false
 
 var client
@@ -75,9 +76,11 @@ func set_up_card_panel():
 	$"../Numbers/CardPanel4".global_position =$"../Numbers/CardHolderPanel4".global_position
 	$"../Numbers/CardPanel5".global_position =$"../Numbers/CardHolderPanel5".global_position
 
-func setSeed(_used_num, _target_num):
+func setSeed(_used_num, _target_num, _seed_answer):
 	used_num = _used_num
 	target_num = _target_num
+	seed_answer = _seed_answer
+	%timeup_answer.get_node("Label4").text = "solution: " + str(seed_answer)
 
 func generate_target_and_numbers():
 	for i in used_num.size():

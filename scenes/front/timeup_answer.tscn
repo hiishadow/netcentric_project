@@ -84,13 +84,25 @@ vertical_alignment = 1
 
 [node name="Label2" type="Label" parent="."]
 layout_mode = 0
-offset_top = 80.0
+offset_top = 15.0
 offset_right = 1200.0
-offset_bottom = 280.0
+offset_bottom = 215.0
 theme_override_colors/font_color = Color(0.85098, 0.176471, 0.12549, 1)
 theme_override_fonts/font = ExtResource("3_3w4og")
 theme_override_font_sizes/font_size = 140
 text = "time's up!"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Label4" type="Label" parent="."]
+layout_mode = 0
+offset_top = 145.0
+offset_right = 1200.0
+offset_bottom = 345.0
+theme_override_colors/font_color = Color(0.882353, 0.341176, 0.301961, 1)
+theme_override_fonts/font = ExtResource("3_3w4og")
+theme_override_font_sizes/font_size = 60
+text = "ANSWER: "
 horizontal_alignment = 1
 vertical_alignment = 1
 

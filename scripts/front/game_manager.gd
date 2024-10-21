@@ -17,6 +17,7 @@ var can_submit: bool = false
 var can_delete: bool = false
 var used_num
 var target_num
+var is_clicked = false
 
 var client
 var your_turn: bool = false
@@ -159,11 +160,14 @@ func display_player_count(count):
 	if count == 1:
 		$"../P1Name".visible = true
 		$"../P1Score".visible = true
+		$"../P1Avatar".visible = true
 	elif count == 2:
 		$"../P1Name".visible = true
 		$"../P1Score".visible = true
+		$"../P1Avatar".visible = true
 		$"../P2Name".visible = true
 		$"../P2Score".visible = true
+		$"../P2Avatar".visible = true
 
 func delete():
 	if play_zone.size() == 0: return
@@ -270,7 +274,7 @@ func _on_timer_timeout() -> void:
 		%GameTimer.stop()
 		if your_turn:
 			client.send_to_server({
-				"message": client.Message.sendTimeUsage, "client_id": client.id, "data": 999, "equation": "DNF"
+				"message": client.Message.sendTimeUsage, "client_id": client.id, "data": 999, "equation": "DID not FINISH"
 			})
 			%timeup_answer.visible = true
 			%ModalTimer.start()
@@ -333,11 +337,30 @@ func _on_modal_timer_timeout() -> void:
 				%EnemyTime.visible = true
 				%Time.visible = false
 				%Turn.get_node("Label").text = "enemy's turn"
+			%P1Avatar.visible = false
+			%P2Avatar.visible = false
 			%TurnOfEnemy.visible = false
 			%ReadyPanel.visible = false
 			%DeletePanel.visible = true
 			%SubmitPanel.visible = true
 			%Turn.visible = true
+		if %Winner.visible:
+			%Winner.visible = false
+			#START NEXT GAME
+			if is_clicked:
+				client.send_to_server({
+					"message": client.Message.runningGame,
+					"client_id": client.id,
+					"data": "NextRound"
+				})
+				is_clicked = false
+			elif !is_clicked:
+				if your_turn:
+					client.send_to_server({
+						"message": client.Message.runningGame,
+						"client_id": client.id,
+						"data": "NextRound"
+					})
 			
 		modal_is_on = false
 		modal_time = 5
@@ -352,6 +375,8 @@ func _on_modal_timer_timeout() -> void:
 		%TurnOfEnemy.get_node("Label3").text = "AUTOSTART IN " + str(modal_time) + " SECONDS"
 	if %timeup_answer.visible:
 		%timeup_answer.get_node("Label3").text = "AUTOCLOSE IN " + str(modal_time) + " SECONDS"
+	if %Winner.visible:
+		%Winner.get_node("Label3").text = "AUTOSTART IN " + str(modal_time) + " SECONDS"
 	
 
 func reset(event: InputEvent) -> void:
@@ -380,6 +405,8 @@ func runningGame(data):
 			%TurnOfEnemy.get_node("Label2").text = str(data.turn_name)
 			%TurnOfEnemy.get_node("Close").get_node("Label3").text = "start"
 			%TurnOfEnemy.visible = true
+			%EnemyTime.get_node("Label").text = "TIME : 60"
+			%Time.get_node("Label").text = "TIME : 60"
 			%EnemyTime.visible = false
 			modal_is_on = true
 			%ModalTimer.start()
@@ -389,17 +416,46 @@ func runningGame(data):
 			%TurnOfEnemy.get_node("Label2").text =  str(data.turn_name)
 			%TurnOfEnemy.get_node("Close").get_node("Label3").text = "close"
 			%TurnOfEnemy.visible = true
+			%EnemyTime.get_node("Label").text = "TIME : 60"
+			%Time.get_node("Label").text = "TIME : 60"
 			%EnemyTime.visible = false
 			modal_is_on = true
 			%ModalTimer.start()
 		"CalculateWinner":
-			for i in data.equations.size():
-				if i == 0: #TODO NAME
-					%Winner.get_node("Player1").get_node("Label2").text = data.equations[data.equations.keys()[i]]
-					%Winner.get_node("Player1").get_node("Label3").text = "TIME USE : " + data.equations[data.time_usage.keys()[i]]
-				elif i == 1:
-					%Winner.get_node("Player2").get_node("Label2").text = data.equations[data.equations.keys()[i]]
-					%Winner.get_node("Player2").get_node("Label3").text = "TIME USE : " + data.equations[data.time_usage.keys()[i]]
-			%Winner.get_node("Label3").text = "AUTOCLOSE IN " + "5" + " SECONDS"
+			var other_id
+			for client_id in client.clients.keys():
+				if client_id != str(client.id):
+					other_id = client_id
+			if get_tree().root.get_node("main").is_server:
+				%Winner.get_node("Player1").get_node("Label").text = str(data.clients[str(client.id)].attributes.name) + "'s equation"
+				%Winner.get_node("Player1").get_node("Label2").text = data.equations[str(client.id)]
+				%Winner.get_node("Player2").get_node("Label").text = str(data.clients[other_id].attributes.name) + "'s equation"
+				%Winner.get_node("Player2").get_node("Label2").text = data.equations[other_id]
+				if data.time_usage[str(client.id)] != 999:
+					%Winner.get_node("Player1").get_node("Label3").text = "TIME USE : " + str(data.time_usage[str(client.id)]) + " seconds"
+				else:
+					%Winner.get_node("Player1").get_node("Label3").text = "TIME USE : 60 seconds"
+				if data.time_usage[other_id] != 999:
+					%Winner.get_node("Player2").get_node("Label3").text = "TIME USE : " + str(data.time_usage[other_id]) + " seconds"
+				else:
+					%Winner.get_node("Player2").get_node("Label3").text = "TIME USE : 60 seconds"
+			else:
+				%Winner.get_node("Player1").get_node("Label").text = str(data.clients[other_id].attributes.name) + "'s equation"
+				%Winner.get_node("Player1").get_node("Label2").text = data.equations[other_id]
+				%Winner.get_node("Player2").get_node("Label").text = str(data.clients[str(client.id)].attributes.name) + "'s equation"
+				%Winner.get_node("Player2").get_node("Label2").text = data.equations[str(client.id)]
+				if data.time_usage[other_id] != 999:
+					%Winner.get_node("Player1").get_node("Label3").text = "TIME USE : " + str(data.time_usage[other_id]) + " seconds"
+				else:
+					%Winner.get_node("Player1").get_node("Label3").text = "TIME USE : 60 seconds"
+				if data.time_usage[str(client.id)] != 999:
+					%Winner.get_node("Player2").get_node("Label3").text = "TIME USE : " + str(data.time_usage[str(client.id)]) + " seconds"
+				else:
+					%Winner.get_node("Player2").get_node("Label3").text = "TIME USE : 60 seconds"
+			
+			%Winner.get_node("Label").text = data.winner
+			%Winner.get_node("Label3").text = "AUTOSTART IN " + "30" + " SECONDS"
 			%Winner.visible = true
+			modal_time = 30
 			modal_is_on = true
+			%ModalTimer.start()

@@ -16,7 +16,8 @@ enum Message {
 	getUserReadyCount,
 	runningGame,
 	closeModal,
-	updateTimer
+	updateTimer,
+	forceClosed
 }
 
 var game = preload("res://scenes/front/game.tscn")
@@ -27,6 +28,7 @@ var turn_num
 var clients_num
 var _name
 var _avatar
+var clients
 
 func _process(delta: float) -> void:
 	peer.poll()
@@ -47,16 +49,17 @@ func _process(delta: float) -> void:
 				Message.newUserConnected:
 					print("User connected: " + str(data.data))
 					clients_num = data.clients_num
-					handleNewUserConnected(data.data)
 				Message.userDisconnected:
 					print("User disconnected: " + str(data.data))
 				Message.updateUserAttributes:
 					print("Player attributes updated: " + str(data.data))
-					handleUpdateUserAttributes(data.data)
+					if data.has("clients"):
+						clients = data.clients
+					updateDisplay()
+					get_parent().get_node("Game").get_node("GameManager").display_player_count(clients.size())
 				Message.getUserCount:
 					if data.data == 2:
 						get_parent().get_node("Game").get_node("ReadyPanel").change()
-					get_parent().get_node("Game").get_node("GameManager").display_player_count(data.data)
 				Message.showModal:
 					show_modal(data.data)
 				Message.getUserReadyCount:
@@ -82,6 +85,10 @@ func _process(delta: float) -> void:
 					get_parent().get_node("Game").get_node(data.data).start()
 				Message.sendSeed:
 					get_parent().get_node("Game").get_node("GameManager").setSeed(data.used_num, data.target_num)
+				Message.forceClosed:
+					get_parent().get_node("Game").get_node("ModalTimer").stop()
+					get_parent().get_node("Game").get_node("GameManager").modal_time = 5
+					get_parent().get_node("Game").get_node("Winner").visible = false
 				_:
 					print("Unknown message type")
 
@@ -93,21 +100,56 @@ func connectToServer(ip):
 		print("Started client")
 		#wait for client to connect to server (poll to open) or 
 		#just send to server and let it send back as packet and run on client that time
-		await get_tree().create_timer(0.05).timeout
 		var game_instant = game.instantiate()
 		get_parent().add_child(game_instant)
+		await get_tree().create_timer(0.5).timeout
+		
 		send_to_server({"message": Message.getUserCount,"client_id": id})
 		send_to_server({"message": Message.showModal,"client_id": id})
 		assignPlayerName()
 		get_parent().get_node("Game").get_node("Welcome").get_node("Label2").text = _name
 		show_modal("Welcome")
 
-func handleNewUserConnected(data) -> void:
-	# pop up show new user connected
-	pass
+func updateDisplay():
+	var game = get_parent().get_node("Game")
+	var menu = get_parent().get_node("MainMenu")
+	if clients.size() == 1:
+		game.get_node("P1Name").text = clients[str(id)].attributes.name
+		var node_path = "AvatarChange/WhiteBox/bald" + str(clients[str(id)].attributes.avatar) + "/Panel"
+		var stylebox = menu.get_node(node_path).get_theme_stylebox("panel", "Panel")
+		game.get_node("P1Avatar").add_theme_stylebox_override("panel", stylebox)
+		game.get_node("P1Score").get_node("Score").text = str(clients[str(id)].attributes.score)
+	elif clients.size() == 2:
+		var other_id
+		for client_id in clients.keys():
+			if client_id != str(id):
+				other_id = client_id
+		
+		if game.get_node("P1Name").text != clients[str(id)].attributes.name:
+			game.get_node("P1Name").text = clients[other_id].attributes.name
+			var node_path = "AvatarChange/WhiteBox/bald" + str(clients[other_id].attributes.avatar) + "/Panel"
+			var stylebox = menu.get_node(node_path).get_theme_stylebox("panel", "Panel")
+			game.get_node("P1Avatar").add_theme_stylebox_override("panel", stylebox)
+			game.get_node("P1Score").get_node("Score").text = str(clients[other_id].attributes.score)
+			
+			game.get_node("P2Name").text = clients[str(id)].attributes.name
+			node_path = "AvatarChange/WhiteBox/bald" + str(clients[str(id)].attributes.avatar) + "/Panel"
+			stylebox = menu.get_node(node_path).get_theme_stylebox("panel", "Panel")
+			game.get_node("P2Avatar").add_theme_stylebox_override("panel", stylebox)
+			game.get_node("P2Score").get_node("Score").text = str(clients[str(id)].attributes.score)
+		else:
+			game.get_node("P1Name").text = clients[str(id)].attributes.name
+			var node_path = "AvatarChange/WhiteBox/bald" + str(clients[str(id)].attributes.avatar) + "/Panel"
+			var stylebox = menu.get_node(node_path).get_theme_stylebox("panel", "Panel")
+			game.get_node("P1Avatar").add_theme_stylebox_override("panel", stylebox)
+			game.get_node("P1Score").get_node("Score").text = str(clients[str(id)].attributes.score)
+			
+			game.get_node("P2Name").text = clients[other_id].attributes.name
+			node_path = "AvatarChange/WhiteBox/bald" + str(clients[other_id].attributes.avatar) + "/Panel"
+			stylebox = menu.get_node(node_path).get_theme_stylebox("panel", "Panel")
+			game.get_node("P2Avatar").add_theme_stylebox_override("panel", stylebox)
+			game.get_node("P2Score").get_node("Score").text = str(clients[other_id].attributes.score)
 
-func handleUpdateUserAttributes(data)-> void:
-	pass
 
 func handleConfirmConnection():
 	# close home page to start game page
@@ -121,13 +163,14 @@ func send_to_server(message):
 func assignPlayerName() -> void:
 	if id != -1:
 		_name = get_parent().get_node("MainMenu").get_node("MainBox").get_node("LineEdit").text
-		_avatar = get_parent().get_node("MainMenu").get_node("AvatarChange").selected_texture
+		_avatar = get_parent().get_node("MainMenu").get_node("AvatarChange").selected_avatar_number
 		player_attributes["name"] = _name
+		player_attributes["avatar"] = _avatar
 		# Send player attributes to the server
 		var message = {
 			"message": Message.updateUserAttributes,
 			"client_id" : id,
-			"data": player_attributes
+			"data": player_attributes,
 		}
 		peer.put_packet(JSON.stringify(message).to_utf8_buffer())
 	else:

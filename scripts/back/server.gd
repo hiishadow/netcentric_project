@@ -16,7 +16,8 @@ enum Message {
 	getUserReadyCount,
 	runningGame,
 	closeModal,
-	updateTimer
+	updateTimer,
+	forceClosed
 }
 
 var rng = RandomNumberGenerator.new()
@@ -51,7 +52,7 @@ func handle_message(data, sender_id):
 			# Update the user's attributes on the server
 			if data.has("data"):
 				clients[sender_id].attributes = data.data
-				broadcast_to_all({"message": Message.updateUserAttributes, "data": clients[sender_id]})
+				broadcast_to_all({"message": Message.updateUserAttributes, "data": clients[sender_id], "clients": clients})
 		Message.getUserCount:
 			broadcast_to_all({"message": Message.getUserCount, "data": clients.size()})
 		Message.showModal:
@@ -91,20 +92,49 @@ func handle_message(data, sender_id):
 			if data.data == "NextTurn":
 				turn_index = (turn_index + 1) % clients.size()
 				runningGame()
+			elif data.data == "NextRound":
+				turn_index = 0
+				for client_id in clients.keys():
+					if client_id != sender_id:
+						send_to_client(client_id, {"message": Message.forceClosed})
+				runningGame()
 			elif data.data == "CalculateWinner":
-				#TODO same time TIE
 				var winner
 				var min = 9999
 				for i in time_usage.keys():
 					if time_usage[i] <= min:
 						min = time_usage[i]
 						winner = i
-				broadcast_to_all({"message": Message.runningGame, "data": "CalculateWinner", 
-					"time_usage": time_usage,
-					"winner": winner,
-					"equations": equations
-				})
 				
+				if time_usage[time_usage.keys()[0]] == 999 and time_usage[time_usage.keys()[1]] == 999:
+					broadcast_to_all({"message": Message.runningGame, "data": "CalculateWinner", 
+						"time_usage": time_usage,
+						"winner": "NO WINNER",
+						"equations": equations,
+						"clients": clients
+					})
+				elif time_usage[time_usage.keys()[0]] == time_usage[time_usage.keys()[1]]:
+					broadcast_to_all({"message": Message.runningGame, "data": "CalculateWinner", 
+						"time_usage": time_usage,
+						"winner": "tie",
+						"equations": equations,
+						"clients": clients
+					})
+				elif time_usage[time_usage.keys()[0]] != time_usage[time_usage.keys()[1]]:
+					broadcast_to_all({"message": Message.runningGame, "data": "CalculateWinner", 
+						"time_usage": time_usage,
+						"winner": clients[int(winner)].attributes.name,
+						"equations": equations,
+						"clients": clients
+					})
+					clients[int(winner)].attributes.score += 1
+					broadcast_to_all({
+						"message": Message.updateUserAttributes,
+						"data": "updateScore",
+						"clients": clients
+					})
+				time_usage = {}
+				equations = {}
 
 func peer_connected(id):
 	print("Peer Connected: " + str(id))
@@ -124,7 +154,7 @@ func peer_connected(id):
 	broadcast_to_all({
 		"message": Message.newUserConnected,
 		"data": clients[id],
-		"clients_num": clients.size()
+		"clients_num": clients.size(),
 	})
 
 func peer_disconnected(id):
@@ -153,6 +183,8 @@ func startServer():
 func runningGame():
 	if turn_index == 0: #set new seed only first round
 		rng.randomize()
+		#FIXME fix seed for debug
+		rng.seed = 3672018741301020184
 		print("Seed: ", rng.seed)
 		var used_num = []
 		var j = 0

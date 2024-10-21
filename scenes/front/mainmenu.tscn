@@ -337,7 +337,7 @@ offset_right = 993.4
 offset_bottom = 515.24
 theme_override_styles/panel = SubResource("StyleBoxFlat_7q2ob")
 
-[node name="bald" type="Control" parent="AvatarChange/WhiteBox"]
+[node name="bald1" type="Control" parent="AvatarChange/WhiteBox"]
 custom_minimum_size = Vector2(158.94, 174.84)
 anchors_preset = 0
 offset_left = 23.84
@@ -346,7 +346,7 @@ offset_right = 182.78
 offset_bottom = 198.68
 script = ExtResource("11_odric")
 
-[node name="Bald" type="Panel" parent="AvatarChange/WhiteBox/bald"]
+[node name="Bald" type="Panel" parent="AvatarChange/WhiteBox/bald1"]
 custom_minimum_size = Vector2(158.94, 174.84)
 layout_mode = 1
 anchors_preset = 15
@@ -356,7 +356,7 @@ grow_horizontal = 2
 grow_vertical = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_p8n56")
 
-[node name="Panel" type="Panel" parent="AvatarChange/WhiteBox/bald"]
+[node name="Panel" type="Panel" parent="AvatarChange/WhiteBox/bald1"]
 custom_minimum_size = Vector2(132.45, 140.48)
 layout_mode = 0
 offset_left = 13.25
@@ -365,7 +365,7 @@ offset_right = 145.7
 offset_bottom = 153.73
 theme_override_styles/panel = SubResource("StyleBoxTexture_qpbb0")
 
-[node name="ClickArea" type="Panel" parent="AvatarChange/WhiteBox/bald"]
+[node name="ClickArea" type="Panel" parent="AvatarChange/WhiteBox/bald1"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -717,12 +717,12 @@ offset_bottom = 625.18
 theme = SubResource("Theme_8tnk6")
 text = "confirm"
 
-[connection signal="gui_input" from="AvatarChange/WhiteBox/bald/Bald" to="MainBox" method="_on_bald_gui_input"]
-[connection signal="gui_input" from="AvatarChange/WhiteBox/bald/Bald" to="AvatarChange" method="_on_bald_gui_input"]
-[connection signal="gui_input" from="AvatarChange/WhiteBox/bald/ClickArea" to="AvatarChange" method="_on_click_area_gui_input"]
-[connection signal="gui_input" from="AvatarChange/WhiteBox/bald/ClickArea" to="AvatarChange/WhiteBox/bald" method="_on_click_area_gui_input"]
-[connection signal="mouse_entered" from="AvatarChange/WhiteBox/bald/ClickArea" to="AvatarChange/WhiteBox/bald" method="_on_click_area_mouse_entered"]
-[connection signal="mouse_exited" from="AvatarChange/WhiteBox/bald/ClickArea" to="AvatarChange/WhiteBox/bald" method="_on_click_area_mouse_exited"]
+[connection signal="gui_input" from="AvatarChange/WhiteBox/bald1/Bald" to="MainBox" method="_on_bald_gui_input"]
+[connection signal="gui_input" from="AvatarChange/WhiteBox/bald1/Bald" to="AvatarChange" method="_on_bald_gui_input"]
+[connection signal="gui_input" from="AvatarChange/WhiteBox/bald1/ClickArea" to="AvatarChange" method="_on_click_area_gui_input"]
+[connection signal="gui_input" from="AvatarChange/WhiteBox/bald1/ClickArea" to="AvatarChange/WhiteBox/bald1" method="_on_click_area_gui_input"]
+[connection signal="mouse_entered" from="AvatarChange/WhiteBox/bald1/ClickArea" to="AvatarChange/WhiteBox/bald1" method="_on_click_area_mouse_entered"]
+[connection signal="mouse_exited" from="AvatarChange/WhiteBox/bald1/ClickArea" to="AvatarChange/WhiteBox/bald1" method="_on_click_area_mouse_exited"]
 [connection signal="gui_input" from="AvatarChange/WhiteBox/bald2/ClickArea2" to="AvatarChange" method="_on_click_area_2_gui_input"]
 [connection signal="mouse_entered" from="AvatarChange/WhiteBox/bald2/ClickArea2" to="AvatarChange/WhiteBox/bald2" method="_on_click_area_2_mouse_entered"]
 [connection signal="mouse_exited" from="AvatarChange/WhiteBox/bald2/ClickArea2" to="AvatarChange/WhiteBox/bald2" method="_on_click_area_2_mouse_exited"]

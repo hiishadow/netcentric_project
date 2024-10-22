@@ -17,7 +17,8 @@ enum Message {
 	runningGame,
 	closeModal,
 	updateTimer,
-	forceClosed
+	forceClosed,
+	resetGame
 }
 
 var game = preload("res://scenes/front/game.tscn")
@@ -56,6 +57,9 @@ func _process(delta: float) -> void:
 					print("Player attributes updated: " + str(data.data))
 					if data.has("clients"):
 						clients = data.clients
+						if get_tree().root.get_node("main").is_server:
+							get_tree().root.get_node("main").get_node("Game").get_node("PlayerCount").visible = true
+							get_tree().root.get_node("main").get_node("Game").get_node("PlayerCount").text = "PLAYERS ONLINE " + str(clients.size())
 					updateDisplay()
 					get_parent().get_node("Game").get_node("GameManager").display_player_count(clients.size())
 				Message.getUserCount:
@@ -90,6 +94,10 @@ func _process(delta: float) -> void:
 					get_parent().get_node("Game").get_node("ModalTimer").stop()
 					get_parent().get_node("Game").get_node("GameManager").modal_time = 5
 					get_parent().get_node("Game").get_node("Winner").visible = false
+				Message.resetGame:
+					for i in clients.keys():
+						clients[i].attributes.score = 0
+					get_parent().get_node("Game").get_node("GameManager").resetGame()
 				_:
 					print("Unknown message type")
 
@@ -104,6 +112,7 @@ func connectToServer(ip):
 		var game_instant = game.instantiate()
 		get_parent().add_child(game_instant)
 		await get_tree().create_timer(0.5).timeout
+		
 		
 		send_to_server({"message": Message.getUserCount,"client_id": id})
 		send_to_server({"message": Message.showModal,"client_id": id})

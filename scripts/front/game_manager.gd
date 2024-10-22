@@ -26,6 +26,8 @@ var your_turn: bool = false
 func _ready() -> void:
 	client = get_tree().root.get_child(0).get_node("Client")
 	main = get_tree().root.get_child(0)
+	if get_tree().root.get_node("main").is_server:
+		%ResetGame.visible = true
 	
 	slot_path()
 	
@@ -462,3 +464,53 @@ func runningGame(data):
 			modal_time = 30
 			modal_is_on = true
 			%ModalTimer.start()
+
+
+func _on_reset_game_pressed() -> void:
+	client.send_to_server({"message": client.Message.resetGame, "client_id": client.id})
+
+func resetGame():
+	print("resetGame")
+	%GameTimer.stop()
+	%ModalTimer.stop()
+	%Turn.hide()
+	%Time.hide()
+	%DeletePanel.hide()
+	%SubmitPanel.hide()
+	$"../Welcome".hide()
+	%TurnOfEnemy.hide()
+	$"../RulePage".hide()
+	%WrongAnswer.hide()
+	%CorrectAnswer.hide()
+	%timeup_answer.hide()
+	%Winner.hide()
+	$"../ViewRule".visible = true
+	%ReadyPanel.visible = true
+	%P1Avatar.visible = true
+	%P2Avatar.visible= true
+	
+	reverse_set_up_card_panel()
+	
+	$"../ViewRule".get_node("Label").text = "WHEN READY\nPRESS READY"
+	%ReadyPanel.get_node("Label").text = "READY"
+	var new_sb = StyleBoxFlat.new()
+	new_sb.bg_color = Color(0.882, 0.341, 0.302)
+	var styleBox: StyleBoxFlat = %ReadyPanel.get_node("Panel2").get_theme_stylebox("panel")
+	styleBox.set("bg_color", Color(0.882, 0.341, 0.302))
+	%ReadyPanel.get_node("Panel2").add_theme_stylebox_override("panel", styleBox)
+	%ReadyPanel.is_ready = false
+	%TargetPanel.get_node("Label").text = "#"
+	
+	client.updateDisplay()
+	
+	game_time = 60
+	modal_time = 60
+	final_time = 0
+	modal_is_on = false
+	can_submit = false
+	can_delete = false
+	used_num = null
+	target_num = null
+	seed_answer = null
+	is_clicked = false
+	your_turn = false

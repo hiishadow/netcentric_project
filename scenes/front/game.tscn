@@ -405,9 +405,9 @@ vertical_alignment = 1
 
 [node name="ScoreBoard" type="Panel" parent="."]
 offset_left = 75.0
-offset_top = 45.0
+offset_top = 65.0
 offset_right = 1845.0
-offset_bottom = 325.0
+offset_bottom = 345.0
 theme_override_styles/panel = SubResource("StyleBoxFlat_u07ho")
 
 [node name="TargetPanel" parent="ScoreBoard" instance=ExtResource("2_vt8v8")]
@@ -499,9 +499,9 @@ theme_override_styles/panel = SubResource("StyleBoxFlat_vrwdf")
 
 [node name="Signs" type="Panel" parent="."]
 offset_left = 75.0
-offset_top = 780.0
+offset_top = 755.0
 offset_right = 395.0
-offset_bottom = 1040.0
+offset_bottom = 1015.0
 theme_override_styles/panel = SubResource("StyleBoxFlat_u07ho")
 
 [node name="SignPanel" parent="Signs" instance=ExtResource("2_u1332")]
@@ -534,9 +534,9 @@ _sign = "divide"
 
 [node name="Numbers" type="Panel" parent="."]
 offset_left = 460.0
-offset_top = 780.0
+offset_top = 755.0
 offset_right = 1460.0
-offset_bottom = 1040.0
+offset_bottom = 1015.0
 theme_override_styles/panel = SubResource("StyleBoxFlat_u07ho")
 
 [node name="CardHolderPanel" parent="Numbers" instance=ExtResource("3_l5urw")]
@@ -613,17 +613,17 @@ offset_bottom = -515.0
 unique_name_in_owner = true
 visible = false
 offset_left = 1525.0
-offset_top = 780.0
+offset_top = 755.0
 offset_right = 1525.0
-offset_bottom = 780.0
+offset_bottom = 755.0
 
 [node name="SubmitPanel" parent="." instance=ExtResource("9_766rw")]
 unique_name_in_owner = true
 visible = false
 offset_left = 1526.0
-offset_top = 923.0
+offset_top = 905.0
 offset_right = 1526.0
-offset_bottom = 923.0
+offset_bottom = 905.0
 
 [node name="timeup_answer" parent="." instance=ExtResource("12_c52ok")]
 unique_name_in_owner = true
@@ -664,9 +664,9 @@ offset_bottom = 380.0
 unique_name_in_owner = true
 z_index = 1
 offset_left = 1525.0
-offset_top = 780.0
+offset_top = 755.0
 offset_right = 1525.0
-offset_bottom = 780.0
+offset_bottom = 755.0
 
 [node name="TurnOfEnemy" parent="." instance=ExtResource("13_lyvr4")]
 unique_name_in_owner = true
@@ -758,6 +758,7 @@ offset_right = 210.0
 offset_bottom = 140.0
 
 [node name="DebugLabel" type="Label" parent="."]
+visible = false
 z_index = 4096
 offset_left = 47.0
 offset_top = 23.0
@@ -767,6 +768,27 @@ theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_font_sizes/font_size = 50
 script = ExtResource("22_spbk7")
 
+[node name="PlayerCount" type="Label" parent="."]
+visible = false
+offset_left = 13.0
+offset_top = 1021.0
+offset_right = 81.0
+offset_bottom = 1076.0
+theme_override_font_sizes/font_size = 40
+text = "123"
+
+[node name="ResetGame" type="Button" parent="."]
+unique_name_in_owner = true
+visible = false
+z_index = 50
+offset_left = 1682.0
+offset_top = 1021.0
+offset_right = 1906.0
+offset_bottom = 1075.0
+theme_override_font_sizes/font_size = 30
+text = "RESET GAME"
+
 [connection signal="timeout" from="GameTimer" to="GameManager" method="_on_timer_timeout"]
 [connection signal="timeout" from="ModalTimer" to="GameManager" method="_on_modal_timer_timeout"]
 [connection signal="gui_input" from="Reset/ClickArea" to="GameManager" method="reset"]
+[connection signal="pressed" from="ResetGame" to="GameManager" method="_on_reset_game_pressed"]

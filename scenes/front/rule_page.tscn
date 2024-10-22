@@ -338,9 +338,9 @@ texture = ExtResource("12_kvod6")
 [node name="ScoreBoard" type="Panel" parent="."]
 layout_mode = 0
 offset_left = 75.0
-offset_top = 45.0
+offset_top = 65.0
 offset_right = 1845.0
-offset_bottom = 325.0
+offset_bottom = 345.0
 theme_override_styles/panel = SubResource("StyleBoxFlat_65gh2")
 
 [node name="TargetPanel" type="Control" parent="ScoreBoard"]
@@ -616,9 +616,9 @@ theme_override_styles/panel = SubResource("StyleBoxFlat_uur7u")
 [node name="Signs" type="Panel" parent="."]
 layout_mode = 0
 offset_left = 75.0
-offset_top = 780.0
+offset_top = 760.0
 offset_right = 395.0
-offset_bottom = 1040.0
+offset_bottom = 1020.0
 theme_override_styles/panel = SubResource("StyleBoxFlat_m3v6v")
 
 [node name="SignPanel" type="Control" parent="Signs"]
@@ -754,9 +754,9 @@ vertical_alignment = 1
 [node name="Numbers" type="Panel" parent="."]
 layout_mode = 0
 offset_left = 460.0
-offset_top = 780.0
+offset_top = 760.0
 offset_right = 1460.0
-offset_bottom = 1040.0
+offset_bottom = 1020.0
 theme_override_styles/panel = SubResource("StyleBoxFlat_nruo5")
 
 [node name="CardHolderPanel" parent="Numbers" instance=ExtResource("3_xgt44")]
@@ -904,17 +904,17 @@ vertical_alignment = 1
 [node name="DeletePanel" parent="." instance=ExtResource("5_l2nby")]
 layout_mode = 1
 offset_left = 1525.0
-offset_top = 780.0
+offset_top = 760.0
 offset_right = 1525.0
-offset_bottom = 780.0
+offset_bottom = 760.0
 script = null
 
 [node name="SubmitPanel" parent="." instance=ExtResource("6_jjal2")]
 layout_mode = 1
 offset_left = 1526.0
-offset_top = 923.0
+offset_top = 905.0
 offset_right = 1526.0
-offset_bottom = 923.0
+offset_bottom = 905.0
 script = null
 
 [node name="TextureRect" type="TextureRect" parent="."]
@@ -953,9 +953,9 @@ vertical_alignment = 1
 [node name="Label2" type="Label" parent="Top"]
 layout_mode = 0
 offset_left = 785.0
-offset_top = 116.0
+offset_top = 136.0
 offset_right = 1155.0
-offset_bottom = 254.0
+offset_bottom = 274.0
 theme_override_colors/font_color = Color(0.572549, 0.109804, 0.117647, 1)
 theme_override_colors/font_outline_color = Color(0.956863, 0.909804, 0.913725, 1)
 theme_override_constants/line_spacing = -10
@@ -1002,9 +1002,9 @@ vertical_alignment = 1
 [node name="Label5" type="Label" parent="Top"]
 layout_mode = 0
 offset_left = 16.0
-offset_top = 837.0
+offset_top = 817.0
 offset_right = 456.0
-offset_bottom = 975.0
+offset_bottom = 955.0
 theme_override_colors/font_color = Color(0.572549, 0.109804, 0.117647, 1)
 theme_override_colors/font_outline_color = Color(0.956863, 0.909804, 0.913725, 1)
 theme_override_constants/line_spacing = -10
@@ -1019,9 +1019,9 @@ vertical_alignment = 1
 [node name="Label6" type="Label" parent="Top"]
 layout_mode = 0
 offset_left = 718.0
-offset_top = 835.0
+offset_top = 815.0
 offset_right = 1179.0
-offset_bottom = 973.0
+offset_bottom = 953.0
 theme_override_colors/font_color = Color(0.572549, 0.109804, 0.117647, 1)
 theme_override_colors/font_outline_color = Color(0.956863, 0.909804, 0.913725, 1)
 theme_override_constants/line_spacing = -10

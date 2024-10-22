@@ -17,7 +17,8 @@ enum Message {
 	runningGame,
 	closeModal,
 	updateTimer,
-	forceClosed
+	forceClosed,
+	resetGame
 }
 
 var rng = RandomNumberGenerator.new()
@@ -140,6 +141,18 @@ func handle_message(data, sender_id):
 					})
 				time_usage = {}
 				equations = {}
+		Message.resetGame:
+			ready_count = []
+			time_usage = {}
+			turn_index = 0
+			equations = {}
+			used_num = []
+			target_num = 0
+			used_pool = []
+			seed_answer = ""
+			for i in clients.keys():
+				clients[i].attributes.score = 0
+			broadcast_to_all({"message": Message.resetGame})
 
 func peer_connected(id):
 	print("Peer Connected: " + str(id))
@@ -170,6 +183,8 @@ func peer_disconnected(id):
 		"data": "User " + str(id) + " has disconnected."
 	}
 	broadcast_to_all(message)
+	if get_tree().root.get_node("main").has_node("Game"):
+		get_tree().root.get_node("main").get_node("Game").get_node("PlayerCount").text = "PLAYERS ONLINE " + str(clients.size())
 
 func send_to_client(id, message):
 	peer.get_peer(id).put_packet(JSON.stringify(message).to_utf8_buffer())

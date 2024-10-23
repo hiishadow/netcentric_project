@@ -1,0 +1,838 @@
+[gd_scene load_steps=48 format=3 uid="uid://bc2cby6tnrrql"]
+
+[ext_resource type="Script" path="res://scripts/front/practice_game_manager.gd" id="1_enqkb"]
+[ext_resource type="Texture2D" uid="uid://cgxiwy3ntovsc" path="res://bg.png" id="1_h7sve"]
+[ext_resource type="FontFile" uid="uid://bt5pn0ptnei0q" path="res://fonts/Bungee/Bungee-Regular.ttf" id="2_65tdw"]
+[ext_resource type="Texture2D" uid="uid://deydy23ssje4b" path="res://resources/mainmenu/avatar/Gamee Avatar (3).png" id="3_sney8"]
+[ext_resource type="PackedScene" uid="uid://bhxybkqifjtla" path="res://scenes/front/target_panel.tscn" id="4_d86ux"]
+[ext_resource type="PackedScene" uid="uid://cw2c8fcsrep15" path="res://scenes/front/play_card_holder_panel.tscn" id="5_4x40y"]
+[ext_resource type="PackedScene" uid="uid://bx52h06k44xab" path="res://scenes/front/play_sign_holder_panel.tscn" id="6_nblpc"]
+[ext_resource type="PackedScene" uid="uid://vxt7wu6vjao7" path="res://scenes/front/sign_panel.tscn" id="7_ikryi"]
+[ext_resource type="PackedScene" uid="uid://djkcfpcmletix" path="res://scenes/front/card_holder_panel.tscn" id="8_1rp2e"]
+[ext_resource type="PackedScene" uid="uid://kgybfj0gkb47" path="res://scenes/front/card_panel.tscn" id="9_t5jbo"]
+[ext_resource type="PackedScene" uid="uid://bpkemiqcmcn6t" path="res://scenes/front/delete_panel.tscn" id="10_fsr4c"]
+[ext_resource type="PackedScene" uid="uid://c1tglnq46dnbr" path="res://scenes/front/submit_panel.tscn" id="11_31j5l"]
+[ext_resource type="PackedScene" uid="uid://bv74qvfpjwmcy" path="res://scenes/front/timeup_answer.tscn" id="12_4w8lp"]
+[ext_resource type="PackedScene" uid="uid://0qnpdrwpewmo" path="res://scenes/front/wrong_answer.tscn" id="13_y4h4d"]
+[ext_resource type="PackedScene" uid="uid://dwxtua5310fs6" path="res://scenes/front/correct_answer.tscn" id="14_mpqce"]
+[ext_resource type="PackedScene" uid="uid://2sqnqctq3w11" path="res://scenes/front/view_rule.tscn" id="15_3k4w8"]
+[ext_resource type="PackedScene" uid="uid://cfagfbup4tp0s" path="res://scenes/front/ready_panel.tscn" id="16_7bs3w"]
+[ext_resource type="PackedScene" uid="uid://6llspxbxiacd" path="res://scenes/front/turn_of_enemy.tscn" id="17_1cqrh"]
+[ext_resource type="PackedScene" uid="uid://bgpv5q10qgg3r" path="res://scenes/front/welcome.tscn" id="18_w787l"]
+[ext_resource type="PackedScene" uid="uid://41q8f4vhbp1n" path="res://scenes/front/rule_page.tscn" id="19_ab213"]
+[ext_resource type="PackedScene" uid="uid://bt8ttmwh8ex8j" path="res://scenes/front/winner.tscn" id="20_cox3v"]
+[ext_resource type="Script" path="res://scripts/front/debug_label.gd" id="21_yrdnh"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_r6146"]
+bg_color = Color(0.894118, 0.533333, 0.247059, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ewqpo"]
+bg_color = Color(0.658824, 0.286275, 0.294118, 1)
+corner_radius_top_left = 20
+corner_radius_top_right = 20
+corner_radius_bottom_right = 20
+corner_radius_bottom_left = 20
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_wmddp"]
+texture = ExtResource("3_sney8")
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_jupen"]
+texture = ExtResource("3_sney8")
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_kk5f4"]
+bg_color = Color(0.988235, 0.952941, 0.92549, 1)
+corner_radius_top_left = 20
+corner_radius_top_right = 20
+corner_radius_bottom_right = 20
+corner_radius_bottom_left = 20
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_eqpt4"]
+bg_color = Color(0.980392, 0.980392, 0.980392, 1)
+corner_radius_top_left = 20
+corner_radius_top_right = 20
+corner_radius_bottom_right = 20
+corner_radius_bottom_left = 20
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_4d4h5"]
+resource_local_to_scene = true
+bg_color = Color(0.984314, 0.917647, 0.913725, 1)
+corner_radius_top_left = 12
+corner_radius_top_right = 12
+corner_radius_bottom_right = 12
+corner_radius_bottom_left = 12
+shadow_color = Color(0, 0, 0, 0.0980392)
+shadow_size = 6
+shadow_offset = Vector2(0, 5)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_mb4v6"]
+resource_local_to_scene = true
+bg_color = Color(0.984314, 0.917647, 0.913725, 1)
+corner_radius_top_left = 12
+corner_radius_top_right = 12
+corner_radius_bottom_right = 12
+corner_radius_bottom_left = 12
+shadow_color = Color(0, 0, 0, 0.0980392)
+shadow_size = 6
+shadow_offset = Vector2(0, 5)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_1ev5s"]
+resource_local_to_scene = true
+bg_color = Color(0.984314, 0.917647, 0.913725, 1)
+corner_radius_top_left = 12
+corner_radius_top_right = 12
+corner_radius_bottom_right = 12
+corner_radius_bottom_left = 12
+shadow_color = Color(0, 0, 0, 0.0980392)
+shadow_size = 6
+shadow_offset = Vector2(0, 5)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_2asbt"]
+resource_local_to_scene = true
+bg_color = Color(0.984314, 0.917647, 0.913725, 1)
+corner_radius_top_left = 12
+corner_radius_top_right = 12
+corner_radius_bottom_right = 12
+corner_radius_bottom_left = 12
+shadow_color = Color(0, 0, 0, 0.0980392)
+shadow_size = 6
+shadow_offset = Vector2(0, 5)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_fcvl5"]
+resource_local_to_scene = true
+bg_color = Color(0.984314, 0.917647, 0.913725, 1)
+corner_radius_top_left = 12
+corner_radius_top_right = 12
+corner_radius_bottom_right = 12
+corner_radius_bottom_left = 12
+shadow_color = Color(0, 0, 0, 0.0980392)
+shadow_size = 6
+shadow_offset = Vector2(0, 5)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_hiaft"]
+resource_local_to_scene = true
+bg_color = Color(0.984314, 0.917647, 0.913725, 1)
+corner_radius_top_left = 12
+corner_radius_top_right = 12
+corner_radius_bottom_right = 12
+corner_radius_bottom_left = 12
+shadow_color = Color(0, 0, 0, 0.0980392)
+shadow_size = 6
+shadow_offset = Vector2(0, 5)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_eflov"]
+resource_local_to_scene = true
+bg_color = Color(0.984314, 0.917647, 0.913725, 1)
+corner_radius_top_left = 12
+corner_radius_top_right = 12
+corner_radius_bottom_right = 12
+corner_radius_bottom_left = 12
+shadow_color = Color(0, 0, 0, 0.0980392)
+shadow_size = 6
+shadow_offset = Vector2(0, 5)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ydrvr"]
+resource_local_to_scene = true
+bg_color = Color(0.984314, 0.917647, 0.913725, 1)
+corner_radius_top_left = 12
+corner_radius_top_right = 12
+corner_radius_bottom_right = 12
+corner_radius_bottom_left = 12
+shadow_color = Color(0, 0, 0, 0.0980392)
+shadow_size = 6
+shadow_offset = Vector2(0, 5)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_igw3y"]
+resource_local_to_scene = true
+bg_color = Color(0.984314, 0.917647, 0.913725, 1)
+corner_radius_top_left = 12
+corner_radius_top_right = 12
+corner_radius_bottom_right = 12
+corner_radius_bottom_left = 12
+shadow_color = Color(0, 0, 0, 0.0980392)
+shadow_size = 6
+shadow_offset = Vector2(0, 5)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_gy1g3"]
+resource_local_to_scene = true
+bg_color = Color(1, 1, 1, 1)
+corner_radius_top_left = 12
+corner_radius_top_right = 12
+corner_radius_bottom_right = 12
+corner_radius_bottom_left = 12
+shadow_color = Color(0, 0, 0, 0.0980392)
+shadow_size = 6
+shadow_offset = Vector2(0, 4)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_mdr7i"]
+resource_local_to_scene = true
+bg_color = Color(1, 1, 1, 1)
+corner_radius_top_left = 12
+corner_radius_top_right = 12
+corner_radius_bottom_right = 12
+corner_radius_bottom_left = 12
+shadow_color = Color(0, 0, 0, 0.0980392)
+shadow_size = 6
+shadow_offset = Vector2(0, 4)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_3kccl"]
+resource_local_to_scene = true
+bg_color = Color(1, 1, 1, 1)
+corner_radius_top_left = 12
+corner_radius_top_right = 12
+corner_radius_bottom_right = 12
+corner_radius_bottom_left = 12
+shadow_color = Color(0, 0, 0, 0.0980392)
+shadow_size = 6
+shadow_offset = Vector2(0, 4)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_33wrk"]
+resource_local_to_scene = true
+bg_color = Color(1, 1, 1, 1)
+corner_radius_top_left = 12
+corner_radius_top_right = 12
+corner_radius_bottom_right = 12
+corner_radius_bottom_left = 12
+shadow_color = Color(0, 0, 0, 0.0980392)
+shadow_size = 6
+shadow_offset = Vector2(0, 4)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_xogei"]
+resource_local_to_scene = true
+bg_color = Color(1, 1, 1, 1)
+corner_radius_top_left = 12
+corner_radius_top_right = 12
+corner_radius_bottom_right = 12
+corner_radius_bottom_left = 12
+shadow_color = Color(0, 0, 0, 0.0980392)
+shadow_size = 6
+shadow_offset = Vector2(0, 4)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_tsq6o"]
+bg_color = Color(0.658824, 0.286275, 0.294118, 1)
+corner_radius_top_left = 20
+corner_radius_top_right = 20
+corner_radius_bottom_right = 20
+corner_radius_bottom_left = 20
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_tbl0g"]
+bg_color = Color(0.988235, 0.952941, 0.92549, 1)
+corner_radius_top_left = 20
+corner_radius_top_right = 20
+corner_radius_bottom_right = 20
+corner_radius_bottom_left = 20
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_h5a7p"]
+bg_color = Color(1, 0.72549, 0.141176, 1)
+corner_radius_top_left = 8
+corner_radius_top_right = 8
+corner_radius_bottom_right = 8
+corner_radius_bottom_left = 8
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_kjrim"]
+bg_color = Color(0.603922, 0.12549, 0.0901961, 1)
+corner_radius_top_left = 20
+corner_radius_bottom_left = 20
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_haarr"]
+bg_color = Color(0.882353, 0.341176, 0.301961, 1)
+corner_radius_top_left = 20
+corner_radius_bottom_left = 20
+
+[node name="PracticeGame" type="Node"]
+
+[node name="GameManager" type="Node" parent="."]
+unique_name_in_owner = true
+script = ExtResource("1_enqkb")
+
+[node name="GameTimer" type="Timer" parent="."]
+unique_name_in_owner = true
+
+[node name="ModalTimer" type="Timer" parent="."]
+unique_name_in_owner = true
+
+[node name="Background" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="Panel" type="Panel" parent="Background"]
+layout_mode = 0
+offset_right = 1920.0
+offset_bottom = 1080.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_r6146")
+
+[node name="TextureRect" type="TextureRect" parent="Background"]
+self_modulate = Color(1, 1, 1, 0.862745)
+layout_mode = 0
+offset_right = 1920.0
+offset_bottom = 1080.0
+texture = ExtResource("1_h7sve")
+
+[node name="Turn" type="Panel" parent="."]
+unique_name_in_owner = true
+visible = false
+z_index = 101
+offset_left = 40.0
+offset_top = 30.0
+offset_right = 400.0
+offset_bottom = 140.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_ewqpo")
+
+[node name="Label" type="Label" parent="Turn"]
+layout_mode = 0
+offset_right = 360.0
+offset_bottom = 110.0
+theme_override_fonts/font = ExtResource("2_65tdw")
+theme_override_font_sizes/font_size = 53
+text = "YOUR TURN"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Time" type="Panel" parent="."]
+unique_name_in_owner = true
+z_index = 101
+offset_left = 1570.0
+offset_top = 30.0
+offset_right = 1880.0
+offset_bottom = 140.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_ewqpo")
+
+[node name="Label" type="Label" parent="Time"]
+layout_mode = 0
+offset_right = 310.0
+offset_bottom = 110.0
+theme_override_fonts/font = ExtResource("2_65tdw")
+theme_override_font_sizes/font_size = 53
+text = "TIME : 60"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="P1Avatar" type="Panel" parent="."]
+unique_name_in_owner = true
+visible = false
+z_index = 100
+custom_minimum_size = Vector2(180, 180)
+offset_left = 180.0
+offset_top = -10.0
+offset_right = 420.0
+offset_bottom = 230.0
+theme_override_styles/panel = SubResource("StyleBoxTexture_wmddp")
+
+[node name="P1Name" type="Label" parent="."]
+visible = false
+z_index = 100
+offset_left = 120.0
+offset_top = 220.0
+offset_right = 470.0
+offset_bottom = 320.0
+theme_override_colors/font_color = Color(0.85098, 0.176471, 0.12549, 1)
+theme_override_fonts/font = ExtResource("2_65tdw")
+theme_override_font_sizes/font_size = 60
+text = "P1__NAME"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="P1Score" type="Label" parent="."]
+visible = false
+z_index = 100
+offset_left = 552.5
+offset_top = 105.0
+offset_right = 722.5
+offset_bottom = 175.0
+theme_override_colors/font_color = Color(0.85098, 0.176471, 0.12549, 1)
+theme_override_fonts/font = ExtResource("2_65tdw")
+theme_override_font_sizes/font_size = 50
+text = "SCORE"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Score" type="Label" parent="P1Score"]
+layout_mode = 0
+offset_left = -17.5
+offset_top = 35.0
+offset_right = 187.5
+offset_bottom = 220.0
+theme_override_colors/font_color = Color(0.85098, 0.176471, 0.12549, 1)
+theme_override_fonts/font = ExtResource("2_65tdw")
+theme_override_font_sizes/font_size = 140
+text = "00"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="P2Avatar" type="Panel" parent="."]
+unique_name_in_owner = true
+visible = false
+z_index = 100
+custom_minimum_size = Vector2(180, 180)
+offset_left = 1510.0
+offset_top = -10.0
+offset_right = 1750.0
+offset_bottom = 230.0
+theme_override_styles/panel = SubResource("StyleBoxTexture_jupen")
+
+[node name="P2Name" type="Label" parent="."]
+visible = false
+z_index = 100
+offset_left = 1450.0
+offset_top = 220.0
+offset_right = 1800.0
+offset_bottom = 320.0
+theme_override_colors/font_color = Color(0.85098, 0.176471, 0.12549, 1)
+theme_override_fonts/font = ExtResource("2_65tdw")
+theme_override_font_sizes/font_size = 60
+text = "P2__NAME"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="P2Score" type="Label" parent="."]
+visible = false
+z_index = 100
+offset_left = 1197.5
+offset_top = 105.0
+offset_right = 1367.5
+offset_bottom = 175.0
+theme_override_colors/font_color = Color(0.85098, 0.176471, 0.12549, 1)
+theme_override_fonts/font = ExtResource("2_65tdw")
+theme_override_font_sizes/font_size = 50
+text = "SCORE"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Score" type="Label" parent="P2Score"]
+layout_mode = 0
+offset_left = -17.5
+offset_top = 35.0
+offset_right = 187.5
+offset_bottom = 220.0
+theme_override_colors/font_color = Color(0.85098, 0.176471, 0.12549, 1)
+theme_override_fonts/font = ExtResource("2_65tdw")
+theme_override_font_sizes/font_size = 140
+text = "00"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="ScoreBoard" type="Panel" parent="."]
+offset_left = 75.0
+offset_top = 65.0
+offset_right = 1845.0
+offset_bottom = 345.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_kk5f4")
+
+[node name="TargetPanel" parent="ScoreBoard" instance=ExtResource("4_d86ux")]
+unique_name_in_owner = true
+layout_mode = 1
+offset_left = 730.0
+offset_top = -15.0
+offset_right = 730.0
+offset_bottom = -15.0
+
+[node name="PlayZone" type="Panel" parent="."]
+offset_left = 75.0
+offset_top = 380.0
+offset_right = 1845.0
+offset_bottom = 720.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_eqpt4")
+
+[node name="PlayCardHolderPanel" parent="PlayZone" instance=ExtResource("5_4x40y")]
+layout_mode = 0
+offset_left = 44.6
+offset_top = 46.5
+offset_right = 216.6
+offset_bottom = 293.5
+theme_override_styles/panel = SubResource("StyleBoxFlat_4d4h5")
+
+[node name="PlayCardHolderPanel2" parent="PlayZone" instance=ExtResource("5_4x40y")]
+layout_mode = 0
+offset_left = 421.8
+offset_top = 46.5
+offset_right = 593.8
+offset_bottom = 293.5
+theme_override_styles/panel = SubResource("StyleBoxFlat_mb4v6")
+
+[node name="PlayCardHolderPanel3" parent="PlayZone" instance=ExtResource("5_4x40y")]
+layout_mode = 0
+offset_left = 799.0
+offset_top = 46.5
+offset_right = 971.0
+offset_bottom = 293.5
+theme_override_styles/panel = SubResource("StyleBoxFlat_1ev5s")
+
+[node name="PlayCardHolderPanel4" parent="PlayZone" instance=ExtResource("5_4x40y")]
+layout_mode = 0
+offset_left = 1176.2
+offset_top = 46.5
+offset_right = 1348.2
+offset_bottom = 293.5
+theme_override_styles/panel = SubResource("StyleBoxFlat_2asbt")
+
+[node name="PlayCardHolderPanel5" parent="PlayZone" instance=ExtResource("5_4x40y")]
+layout_mode = 0
+offset_left = 1553.5
+offset_top = 46.5
+offset_right = 1725.5
+offset_bottom = 293.5
+theme_override_styles/panel = SubResource("StyleBoxFlat_fcvl5")
+
+[node name="PlaySignHolderPanel" parent="PlayZone" instance=ExtResource("6_nblpc")]
+layout_mode = 0
+offset_left = 261.2
+offset_top = 112.0
+offset_right = 377.2
+offset_bottom = 228.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_hiaft")
+
+[node name="PlaySignHolderPanel2" parent="PlayZone" instance=ExtResource("6_nblpc")]
+layout_mode = 0
+offset_left = 638.4
+offset_top = 112.0
+offset_right = 754.4
+offset_bottom = 228.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_eflov")
+
+[node name="PlaySignHolderPanel3" parent="PlayZone" instance=ExtResource("6_nblpc")]
+layout_mode = 0
+offset_left = 1015.6
+offset_top = 112.0
+offset_right = 1131.6
+offset_bottom = 228.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_ydrvr")
+
+[node name="PlaySignHolderPanel4" parent="PlayZone" instance=ExtResource("6_nblpc")]
+layout_mode = 0
+offset_left = 1392.8
+offset_top = 112.0
+offset_right = 1508.8
+offset_bottom = 228.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_igw3y")
+
+[node name="Signs" type="Panel" parent="."]
+offset_left = 75.0
+offset_top = 755.0
+offset_right = 395.0
+offset_bottom = 1015.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_kk5f4")
+
+[node name="SignPanel" parent="Signs" instance=ExtResource("7_ikryi")]
+offset_left = 50.0
+offset_top = 20.0
+offset_right = 90.0
+offset_bottom = 60.0
+_sign = "plus"
+
+[node name="SignPanel2" parent="Signs" instance=ExtResource("7_ikryi")]
+offset_left = 170.0
+offset_top = 20.0
+offset_right = 210.0
+offset_bottom = 60.0
+_sign = "minus"
+
+[node name="SignPanel3" parent="Signs" instance=ExtResource("7_ikryi")]
+offset_left = 50.0
+offset_top = 140.0
+offset_right = 90.0
+offset_bottom = 180.0
+_sign = "multiply"
+
+[node name="SignPanel4" parent="Signs" instance=ExtResource("7_ikryi")]
+offset_left = 170.0
+offset_top = 140.0
+offset_right = 210.0
+offset_bottom = 180.0
+_sign = "divide"
+
+[node name="Numbers" type="Panel" parent="."]
+offset_left = 460.0
+offset_top = 755.0
+offset_right = 1460.0
+offset_bottom = 1015.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_kk5f4")
+
+[node name="CardHolderPanel" parent="Numbers" instance=ExtResource("8_1rp2e")]
+layout_mode = 0
+offset_left = 46.6
+offset_top = 27.0
+offset_right = 190.6
+offset_bottom = 233.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_gy1g3")
+
+[node name="CardHolderPanel2" parent="Numbers" instance=ExtResource("8_1rp2e")]
+layout_mode = 0
+offset_left = 237.2
+offset_top = 27.0
+offset_right = 381.2
+offset_bottom = 233.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_mdr7i")
+
+[node name="CardHolderPanel3" parent="Numbers" instance=ExtResource("8_1rp2e")]
+layout_mode = 0
+offset_left = 427.8
+offset_top = 27.0
+offset_right = 571.8
+offset_bottom = 233.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_3kccl")
+
+[node name="CardHolderPanel4" parent="Numbers" instance=ExtResource("8_1rp2e")]
+layout_mode = 0
+offset_left = 618.4
+offset_top = 27.0
+offset_right = 762.4
+offset_bottom = 233.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_33wrk")
+
+[node name="CardHolderPanel5" parent="Numbers" instance=ExtResource("8_1rp2e")]
+layout_mode = 0
+offset_left = 809.0
+offset_top = 27.0
+offset_right = 953.0
+offset_bottom = 233.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_xogei")
+
+[node name="CardPanel" parent="Numbers" instance=ExtResource("9_t5jbo")]
+offset_left = -792.0
+offset_top = -239.0
+offset_right = -648.0
+offset_bottom = -33.0
+
+[node name="CardPanel2" parent="Numbers" instance=ExtResource("9_t5jbo")]
+offset_left = -780.0
+offset_top = -2.0
+offset_right = -636.0
+offset_bottom = 204.0
+
+[node name="CardPanel3" parent="Numbers" instance=ExtResource("9_t5jbo")]
+offset_left = -765.0
+offset_top = -472.0
+offset_right = -621.0
+offset_bottom = -266.0
+
+[node name="CardPanel4" parent="Numbers" instance=ExtResource("9_t5jbo")]
+offset_left = -759.0
+offset_top = 244.0
+offset_right = -615.0
+offset_bottom = 450.0
+
+[node name="CardPanel5" parent="Numbers" instance=ExtResource("9_t5jbo")]
+offset_left = -747.0
+offset_top = -721.0
+offset_right = -603.0
+offset_bottom = -515.0
+
+[node name="DeletePanel" parent="." instance=ExtResource("10_fsr4c")]
+unique_name_in_owner = true
+offset_left = 1525.0
+offset_top = 755.0
+offset_right = 1525.0
+offset_bottom = 755.0
+
+[node name="SubmitPanel" parent="." instance=ExtResource("11_31j5l")]
+unique_name_in_owner = true
+offset_left = 1526.0
+offset_top = 905.0
+offset_right = 1526.0
+offset_bottom = 905.0
+
+[node name="timeup_answer" parent="." instance=ExtResource("12_4w8lp")]
+unique_name_in_owner = true
+visible = false
+z_index = 101
+offset_left = 360.0
+offset_top = 240.0
+offset_right = 360.0
+offset_bottom = 240.0
+
+[node name="WrongAnswer" parent="." instance=ExtResource("13_y4h4d")]
+unique_name_in_owner = true
+visible = false
+z_index = 101
+offset_left = 360.0
+offset_top = 240.0
+offset_right = 360.0
+offset_bottom = 240.0
+
+[node name="CorrectAnswer" parent="." instance=ExtResource("14_mpqce")]
+unique_name_in_owner = true
+visible = false
+z_index = 101
+offset_left = 360.0
+offset_top = 240.0
+offset_right = 360.0
+offset_bottom = 240.0
+
+[node name="ViewRule" parent="." instance=ExtResource("15_3k4w8")]
+visible = false
+z_index = 1
+offset_left = 75.0
+offset_top = 380.0
+offset_right = 75.0
+offset_bottom = 380.0
+
+[node name="ReadyPanel" parent="." instance=ExtResource("16_7bs3w")]
+unique_name_in_owner = true
+visible = false
+z_index = 1
+offset_left = 1525.0
+offset_top = 755.0
+offset_right = 1525.0
+offset_bottom = 755.0
+
+[node name="TurnOfEnemy" parent="." instance=ExtResource("17_1cqrh")]
+unique_name_in_owner = true
+visible = false
+z_index = 101
+offset_left = 360.0
+offset_top = 240.0
+offset_right = 360.0
+offset_bottom = 240.0
+
+[node name="Welcome" parent="." instance=ExtResource("18_w787l")]
+visible = false
+z_index = 101
+offset_left = 360.0
+offset_top = 240.0
+offset_right = 360.0
+offset_bottom = 240.0
+
+[node name="RulePage" parent="." instance=ExtResource("19_ab213")]
+visible = false
+z_index = 2000
+
+[node name="EnemyTime" type="Panel" parent="."]
+unique_name_in_owner = true
+visible = false
+offset_left = 75.0
+offset_top = 380.0
+offset_right = 1845.0
+offset_bottom = 720.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_tsq6o")
+
+[node name="Label" type="Label" parent="EnemyTime"]
+layout_mode = 0
+offset_right = 1770.0
+offset_bottom = 340.0
+theme_override_fonts/font = ExtResource("2_65tdw")
+theme_override_font_sizes/font_size = 250
+text = "TIME : 60"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Reset" type="Control" parent="."]
+visible = false
+layout_mode = 3
+anchors_preset = 0
+offset_left = 1569.0
+offset_top = 295.0
+offset_right = 1609.0
+offset_bottom = 335.0
+
+[node name="Panel" type="Panel" parent="Reset"]
+layout_mode = 0
+offset_right = 320.0
+offset_bottom = 110.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_tbl0g")
+
+[node name="Panel2" type="Panel" parent="Reset"]
+layout_mode = 0
+offset_left = 10.0
+offset_top = 10.0
+offset_right = 310.0
+offset_bottom = 100.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_h5a7p")
+
+[node name="Label" type="Label" parent="Reset"]
+layout_mode = 0
+offset_right = 320.0
+offset_bottom = 110.0
+theme_override_fonts/font = ExtResource("2_65tdw")
+theme_override_font_sizes/font_size = 60
+text = "RESET"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="ClickArea" type="Panel" parent="Reset"]
+unique_name_in_owner = true
+self_modulate = Color(1, 1, 1, 0)
+layout_mode = 0
+offset_right = 320.0
+offset_bottom = 110.0
+
+[node name="Winner" parent="." instance=ExtResource("20_cox3v")]
+unique_name_in_owner = true
+visible = false
+z_index = 102
+offset_left = 210.0
+offset_top = 140.0
+offset_right = 210.0
+offset_bottom = 140.0
+
+[node name="DebugLabel" type="Label" parent="."]
+visible = false
+z_index = 4096
+offset_left = 47.0
+offset_top = 23.0
+offset_right = 87.0
+offset_bottom = 92.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 50
+script = ExtResource("21_yrdnh")
+
+[node name="PlayerCount" type="Label" parent="."]
+visible = false
+offset_left = 13.0
+offset_top = 1021.0
+offset_right = 81.0
+offset_bottom = 1076.0
+theme_override_font_sizes/font_size = 40
+text = "123"
+
+[node name="ResetGame" type="Button" parent="."]
+unique_name_in_owner = true
+visible = false
+z_index = 50
+offset_left = 1682.0
+offset_top = 1021.0
+offset_right = 1906.0
+offset_bottom = 1075.0
+theme_override_font_sizes/font_size = 30
+text = "RESET GAME"
+
+[node name="Panel2" type="Panel" parent="."]
+unique_name_in_owner = true
+z_index = 1
+offset_left = 1570.0
+offset_top = 170.0
+offset_right = 1920.0
+offset_bottom = 370.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_kjrim")
+
+[node name="Panel" type="Panel" parent="Panel2"]
+layout_mode = 0
+offset_left = 10.0
+offset_top = 10.0
+offset_right = 340.0
+offset_bottom = 190.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_haarr")
+
+[node name="Label7" type="Label" parent="Panel2"]
+layout_mode = 0
+offset_right = 350.0
+offset_bottom = 200.0
+theme_override_fonts/font = ExtResource("2_65tdw")
+theme_override_font_sizes/font_size = 75
+text = "BACK"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="ClickArea" type="Panel" parent="Panel2"]
+self_modulate = Color(1, 1, 1, 0)
+z_index = 101
+layout_mode = 0
+offset_right = 350.0
+offset_bottom = 200.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_kjrim")
+
+[connection signal="timeout" from="GameTimer" to="GameManager" method="_on_timer_timeout"]
+[connection signal="timeout" from="ModalTimer" to="GameManager" method="_on_modal_timer_timeout"]
+[connection signal="gui_input" from="Panel2/ClickArea" to="GameManager" method="_on_click_area_gui_input"]
+[connection signal="mouse_entered" from="Panel2/ClickArea" to="GameManager" method="_on_click_area_mouse_entered"]
+[connection signal="mouse_exited" from="Panel2/ClickArea" to="GameManager" method="_on_click_area_mouse_exited"]

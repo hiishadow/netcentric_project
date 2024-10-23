@@ -4,7 +4,8 @@ extends Node
 var client
 
 func _ready() -> void:
-	client = get_tree().root.get_child(0).get_node("Client")
+	if  get_tree().root.get_child(0).has_node("Client"):
+		client = get_tree().root.get_child(0).get_node("Client")
 
 func _on_click_area_gui_input(event: InputEvent) -> void:
 	if event is InputEventMouseButton and event.is_pressed():

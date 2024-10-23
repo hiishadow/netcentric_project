@@ -15,26 +15,69 @@ var final_time: int
 var modal_is_on: bool = false
 var can_submit: bool = false
 var can_delete: bool = false
+var used_pool = []
 var used_num
 var target_num
 var seed_answer
 var is_clicked = false
 
-var client
-var your_turn: bool = false
-var single_player = false
+var your_turn: bool = true
+var single_player = true
+var rng = RandomNumberGenerator.new()
 
 func _ready() -> void:
-	client = get_tree().root.get_child(0).get_node("Client")
 	main = get_tree().root.get_child(0)
 	if get_tree().root.get_node("main").is_server:
 		%ResetGame.visible = true
 	
+	random_from_pool()
+	
 	slot_path()
 	
-	#generate_target_and_numbers()
+	generate_target_and_numbers()
 	
-	#set_up_card_panel()
+	set_up_card_panel()
+	%GameTimer.start()
+
+func random_from_pool():
+	used_num = []
+	target_num = 0
+	var pool = [
+		[1,3,4,5,6,7],#3+4-7+6-5
+		[2,1,4,5,6,8],#8/4-1+6-5
+		[3,1,2,3,5,7],#7-5+3-2x1
+		[4,1,2,3,6,8],#8-6-2+1+3
+		[5,2,3,5,7,8],#7-3-8/2+5
+		[6,1,2,3,5,7],#7-1+2+3-5
+		[7,1,2,4,7,8],#8-2x4x1+7
+		[8,2,4,5,6,9],#2+6+9-4-5
+		[9,5,6,7,8,9] #9+5+8-6-7
+		]
+	
+	var pool_answer = [
+		"3+4-7+6-5",
+		"8/4-1+6-5",
+		"7-5+3-2x1",
+		"8-6-2+1+3",
+		"7-3-8/2+5",
+		"7-1+2+3-5",
+		"8-2x4x1+7",
+		"2+6+9-4-5",
+		"9+5+8-6-7"
+	]
+	
+	var arr = pool[rng.randi_range(0, pool.size() -1)]
+	while used_pool.find(arr) != -1:
+		arr = pool[rng.randi_range(0, pool.size() -1)]
+	target_num = arr[0]
+	for i in arr.size():
+		if i != 0:
+			used_num.append(arr[i])
+	used_num.sort()
+	used_pool.append(arr)
+	print("seed_pool:", pool.find(arr))
+	seed_answer = pool_answer[pool.find(arr)]
+	print(seed_answer)
 
 func slot_path():
 	play_zone_card_slot = [
@@ -158,7 +201,7 @@ func calculate_sign_slot(sign_):
 		signn_.get_node("ClickArea").size = signn_.get_node("ClickArea").size + Vector2(16,16)
 		signn_.get_node("Label").set("theme_override_font_sizes/font_size", 80)
 		signn_.global_position = play_zone_sign_slot[recent_sign_slot].global_position
-		get_tree().root.get_node("main").get_node("Game").add_child(signn_, true)
+		get_tree().root.get_node("main").get_node("PracticeGame").add_child(signn_, true)
 		recent_sign_slot += 1
 		play_zone.append(signn_)
 
@@ -214,7 +257,7 @@ func delete():
 func submit():
 	if play_zone.size() != 9: return
 	modal_time = 5
-	%CorrectAnswer.get_node("Label3").text = "AUTOCLOSE IN " + str(modal_time) + " SECONDS"
+	%CorrectAnswer.get_node("Label3").text = "AUTOSTART IN " + str(modal_time) + " SECONDS"
 	%WrongAnswer.get_node("Label3").text = "AUTOCLOSE IN " + str(modal_time) + " SECONDS"
 	
 	var play_zone_ = []
@@ -260,9 +303,7 @@ func submit():
 	else:
 		%GameTimer.stop()
 		final_time = int($"../Time".get_node("Label").text)
-		client.send_to_server({
-			"message": client.Message.sendTimeUsage, "client_id": client.id, "data": 60 - final_time, "equation": send_equation()
-		})
+		
 		%CorrectAnswer.visible = true
 		modal_is_on = true
 		%CorrectAnswer.get_node("Label2").text = "YOU USED " + str(60 - final_time) + " SECONDS"
@@ -279,9 +320,7 @@ func _on_timer_timeout() -> void:
 	if game_time == 0: 
 		%GameTimer.stop()
 		if your_turn:
-			client.send_to_server({
-				"message": client.Message.sendTimeUsage, "client_id": client.id, "data": 999, "equation": "DID not FINISH"
-			})
+
 			%timeup_answer.visible = true
 			%ModalTimer.start()
 		
@@ -302,32 +341,16 @@ func _on_modal_timer_timeout() -> void:
 			%WrongAnswer.visible = false
 		if %CorrectAnswer.visible:
 			%CorrectAnswer.visible = false
-			if client.turn_num != client.clients_num - 1:
-				client.send_to_server({
-					"message": client.Message.runningGame,
-					"client_id": client.id,
-					"data": "NextTurn"
-				})
-			else:
-				client.send_to_server({
-					"message": client.Message.runningGame,
-					"client_id": client.id,
-					"data": "CalculateWinner"
-				})
+			%Time.get_node("Label").text = "TIME: 60"
+			reverse_set_up_card_panel()
+			random_from_pool()
+			generate_target_and_numbers()
+			set_up_card_panel()
+			game_time = 60
+			modal_time = 5
+			%GameTimer.start()
 		if %timeup_answer.visible:
 			%timeup_answer.visible = false
-			if client.turn_num != client.clients_num - 1:
-				client.send_to_server({
-					"message": client.Message.runningGame,
-					"client_id": client.id,
-					"data": "NextTurn"
-				})
-			else:
-				client.send_to_server({
-					"message": client.Message.runningGame,
-					"client_id": client.id,
-					"data": "CalculateWinner"
-				})
 		if %TurnOfEnemy.visible:
 			if your_turn:
 				generate_target_and_numbers()
@@ -336,7 +359,6 @@ func _on_modal_timer_timeout() -> void:
 				%EnemyTime.visible = false
 				%Time.visible = true
 				%GameTimer.start()
-				client.send_to_server({"message": client.Message.updateTimer, "client_id": client.id, "data": "GameTimer"})
 				
 			else:
 				reverse_set_up_card_panel()
@@ -354,19 +376,7 @@ func _on_modal_timer_timeout() -> void:
 			%Winner.visible = false
 			#START NEXT GAME
 			if is_clicked:
-				client.send_to_server({
-					"message": client.Message.runningGame,
-					"client_id": client.id,
-					"data": "NextRound"
-				})
 				is_clicked = false
-			elif !is_clicked:
-				if your_turn:
-					client.send_to_server({
-						"message": client.Message.runningGame,
-						"client_id": client.id,
-						"data": "NextRound"
-					})
 			
 		modal_is_on = false
 		modal_time = 5
@@ -376,142 +386,23 @@ func _on_modal_timer_timeout() -> void:
 	if %WrongAnswer.visible:
 		%WrongAnswer.get_node("Label3").text = "AUTOCLOSE IN " + str(modal_time) + " SECONDS"
 	if %CorrectAnswer.visible:
-		%CorrectAnswer.get_node("Label3").text = "AUTOCLOSE IN " + str(modal_time) + " SECONDS"
+		%CorrectAnswer.get_node("Label3").text = "AUTOSTART IN " + str(modal_time) + " SECONDS"
 	if %TurnOfEnemy.visible:
 		%TurnOfEnemy.get_node("Label3").text = "AUTOSTART IN " + str(modal_time) + " SECONDS"
 	if %timeup_answer.visible:
 		%timeup_answer.get_node("Label3").text = "AUTOCLOSE IN " + str(modal_time) + " SECONDS"
 	if %Winner.visible:
 		%Winner.get_node("Label3").text = "AUTOSTART IN " + str(modal_time) + " SECONDS"
-	
 
-func reset(event: InputEvent) -> void:
-	#dev
-	if modal_is_on: return
+
+func _on_click_area_gui_input(event: InputEvent) -> void:
 	if event is InputEventMouseButton and event.is_pressed():
-		%GameTimer.stop()
-		game_time = 60
-		$"../Time".get_node("Label").text = "TIME : " + str(game_time)
-		%GameTimer.start()
-		%ModalTimer.stop()
-		modal_time = 5
-		
-		generate_target_and_numbers()
-		set_up_card_panel()
-		
-		while play_zone.size() != 0:
-			delete()
-
-func runningGame(data):
-	game_time = 60
-	match data.data:
-		"ShowModalAsTurn": 
-			%TurnOfEnemy.get_node("Label3").text = "AUTOSTART IN " + "5" + " SECONDS"
-			your_turn = true
-			%TurnOfEnemy.get_node("Label2").text = str(data.turn_name)
-			%TurnOfEnemy.get_node("Close").get_node("Label3").text = "start"
-			%TurnOfEnemy.visible = true
-			%EnemyTime.get_node("Label").text = "TIME : 60"
-			%Time.get_node("Label").text = "TIME : 60"
-			%EnemyTime.visible = false
-			modal_is_on = true
-			%ModalTimer.start()
-		"ShowModal":
-			%TurnOfEnemy.get_node("Label3").text = "AUTOSTART IN " + "5" + " SECONDS"
-			your_turn = false
-			%TurnOfEnemy.get_node("Label2").text =  str(data.turn_name)
-			%TurnOfEnemy.get_node("Close").get_node("Label3").text = "close"
-			%TurnOfEnemy.visible = true
-			%EnemyTime.get_node("Label").text = "TIME : 60"
-			%Time.get_node("Label").text = "TIME : 60"
-			%EnemyTime.visible = false
-			modal_is_on = true
-			%ModalTimer.start()
-		"CalculateWinner":
-			var other_id
-			for client_id in client.clients.keys():
-				if client_id != str(client.id):
-					other_id = client_id
-			if get_tree().root.get_node("main").is_server:
-				%Winner.get_node("Player1").get_node("Label").text = str(data.clients[str(client.id)].attributes.name) + "'s equation"
-				%Winner.get_node("Player1").get_node("Label2").text = data.equations[str(client.id)]
-				%Winner.get_node("Player2").get_node("Label").text = str(data.clients[other_id].attributes.name) + "'s equation"
-				%Winner.get_node("Player2").get_node("Label2").text = data.equations[other_id]
-				if data.time_usage[str(client.id)] != 999:
-					%Winner.get_node("Player1").get_node("Label3").text = "TIME USE : " + str(data.time_usage[str(client.id)]) + " seconds"
-				else:
-					%Winner.get_node("Player1").get_node("Label3").text = "TIME USE : 60 seconds"
-				if data.time_usage[other_id] != 999:
-					%Winner.get_node("Player2").get_node("Label3").text = "TIME USE : " + str(data.time_usage[other_id]) + " seconds"
-				else:
-					%Winner.get_node("Player2").get_node("Label3").text = "TIME USE : 60 seconds"
-			else:
-				%Winner.get_node("Player1").get_node("Label").text = str(data.clients[other_id].attributes.name) + "'s equation"
-				%Winner.get_node("Player1").get_node("Label2").text = data.equations[other_id]
-				%Winner.get_node("Player2").get_node("Label").text = str(data.clients[str(client.id)].attributes.name) + "'s equation"
-				%Winner.get_node("Player2").get_node("Label2").text = data.equations[str(client.id)]
-				if data.time_usage[other_id] != 999:
-					%Winner.get_node("Player1").get_node("Label3").text = "TIME USE : " + str(data.time_usage[other_id]) + " seconds"
-				else:
-					%Winner.get_node("Player1").get_node("Label3").text = "TIME USE : 60 seconds"
-				if data.time_usage[str(client.id)] != 999:
-					%Winner.get_node("Player2").get_node("Label3").text = "TIME USE : " + str(data.time_usage[str(client.id)]) + " seconds"
-				else:
-					%Winner.get_node("Player2").get_node("Label3").text = "TIME USE : 60 seconds"
-			
-			%Winner.get_node("Label").text = data.winner
-			%Winner.get_node("Label3").text = "AUTOSTART IN " + "30" + " SECONDS"
-			%Winner.visible = true
-			modal_time = 30
-			modal_is_on = true
-			%ModalTimer.start()
+		get_parent().call_deferred("queue_free")
 
 
-func _on_reset_game_pressed() -> void:
-	client.send_to_server({"message": client.Message.resetGame, "client_id": client.id})
+func _on_click_area_mouse_entered() -> void:
+		get_parent().get_node("Panel2").modulate.a = 0.8
 
-func resetGame():
-	print("resetGame")
-	%GameTimer.stop()
-	%ModalTimer.stop()
-	%Turn.hide()
-	%Time.hide()
-	%DeletePanel.hide()
-	%SubmitPanel.hide()
-	$"../Welcome".hide()
-	%TurnOfEnemy.hide()
-	$"../RulePage".hide()
-	%WrongAnswer.hide()
-	%CorrectAnswer.hide()
-	%timeup_answer.hide()
-	%Winner.hide()
-	$"../ViewRule".visible = true
-	%ReadyPanel.visible = true
-	%P1Avatar.visible = true
-	%P2Avatar.visible= true
-	
-	reverse_set_up_card_panel()
-	
-	$"../ViewRule".get_node("Label").text = "WHEN READY\nPRESS READY"
-	%ReadyPanel.get_node("Label").text = "READY"
-	var new_sb = StyleBoxFlat.new()
-	new_sb.bg_color = Color(0.882, 0.341, 0.302)
-	var styleBox: StyleBoxFlat = %ReadyPanel.get_node("Panel2").get_theme_stylebox("panel")
-	styleBox.set("bg_color", Color(0.882, 0.341, 0.302))
-	%ReadyPanel.get_node("Panel2").add_theme_stylebox_override("panel", styleBox)
-	%ReadyPanel.is_ready = false
-	%TargetPanel.get_node("Label").text = "#"
-	
-	client.updateDisplay()
-	
-	game_time = 60
-	modal_time = 60
-	final_time = 0
-	modal_is_on = false
-	can_submit = false
-	can_delete = false
-	used_num = null
-	target_num = null
-	seed_answer = null
-	is_clicked = false
-	your_turn = false
+
+func _on_click_area_mouse_exited() -> void:
+		get_parent().get_node("Panel2").modulate.a = 1.0

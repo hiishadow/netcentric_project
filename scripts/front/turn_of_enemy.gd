@@ -8,7 +8,7 @@ func _on_click_area_gui_input(event: InputEvent) -> void:
 		%ModalTimer.stop()
 		%GameManager.modal_time = 0
 		%GameManager._on_modal_timer_timeout()
-		if %GameManager.your_turn:
+		if %GameManager.your_turn and !%GameManager.single_player:
 			var client = get_tree().root.get_child(0).get_node("Client")
 			client.send_to_server({
 				"message": client.Message.closeModal, "client_id": client.id

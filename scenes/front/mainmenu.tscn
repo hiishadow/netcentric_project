@@ -304,6 +304,8 @@ texture = ExtResource("2_r0ttp")
 
 [node name="AvatarChange" type="Control" parent="."]
 visible = false
+z_index = 1
+z_as_relative = false
 custom_minimum_size = Vector2(1059.62, 662.26)
 layout_mode = 3
 anchors_preset = 0

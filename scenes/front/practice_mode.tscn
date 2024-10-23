@@ -1,0 +1,60 @@
+[gd_scene load_steps=5 format=3 uid="uid://cdaiqvefvgfrt"]
+
+[ext_resource type="Script" path="res://scripts/front/practice_mode.gd" id="1_gl41u"]
+[ext_resource type="FontFile" uid="uid://bt5pn0ptnei0q" path="res://fonts/Bungee/Bungee-Regular.ttf" id="1_xwveo"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_wijnj"]
+bg_color = Color(0.988235, 0.952941, 0.92549, 1)
+corner_radius_top_left = 20
+corner_radius_top_right = 20
+corner_radius_bottom_right = 20
+corner_radius_bottom_left = 20
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_77ski"]
+bg_color = Color(1, 0.72549, 0.141176, 1)
+corner_radius_top_left = 20
+corner_radius_top_right = 20
+corner_radius_bottom_right = 20
+corner_radius_bottom_left = 20
+
+[node name="PracticeMode" type="Control"]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+script = ExtResource("1_gl41u")
+
+[node name="Panel" type="Panel" parent="."]
+layout_mode = 0
+offset_right = 420.0
+offset_bottom = 120.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_wijnj")
+
+[node name="Panel2" type="Panel" parent="."]
+layout_mode = 0
+offset_left = 8.0
+offset_top = 8.0
+offset_right = 412.0
+offset_bottom = 112.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_77ski")
+
+[node name="Label" type="Label" parent="."]
+layout_mode = 0
+offset_right = 420.0
+offset_bottom = 120.0
+theme_override_fonts/font = ExtResource("1_xwveo")
+theme_override_font_sizes/font_size = 64
+text = "Practice"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="ClickArea" type="Panel" parent="."]
+unique_name_in_owner = true
+self_modulate = Color(1, 1, 1, 0)
+layout_mode = 0
+offset_right = 420.0
+offset_bottom = 120.0
+
+[connection signal="gui_input" from="ClickArea" to="." method="_on_click_area_gui_input"]
+[connection signal="mouse_entered" from="ClickArea" to="." method="_on_click_area_mouse_entered"]
+[connection signal="mouse_exited" from="ClickArea" to="." method="_on_click_area_mouse_exited"]

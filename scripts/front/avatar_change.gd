@@ -9,6 +9,7 @@ var selected_texture
 func _ready() -> void:
 	$CloseAvatarMenu.pressed.connect(func():
 		$".".visible=false
+		get_parent().get_parent().modal_is_on = false
 		)
 	
 # Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -81,3 +82,4 @@ func _on_confirm_pressed() -> void:
 		main_avatar.add_theme_stylebox_override("panel", default_texture)
 		selected_avatar_number =1
 		$".".visible = false  # Hide the character selection screen
+	get_parent().get_parent().modal_is_on = false

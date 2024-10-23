@@ -7,6 +7,7 @@ func _ready() -> void:
 	$"../AvatarChange".visible=false
 	%EditAvatar.pressed.connect(func():
 		$"../AvatarChange".visible=true
+		get_parent().get_parent().modal_is_on = true
 		)
 	
 

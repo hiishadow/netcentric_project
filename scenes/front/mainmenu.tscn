@@ -1,4 +1,4 @@
-[gd_scene load_steps=55 format=3 uid="uid://phqqbkxeyk7u"]
+[gd_scene load_steps=53 format=3 uid="uid://phqqbkxeyk7u"]
 
 [ext_resource type="Texture2D" uid="uid://cgxiwy3ntovsc" path="res://bg.png" id="1_3qn0k"]
 [ext_resource type="Texture2D" uid="uid://dytb7b80up81t" path="res://resources/mainmenu/Gamee IQ180 (2).png" id="2_r0ttp"]
@@ -39,24 +39,6 @@ corner_radius_top_left = 26
 corner_radius_top_right = 26
 corner_radius_bottom_right = 26
 corner_radius_bottom_left = 26
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_b3kbb"]
-bg_color = Color(0.882353, 0.341176, 0.301961, 1)
-border_width_left = 11
-border_width_top = 11
-border_width_right = 11
-border_width_bottom = 11
-border_color = Color(0.988235, 0.952941, 0.92549, 1)
-corner_radius_top_left = 26
-corner_radius_top_right = 26
-corner_radius_bottom_right = 26
-corner_radius_bottom_left = 26
-
-[sub_resource type="Theme" id="Theme_7qrr4"]
-default_font = ExtResource("2_rkpgl")
-default_font_size = 64
-Button/colors/font_color = Color(1, 1, 1, 1)
-Button/styles/normal = SubResource("StyleBoxFlat_b3kbb")
 
 [sub_resource type="LabelSettings" id="LabelSettings_7digr"]
 font = ExtResource("2_rkpgl")
@@ -212,24 +194,8 @@ grow_horizontal = 2
 grow_vertical = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_woksp")
 
-[node name="QuickPlay" type="Button" parent="MainBox"]
-visible = false
-layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -278.15
-offset_top = 243.71
-offset_right = 279.55
-offset_bottom = 364.74
-grow_horizontal = 2
-grow_vertical = 2
-theme = SubResource("Theme_7qrr4")
-text = "QUICK PLAY"
-
 [node name="HowToPlay" type="Label" parent="MainBox"]
+visible = false
 custom_minimum_size = Vector2(529.81, 74.17)
 layout_mode = 0
 offset_left = 793.39
@@ -244,10 +210,10 @@ horizontal_alignment = 1
 [node name="Rule" type="TextureRect" parent="MainBox"]
 custom_minimum_size = Vector2(627.83, 467.56)
 layout_mode = 0
-offset_left = 740.41
-offset_top = 164.24
-offset_right = 1368.24
-offset_bottom = 631.8
+offset_left = 741.0
+offset_top = 74.0
+offset_right = 1368.83
+offset_bottom = 541.56
 texture = ExtResource("3_qyj06")
 stretch_mode = 2
 

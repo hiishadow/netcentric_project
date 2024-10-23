@@ -16,7 +16,7 @@ func _ready() -> void:
 		"divide":
 			%Label.text = "÷"
 		_:
-			%Label.text = ""
+			%Label.text = "#"
 
 func _on_click_area_gui_input(event: InputEvent) -> void:
 	if event is InputEventMouseButton and event.is_pressed():

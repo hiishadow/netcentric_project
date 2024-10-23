@@ -151,7 +151,7 @@ func generate_target_and_numbers():
 
 func reverse_set_up_card_panel():
 	while play_zone.size() != 0:
-			delete()
+		delete()
 
 	$"../Numbers/CardPanel".global_position = Vector2(-1000,1000)
 	$"../Numbers/CardPanel2".global_position =Vector2(-1000,1000)
@@ -163,6 +163,8 @@ func reverse_set_up_card_panel():
 
 func calculate_card_slot(card):
 	if recent_card_slot < 5 and recent_card_slot <= recent_sign_slot and card.zone == "number":
+		if get_tree().root.get_node("main").face_down_mode:
+			card.get_node("Label").text = "#"
 		card.zone = "play"
 		
 		card.get_node("Panel2").size = card.get_node("Panel2").size + Vector2(28,41)
@@ -202,6 +204,8 @@ func calculate_sign_slot(sign_):
 		signn_.get_node("Label").set("theme_override_font_sizes/font_size", 80)
 		signn_.global_position = play_zone_sign_slot[recent_sign_slot].global_position
 		get_tree().root.get_node("main").get_node("PracticeGame").add_child(signn_, true)
+		if get_tree().root.get_node("main").face_down_mode:
+			signn_.get_node("Label").text = "#"
 		recent_sign_slot += 1
 		play_zone.append(signn_)
 
@@ -242,6 +246,7 @@ func delete():
 	card.zone = "number"
 
 	if card.node_type == "card":
+		card.set_label()
 		card.get_node("Panel2").size = card.get_node("Panel2").size - Vector2(28,41)
 		card.get_node("Panel").size = card.get_node("Panel").size - Vector2(28,41)
 		card.get_node("Label").size = card.get_node("Label").size - Vector2(28,41)

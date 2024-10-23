@@ -42,6 +42,7 @@ Button/styles/hover = SubResource("StyleBoxFlat_82jb4")
 Button/styles/hover_pressed = SubResource("StyleBoxFlat_wb3r7")
 Button/styles/normal = SubResource("StyleBoxFlat_wb3r7")
 Button/styles/pressed = SubResource("StyleBoxFlat_wb3r7")
+CheckButton/font_sizes/font_size = 40
 
 [node name="main" type="Node"]
 script = ExtResource("1_pxi0j")
@@ -94,9 +95,9 @@ anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
 offset_left = -551.0
-offset_top = 292.0
+offset_top = 295.0
 offset_right = 6.69995
-offset_bottom = 413.03
+offset_bottom = 416.03
 grow_horizontal = 2
 grow_vertical = 2
 theme = SubResource("Theme_tj5ac")
@@ -104,10 +105,22 @@ text = "QUICK PLAY"
 
 [node name="PracticeMode" parent="." instance=ExtResource("6_vwrw7")]
 offset_left = 1055.0
-offset_top = 832.0
+offset_top = 835.0
 offset_right = 1095.0
-offset_bottom = 872.0
+offset_bottom = 875.0
+
+[node name="FaceDown" type="CheckButton" parent="."]
+unique_name_in_owner = true
+offset_left = 1000.0
+offset_top = 720.0
+offset_right = 1315.0
+offset_bottom = 800.0
+theme = SubResource("Theme_tj5ac")
+text = "face down
+"
+alignment = 1
 
 [connection signal="pressed" from="BecomeHost" to="." method="_on_start_as_server_pressed"]
 [connection signal="pressed" from="JoinAsClient" to="." method="_on_start_as_client_pressed"]
 [connection signal="pressed" from="QuickPlay" to="." method="_on_quick_play_pressed"]
+[connection signal="toggled" from="FaceDown" to="." method="_on_face_down_toggled"]

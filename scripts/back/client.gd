@@ -9,6 +9,7 @@ enum Message {
 	updateUserAttributes,
 	updateLeaderBoard,
 	sendTimeUsage,
+	sendDiffScore,
 	confirmConnection,
 	sendSeed,
 	getUserCount,
@@ -18,7 +19,7 @@ enum Message {
 	closeModal,
 	updateTimer,
 	forceClosed,
-	resetGame
+	resetGame,
 }
 
 var game = preload("res://scenes/front/game.tscn")

@@ -20,6 +20,7 @@ var used_num
 var target_num
 var seed_answer
 var is_clicked = false
+var diff_score = 999.99
 
 var your_turn: bool = true
 var single_player = true
@@ -77,6 +78,7 @@ func random_from_pool():
 	used_pool.append(arr)
 	print("seed_pool:", pool.find(arr))
 	seed_answer = pool_answer[pool.find(arr)]
+	%timeup_answer.get_node("Label4").text = "solution: " + str(seed_answer)
 	print(seed_answer)
 
 func slot_path():
@@ -270,7 +272,7 @@ func submit():
 		if play_zone[i].node_type == "sign":
 			play_zone_.append(play_zone[i]._sign)
 		elif play_zone[i].node_type == "card":
-			play_zone_.append(play_zone[i].number)
+			play_zone_.append(float(play_zone[i].number))
 	var i = 1  # Start at the first operator (index 1)
 
 	# First pass: Handle multiplication and division
@@ -301,6 +303,8 @@ func submit():
 		i += 2  # Move to the next operator
 		
 	if result != int(%TargetPanel.get_node("Label").text):
+		diff_score = abs(int(%TargetPanel.get_node("Label").text)-result)
+		%WrongAnswer.get_node("Label").text = "YOUR Answer is " + str(result)
 		%WrongAnswer.visible = true
 		modal_is_on = true
 		%ModalTimer.start()
@@ -317,7 +321,20 @@ func submit():
 func send_equation():
 	var equation = ""
 	for i in play_zone.size():
-		equation += (str(play_zone[i].get_node("Label").text))
+		if play_zone[i].node_type == "card":
+			equation += (str(play_zone[i].number))
+		elif play_zone[i].node_type == "sign":
+			match play_zone[i]._sign:
+				"plus":
+					equation += "+"
+				"minus":
+					equation += "-"
+				"multiply":
+					equation += "×"
+				"divide":
+					equation += "÷"
+				_:
+					equation += "#"
 	return equation
 
 #GameTimer
@@ -356,6 +373,15 @@ func _on_modal_timer_timeout() -> void:
 			%GameTimer.start()
 		if %timeup_answer.visible:
 			%timeup_answer.visible = false
+			
+			%Time.get_node("Label").text = "TIME: 60"
+			reverse_set_up_card_panel()
+			random_from_pool()
+			generate_target_and_numbers()
+			set_up_card_panel()
+			game_time = 60
+			modal_time = 5
+			%GameTimer.start()
 		if %TurnOfEnemy.visible:
 			if your_turn:
 				generate_target_and_numbers()

@@ -1,0 +1,126 @@
+[gd_scene load_steps=11 format=3 uid="uid://bxprnu2uijnhj"]
+
+[ext_resource type="Script" path="res://scripts/back/main.gd" id="1_pxi0j"]
+[ext_resource type="PackedScene" uid="uid://00r08b5jr0ki" path="res://scenes/back/client.tscn" id="3_wvk0r"]
+[ext_resource type="PackedScene" uid="uid://cyv5wvqsa34yg" path="res://scenes/back/server.tscn" id="4_u47lj"]
+[ext_resource type="PackedScene" uid="uid://phqqbkxeyk7u" path="res://scenes/front/mainmenu.tscn" id="4_ywqig"]
+[ext_resource type="FontFile" uid="uid://bt5pn0ptnei0q" path="res://fonts/Bungee/Bungee-Regular.ttf" id="5_6ebgq"]
+[ext_resource type="PackedScene" uid="uid://cdaiqvefvgfrt" path="res://scenes/front/practice_mode.tscn" id="6_vwrw7"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_ktq6i"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_82jb4"]
+bg_color = Color(0.882353, 0.341176, 0.301961, 1)
+border_width_left = 11
+border_width_top = 11
+border_width_right = 11
+border_width_bottom = 11
+border_color = Color(0.988235, 0.952941, 0.92549, 1)
+corner_radius_top_left = 26
+corner_radius_top_right = 26
+corner_radius_bottom_right = 26
+corner_radius_bottom_left = 26
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_wb3r7"]
+bg_color = Color(0.882353, 0.341176, 0.301961, 1)
+border_width_left = 11
+border_width_top = 11
+border_width_right = 11
+border_width_bottom = 11
+border_color = Color(0.988235, 0.952941, 0.92549, 1)
+corner_radius_top_left = 26
+corner_radius_top_right = 26
+corner_radius_bottom_right = 26
+corner_radius_bottom_left = 26
+
+[sub_resource type="Theme" id="Theme_tj5ac"]
+default_font = ExtResource("5_6ebgq")
+default_font_size = 64
+Button/colors/font_color = Color(1, 1, 1, 1)
+Button/styles/focus = SubResource("StyleBoxEmpty_ktq6i")
+Button/styles/hover = SubResource("StyleBoxFlat_82jb4")
+Button/styles/hover_pressed = SubResource("StyleBoxFlat_wb3r7")
+Button/styles/normal = SubResource("StyleBoxFlat_wb3r7")
+Button/styles/pressed = SubResource("StyleBoxFlat_wb3r7")
+CheckButton/font_sizes/font_size = 40
+
+[node name="main" type="Node"]
+script = ExtResource("1_pxi0j")
+
+[node name="HUD" type="CanvasLayer" parent="."]
+unique_name_in_owner = true
+
+[node name="header" type="Label" parent="HUD"]
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -939.0
+offset_top = 11.0
+offset_right = -554.0
+offset_bottom = 79.0
+grow_horizontal = 2
+
+[node name="Client" parent="." instance=ExtResource("3_wvk0r")]
+unique_name_in_owner = true
+
+[node name="Server" parent="." instance=ExtResource("4_u47lj")]
+unique_name_in_owner = true
+
+[node name="MainMenu" parent="." instance=ExtResource("4_ywqig")]
+unique_name_in_owner = true
+
+[node name="BecomeHost" type="Button" parent="."]
+unique_name_in_owner = true
+offset_left = 1516.0
+offset_top = 823.0
+offset_right = 1869.0
+offset_bottom = 900.0
+theme_override_font_sizes/font_size = 50
+text = "start as server"
+
+[node name="JoinAsClient" type="Button" parent="."]
+unique_name_in_owner = true
+offset_left = 1519.0
+offset_top = 943.0
+offset_right = 1853.0
+offset_bottom = 1020.0
+theme_override_font_sizes/font_size = 50
+text = "start as client"
+
+[node name="QuickPlay" type="Button" parent="."]
+unique_name_in_owner = true
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -551.0
+offset_top = 295.0
+offset_right = 6.69995
+offset_bottom = 416.03
+grow_horizontal = 2
+grow_vertical = 2
+theme = SubResource("Theme_tj5ac")
+text = "QUICK PLAY"
+
+[node name="PracticeMode" parent="." instance=ExtResource("6_vwrw7")]
+offset_left = 1055.0
+offset_top = 835.0
+offset_right = 1095.0
+offset_bottom = 875.0
+
+[node name="FaceDown" type="CheckButton" parent="."]
+unique_name_in_owner = true
+offset_left = 1000.0
+offset_top = 720.0
+offset_right = 1315.0
+offset_bottom = 800.0
+theme = SubResource("Theme_tj5ac")
+text = "face down
+"
+alignment = 1
+
+[connection signal="pressed" from="BecomeHost" to="." method="_on_start_as_server_pressed"]
+[connection signal="pressed" from="JoinAsClient" to="." method="_on_start_as_client_pressed"]
+[connection signal="pressed" from="QuickPlay" to="." method="_on_quick_play_pressed"]
+[connection signal="toggled" from="FaceDown" to="." method="_on_face_down_toggled"]

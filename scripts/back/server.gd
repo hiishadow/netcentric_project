@@ -9,6 +9,7 @@ enum Message {
 	updateUserAttributes,
 	updateLeaderBoard,
 	sendTimeUsage,
+	sendDiffScore,
 	confirmConnection,
 	sendSeed,
 	getUserCount,
@@ -28,6 +29,7 @@ var ready_count = []
 var time_usage = {}
 var turn_index = 0
 var equations = {}
+var diff_score = {}
 var used_num = []
 var target_num = 0
 var used_pool = []
@@ -86,6 +88,9 @@ func handle_message(data, sender_id):
 				for client_id in clients.keys():
 					if client_id != clients.keys()[turn_index]:
 						send_to_client(client_id, {"message": Message.sendTimeUsage, "data": data.data})
+		Message.sendDiffScore:
+			if data.has("data"):
+				diff_score[sender_id] = data.data
 		Message.closeModal:
 			for client_id in clients.keys():
 				if client_id != clients.keys()[turn_index]:
@@ -113,12 +118,42 @@ func handle_message(data, sender_id):
 						winner = i
 				
 				if time_usage[time_usage.keys()[0]] == 999 and time_usage[time_usage.keys()[1]] == 999:
-					broadcast_to_all({"message": Message.runningGame, "data": "CalculateWinner", 
-						"time_usage": time_usage,
-						"winner": "NO WINNER",
-						"equations": equations,
-						"clients": clients
-					})
+					if diff_score[time_usage.keys()[0]] == 999 and diff_score[time_usage.keys()[1]] == 999:
+						broadcast_to_all({"message": Message.runningGame, "data": "CalculateWinner", 
+							"time_usage": time_usage,
+							"winner": "NO WINNER",
+							"equations": equations,
+							"clients": clients,
+						})
+					elif diff_score[time_usage.keys()[0]] == diff_score[time_usage.keys()[1]]:
+						print("XXXXXXXX")
+						broadcast_to_all({"message": Message.runningGame, "data": "CalculateWinner", 
+							"time_usage": time_usage,
+							"winner": "tie",
+							"equations": equations,
+							"clients": clients
+						})
+					else:
+						#closest winner
+						var closest_winner
+						var closest_min = 999
+						for j in diff_score.keys():
+							if diff_score[j] < closest_min:
+								closest_min = diff_score[j]
+								closest_winner = j
+						broadcast_to_all({"message": Message.runningGame, "data": "CalculateWinner", 
+							"time_usage": time_usage,
+							"winner": clients[int(closest_winner)].attributes.name,
+							"equations": equations,
+							"clients": clients,
+							"closest": true
+						})
+						clients[int(closest_winner)].attributes.score += 1
+						broadcast_to_all({
+							"message": Message.updateUserAttributes,
+							"data": "updateScore",
+							"clients": clients
+						})
 				elif time_usage[time_usage.keys()[0]] == time_usage[time_usage.keys()[1]]:
 					broadcast_to_all({"message": Message.runningGame, "data": "CalculateWinner", 
 						"time_usage": time_usage,

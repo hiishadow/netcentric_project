@@ -23,6 +23,8 @@ var is_clicked = false
 var client
 var your_turn: bool = false
 var single_player = false
+var diff_score = 999.99
+var diff_equation = ""
 
 func _ready() -> void:
 	client = get_tree().root.get_child(0).get_node("Client")
@@ -227,7 +229,7 @@ func submit():
 		if play_zone[i].node_type == "sign":
 			play_zone_.append(play_zone[i]._sign)
 		elif play_zone[i].node_type == "card":
-			play_zone_.append(play_zone[i].number)
+			play_zone_.append(float(play_zone[i].number))
 	var i = 1  # Start at the first operator (index 1)
 
 	# First pass: Handle multiplication and division
@@ -258,6 +260,9 @@ func submit():
 		i += 2  # Move to the next operator
 		
 	if result != int(%TargetPanel.get_node("Label").text):
+		diff_score = abs(int(%TargetPanel.get_node("Label").text)-result)
+		diff_equation = send_equation()
+		%WrongAnswer.get_node("Label").text = "YOUR Answer is " + str(result)
 		%WrongAnswer.visible = true
 		modal_is_on = true
 		%ModalTimer.start()
@@ -298,8 +303,13 @@ func _on_timer_timeout() -> void:
 		%GameTimer.stop()
 		if your_turn:
 			client.send_to_server({
-				"message": client.Message.sendTimeUsage, "client_id": client.id, "data": 999, "equation": "DID not FINISH"
+				"message": client.Message.sendTimeUsage, "client_id": client.id, "data": 999, "equation": diff_equation
 			})
+			client.send_to_server({
+				"message": client.Message.sendDiffScore, "client_id": client.id, "data": diff_score
+			})
+			diff_score = 999.99
+			diff_equation = ""
 			%timeup_answer.visible = true
 			%ModalTimer.start()
 		
@@ -369,6 +379,8 @@ func _on_modal_timer_timeout() -> void:
 			%SubmitPanel.visible = true
 			%Turn.visible = true
 		if %Winner.visible:
+			diff_score = 999.99
+			diff_equation = ""
 			%Winner.visible = false
 			#START NEXT GAME
 			if is_clicked:
@@ -477,6 +489,8 @@ func runningGame(data):
 				else:
 					%Winner.get_node("Player2").get_node("Label3").text = "TIME USE : 60 seconds"
 			
+			if data.has("closest"):
+				%Winner.get_node("Label2").text = "The closest winner is"
 			%Winner.get_node("Label").text = data.winner
 			%Winner.get_node("Label3").text = "AUTOSTART IN " + "30" + " SECONDS"
 			%Winner.visible = true
@@ -525,6 +539,8 @@ func resetGame():
 	game_time = 60
 	modal_time = 60
 	final_time = 0
+	diff_score = 999.99
+	diff_equation = ""
 	modal_is_on = false
 	can_submit = false
 	can_delete = false
@@ -533,3 +549,4 @@ func resetGame():
 	seed_answer = null
 	is_clicked = false
 	your_turn = false
+	

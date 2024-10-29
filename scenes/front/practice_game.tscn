@@ -1,4 +1,4 @@
-[gd_scene load_steps=52 format=3 uid="uid://bc2cby6tnrrql"]
+[gd_scene load_steps=53 format=3 uid="uid://bc2cby6tnrrql"]
 
 [ext_resource type="Script" path="res://scripts/front/practice_game_manager.gd" id="1_enqkb"]
 [ext_resource type="Texture2D" uid="uid://cgxiwy3ntovsc" path="res://bg.png" id="1_h7sve"]
@@ -35,6 +35,13 @@ bg_color = Color(0.894118, 0.533333, 0.247059, 1)
 shader = ExtResource("2_lmcuy")
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ewqpo"]
+bg_color = Color(0.658824, 0.286275, 0.294118, 1)
+corner_radius_top_left = 20
+corner_radius_top_right = 20
+corner_radius_bottom_right = 20
+corner_radius_bottom_left = 20
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_godvp"]
 bg_color = Color(0.658824, 0.286275, 0.294118, 1)
 corner_radius_top_left = 20
 corner_radius_top_right = 20
@@ -315,18 +322,18 @@ vertical_alignment = 1
 [node name="Time" type="Panel" parent="."]
 unique_name_in_owner = true
 z_index = 101
-offset_left = 1570.0
-offset_top = 30.0
-offset_right = 1880.0
-offset_bottom = 140.0
-theme_override_styles/panel = SubResource("StyleBoxFlat_ewqpo")
+offset_left = 785.0
+offset_top = 7.0
+offset_right = 1135.0
+offset_bottom = 107.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_godvp")
 
 [node name="Label" type="Label" parent="Time"]
 layout_mode = 0
-offset_right = 310.0
-offset_bottom = 110.0
+offset_right = 350.0
+offset_bottom = 100.0
 theme_override_fonts/font = ExtResource("2_65tdw")
-theme_override_font_sizes/font_size = 53
+theme_override_font_sizes/font_size = 57
 text = "TIME : 60"
 horizontal_alignment = 1
 vertical_alignment = 1

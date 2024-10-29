@@ -383,13 +383,13 @@ func _on_modal_timer_timeout() -> void:
 				%EnemyTime.visible = true
 				%Time.visible = false
 				%Turn.get_node("Label").text = "enemy's turn"
-			%P1Avatar.visible = false
-			%P2Avatar.visible = false
+			#%P1Avatar.visible = false
+			#%P2Avatar.visible = false
 			%TurnOfEnemy.visible = false
 			%ReadyPanel.visible = false
 			%DeletePanel.visible = true
 			%SubmitPanel.visible = true
-			%Turn.visible = true
+			#%Turn.visible = true
 		if %Winner.visible:
 			diff_score = 999.99
 			diff_equation = ""

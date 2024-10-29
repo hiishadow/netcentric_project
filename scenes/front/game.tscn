@@ -306,18 +306,18 @@ vertical_alignment = 1
 unique_name_in_owner = true
 visible = false
 z_index = 101
-offset_left = 1570.0
-offset_top = 30.0
-offset_right = 1880.0
-offset_bottom = 140.0
+offset_left = 785.0
+offset_top = 7.0
+offset_right = 1135.0
+offset_bottom = 107.0
 theme_override_styles/panel = SubResource("StyleBoxFlat_kmgrd")
 
 [node name="Label" type="Label" parent="Time"]
 layout_mode = 0
-offset_right = 310.0
-offset_bottom = 110.0
+offset_right = 350.0
+offset_bottom = 100.0
 theme_override_fonts/font = ExtResource("2_2virx")
-theme_override_font_sizes/font_size = 53
+theme_override_font_sizes/font_size = 57
 text = "TIME : 60"
 horizontal_alignment = 1
 vertical_alignment = 1

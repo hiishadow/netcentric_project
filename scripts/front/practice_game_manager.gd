@@ -311,6 +311,8 @@ func submit():
 		final_time = 0
 	else:
 		%GameTimer.stop()
+		%VideoStreamPlayer.stop()
+		%AudioStreamPlayer.stop()
 		final_time = int($"../Time".get_node("Label").text)
 		
 		%CorrectAnswer.visible = true
@@ -341,19 +343,26 @@ func send_equation():
 func _on_timer_timeout() -> void:
 	if game_time == 0: 
 		%GameTimer.stop()
+		%VideoStreamPlayer.stop()
+		%AudioStreamPlayer.stop()
 		if your_turn:
-
 			%timeup_answer.visible = true
 			%ModalTimer.start()
 		
 		game_time = 60
 		return
 	
+	if game_time == 60:
+		%AudioStreamPlayer.play(1)
+	
 	game_time -= 1
 	if %EnemyTime.visible:
 		%EnemyTime.get_node("Label").text = "TIME : " + str(game_time)
 	if %Time.visible:
 		%Time.get_node("Label").text = "TIME : " + str(game_time)
+	
+	if game_time == 15:
+		%VideoStreamPlayer.play()
 
 
 func _on_modal_timer_timeout() -> void:

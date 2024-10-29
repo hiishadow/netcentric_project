@@ -1,8 +1,10 @@
-[gd_scene load_steps=48 format=3 uid="uid://bc2cby6tnrrql"]
+[gd_scene load_steps=52 format=3 uid="uid://bc2cby6tnrrql"]
 
 [ext_resource type="Script" path="res://scripts/front/practice_game_manager.gd" id="1_enqkb"]
 [ext_resource type="Texture2D" uid="uid://cgxiwy3ntovsc" path="res://bg.png" id="1_h7sve"]
 [ext_resource type="FontFile" uid="uid://bt5pn0ptnei0q" path="res://fonts/Bungee/Bungee-Regular.ttf" id="2_65tdw"]
+[ext_resource type="Shader" path="res://moving.gdshader" id="2_lmcuy"]
+[ext_resource type="AudioStream" uid="uid://0fu5473s6eud" path="res://Mountain King 3.mp3" id="2_y5wgu"]
 [ext_resource type="Texture2D" uid="uid://deydy23ssje4b" path="res://resources/mainmenu/avatar/Gamee Avatar (3).png" id="3_sney8"]
 [ext_resource type="PackedScene" uid="uid://bhxybkqifjtla" path="res://scenes/front/target_panel.tscn" id="4_d86ux"]
 [ext_resource type="PackedScene" uid="uid://cw2c8fcsrep15" path="res://scenes/front/play_card_holder_panel.tscn" id="5_4x40y"]
@@ -23,8 +25,14 @@
 [ext_resource type="PackedScene" uid="uid://bt8ttmwh8ex8j" path="res://scenes/front/winner.tscn" id="20_cox3v"]
 [ext_resource type="Script" path="res://scripts/front/debug_label.gd" id="21_yrdnh"]
 
+[sub_resource type="VideoStreamTheora" id="VideoStreamTheora_8qxto"]
+file = "finalallalalaal.ogv"
+
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_r6146"]
 bg_color = Color(0.894118, 0.533333, 0.247059, 1)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_ong06"]
+shader = ExtResource("2_lmcuy")
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ewqpo"]
 bg_color = Color(0.658824, 0.286275, 0.294118, 1)
@@ -250,6 +258,19 @@ unique_name_in_owner = true
 [node name="ModalTimer" type="Timer" parent="."]
 unique_name_in_owner = true
 
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+unique_name_in_owner = true
+stream = ExtResource("2_y5wgu")
+
+[node name="VideoStreamPlayer" type="VideoStreamPlayer" parent="."]
+unique_name_in_owner = true
+self_modulate = Color(1, 1, 1, 0.215686)
+z_index = 200
+offset_right = 304.0
+offset_bottom = 544.0
+scale = Vector2(0.887011, 0.280471)
+stream = SubResource("VideoStreamTheora_8qxto")
+
 [node name="Background" type="Control" parent="."]
 layout_mode = 3
 anchors_preset = 0
@@ -264,6 +285,8 @@ theme_override_styles/panel = SubResource("StyleBoxFlat_r6146")
 
 [node name="TextureRect" type="TextureRect" parent="Background"]
 self_modulate = Color(1, 1, 1, 0.862745)
+texture_repeat = 2
+material = SubResource("ShaderMaterial_ong06")
 layout_mode = 0
 offset_right = 1920.0
 offset_bottom = 1080.0

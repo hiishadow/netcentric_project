@@ -1,7 +1,9 @@
-[gd_scene load_steps=46 format=3 uid="uid://yucu3qavvca2"]
+[gd_scene load_steps=50 format=3 uid="uid://yucu3qavvca2"]
 
 [ext_resource type="Script" path="res://scripts/front/game_manager.gd" id="1_76u30"]
 [ext_resource type="FontFile" uid="uid://bt5pn0ptnei0q" path="res://fonts/Bungee/Bungee-Regular.ttf" id="2_2virx"]
+[ext_resource type="AudioStream" uid="uid://0fu5473s6eud" path="res://Mountain King 3.mp3" id="2_kpubd"]
+[ext_resource type="Shader" path="res://moving.gdshader" id="2_l0kt6"]
 [ext_resource type="Texture2D" uid="uid://cgxiwy3ntovsc" path="res://bg.png" id="2_semy3"]
 [ext_resource type="PackedScene" uid="uid://vxt7wu6vjao7" path="res://scenes/front/sign_panel.tscn" id="2_u1332"]
 [ext_resource type="PackedScene" uid="uid://bhxybkqifjtla" path="res://scenes/front/target_panel.tscn" id="2_vt8v8"]
@@ -23,8 +25,14 @@
 [ext_resource type="PackedScene" uid="uid://bt8ttmwh8ex8j" path="res://scenes/front/winner.tscn" id="20_akx14"]
 [ext_resource type="Script" path="res://scripts/front/debug_label.gd" id="22_spbk7"]
 
+[sub_resource type="VideoStreamTheora" id="VideoStreamTheora_kc4hb"]
+file = "finalallalalaal.ogv"
+
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_cwgpc"]
 bg_color = Color(0.894118, 0.533333, 0.247059, 1)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_qucdn"]
+shader = ExtResource("2_l0kt6")
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_kmgrd"]
 bg_color = Color(0.658824, 0.286275, 0.294118, 1)
@@ -240,6 +248,19 @@ unique_name_in_owner = true
 [node name="ModalTimer" type="Timer" parent="."]
 unique_name_in_owner = true
 
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+unique_name_in_owner = true
+stream = ExtResource("2_kpubd")
+
+[node name="VideoStreamPlayer" type="VideoStreamPlayer" parent="."]
+unique_name_in_owner = true
+self_modulate = Color(1, 1, 1, 0.215686)
+z_index = 200
+offset_right = 2160.0
+offset_bottom = 3840.0
+scale = Vector2(0.887011, 0.280471)
+stream = SubResource("VideoStreamTheora_kc4hb")
+
 [node name="Background" type="Control" parent="."]
 layout_mode = 3
 anchors_preset = 0
@@ -254,6 +275,8 @@ theme_override_styles/panel = SubResource("StyleBoxFlat_cwgpc")
 
 [node name="TextureRect" type="TextureRect" parent="Background"]
 self_modulate = Color(1, 1, 1, 0.862745)
+texture_repeat = 2
+material = SubResource("ShaderMaterial_qucdn")
 layout_mode = 0
 offset_right = 1920.0
 offset_bottom = 1080.0

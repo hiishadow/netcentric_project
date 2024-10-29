@@ -6,6 +6,8 @@ var client = null
 var modal_is_on = false
 var face_down_mode = false
 
+
+
 func _on_start_as_server_pressed() -> void:
 	if modal_is_on: return
 	%BecomeHost.hide()

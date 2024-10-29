@@ -269,6 +269,8 @@ func submit():
 		final_time = 0
 	else:
 		%GameTimer.stop()
+		%VideoStreamPlayer.stop()
+		%AudioStreamPlayer.stop()
 		final_time = int($"../Time".get_node("Label").text)
 		client.send_to_server({
 			"message": client.Message.sendTimeUsage, "client_id": client.id, "data": 60 - final_time, "equation": send_equation()
@@ -301,6 +303,8 @@ func send_equation():
 func _on_timer_timeout() -> void:
 	if game_time == 0: 
 		%GameTimer.stop()
+		%VideoStreamPlayer.stop()
+		%AudioStreamPlayer.stop()
 		if your_turn:
 			client.send_to_server({
 				"message": client.Message.sendTimeUsage, "client_id": client.id, "data": 999, "equation": diff_equation
@@ -316,11 +320,17 @@ func _on_timer_timeout() -> void:
 		game_time = 60
 		return
 	
+	if game_time == 60 and your_turn:
+		%AudioStreamPlayer.play(1)
+	
 	game_time -= 1
 	if %EnemyTime.visible:
 		%EnemyTime.get_node("Label").text = "TIME : " + str(game_time)
 	if %Time.visible:
 		%Time.get_node("Label").text = "TIME : " + str(game_time)
+		
+	if game_time == 15 and your_turn:
+		%VideoStreamPlayer.play()
 
 
 func _on_modal_timer_timeout() -> void:
@@ -505,6 +515,8 @@ func _on_reset_game_pressed() -> void:
 func resetGame():
 	print("resetGame")
 	%GameTimer.stop()
+	%VideoStreamPlayer.stop()
+	%AudioStreamPlayer.stop()
 	%ModalTimer.stop()
 	%Turn.hide()
 	%Time.hide()

@@ -1,6 +1,7 @@
-[gd_scene load_steps=53 format=3 uid="uid://phqqbkxeyk7u"]
+[gd_scene load_steps=55 format=3 uid="uid://phqqbkxeyk7u"]
 
 [ext_resource type="Texture2D" uid="uid://cgxiwy3ntovsc" path="res://bg.png" id="1_3qn0k"]
+[ext_resource type="Shader" path="res://moving.gdshader" id="1_kmq0h"]
 [ext_resource type="Texture2D" uid="uid://dytb7b80up81t" path="res://resources/mainmenu/Gamee IQ180 (2).png" id="2_r0ttp"]
 [ext_resource type="FontFile" uid="uid://bt5pn0ptnei0q" path="res://fonts/Bungee/Bungee-Regular.ttf" id="2_rkpgl"]
 [ext_resource type="Script" path="res://scripts/front/main_box.gd" id="2_yvuct"]
@@ -32,6 +33,9 @@
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ngd7p"]
 bg_color = Color(0.894118, 0.533333, 0.235294, 1)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_4lwbd"]
+shader = ExtResource("1_kmq0h")
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_woksp"]
 bg_color = Color(0.980392, 0.980392, 0.980392, 1)
@@ -166,6 +170,8 @@ grow_vertical = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_ngd7p")
 
 [node name="TextureRect" type="TextureRect" parent="Background"]
+texture_repeat = 2
+material = SubResource("ShaderMaterial_4lwbd")
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0

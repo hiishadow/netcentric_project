@@ -4,7 +4,7 @@
 [ext_resource type="Texture2D" uid="uid://cgxiwy3ntovsc" path="res://bg.png" id="1_h7sve"]
 [ext_resource type="FontFile" uid="uid://bt5pn0ptnei0q" path="res://fonts/Bungee/Bungee-Regular.ttf" id="2_65tdw"]
 [ext_resource type="Shader" path="res://moving.gdshader" id="2_lmcuy"]
-[ext_resource type="AudioStream" uid="uid://0fu5473s6eud" path="res://Mountain King 3.mp3" id="2_y5wgu"]
+[ext_resource type="AudioStream" uid="uid://dvh04efth2lv2" path="res://Mountain King 1.mp3" id="2_tgliy"]
 [ext_resource type="Texture2D" uid="uid://deydy23ssje4b" path="res://resources/mainmenu/avatar/Gamee Avatar (3).png" id="3_sney8"]
 [ext_resource type="PackedScene" uid="uid://bhxybkqifjtla" path="res://scenes/front/target_panel.tscn" id="4_d86ux"]
 [ext_resource type="PackedScene" uid="uid://cw2c8fcsrep15" path="res://scenes/front/play_card_holder_panel.tscn" id="5_4x40y"]
@@ -260,7 +260,7 @@ unique_name_in_owner = true
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
 unique_name_in_owner = true
-stream = ExtResource("2_y5wgu")
+stream = ExtResource("2_tgliy")
 
 [node name="VideoStreamPlayer" type="VideoStreamPlayer" parent="."]
 unique_name_in_owner = true

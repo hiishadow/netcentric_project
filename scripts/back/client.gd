@@ -71,7 +71,7 @@ func _process(delta: float) -> void:
 				Message.getUserReadyCount:
 					match data.data:
 						"Wait":
-							get_parent().get_node("Game").get_node("ViewRule").get_node("Label").text ="Waiting for\nP2__name"
+							get_parent().get_node("Game").get_node("ViewRule").get_node("Label").text ="Waiting for \nanother player"
 						"Ready":
 							get_parent().get_node("Game").get_node("ViewRule").get_node("Label").text ="press ready\nwhen ready"
 						"StartGame":

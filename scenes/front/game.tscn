@@ -2,11 +2,11 @@
 
 [ext_resource type="Script" path="res://scripts/front/game_manager.gd" id="1_76u30"]
 [ext_resource type="FontFile" uid="uid://bt5pn0ptnei0q" path="res://fonts/Bungee/Bungee-Regular.ttf" id="2_2virx"]
-[ext_resource type="AudioStream" uid="uid://0fu5473s6eud" path="res://Mountain King 3.mp3" id="2_kpubd"]
 [ext_resource type="Shader" path="res://moving.gdshader" id="2_l0kt6"]
 [ext_resource type="Texture2D" uid="uid://cgxiwy3ntovsc" path="res://bg.png" id="2_semy3"]
 [ext_resource type="PackedScene" uid="uid://vxt7wu6vjao7" path="res://scenes/front/sign_panel.tscn" id="2_u1332"]
 [ext_resource type="PackedScene" uid="uid://bhxybkqifjtla" path="res://scenes/front/target_panel.tscn" id="2_vt8v8"]
+[ext_resource type="AudioStream" uid="uid://dvh04efth2lv2" path="res://Mountain King 1.mp3" id="2_x0anc"]
 [ext_resource type="PackedScene" uid="uid://cw2c8fcsrep15" path="res://scenes/front/play_card_holder_panel.tscn" id="2_yl3tp"]
 [ext_resource type="PackedScene" uid="uid://djkcfpcmletix" path="res://scenes/front/card_holder_panel.tscn" id="3_l5urw"]
 [ext_resource type="PackedScene" uid="uid://bx52h06k44xab" path="res://scenes/front/play_sign_holder_panel.tscn" id="3_w2ovd"]
@@ -250,7 +250,7 @@ unique_name_in_owner = true
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
 unique_name_in_owner = true
-stream = ExtResource("2_kpubd")
+stream = ExtResource("2_x0anc")
 
 [node name="VideoStreamPlayer" type="VideoStreamPlayer" parent="."]
 unique_name_in_owner = true
@@ -288,13 +288,13 @@ visible = false
 z_index = 101
 offset_left = 40.0
 offset_top = 30.0
-offset_right = 400.0
+offset_right = 465.0
 offset_bottom = 140.0
 theme_override_styles/panel = SubResource("StyleBoxFlat_kmgrd")
 
 [node name="Label" type="Label" parent="Turn"]
 layout_mode = 0
-offset_right = 360.0
+offset_right = 425.0
 offset_bottom = 110.0
 theme_override_fonts/font = ExtResource("2_2virx")
 theme_override_font_sizes/font_size = 53

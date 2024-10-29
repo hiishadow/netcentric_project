@@ -136,6 +136,7 @@ func calculate_card_slot(card):
 		card.global_position = play_zone_card_slot[recent_card_slot].global_position
 		recent_card_slot += 1
 		play_zone.append(card)
+		get_tree().root.get_node("main").get_node("SoundEffect").play(0.2)
 		if play_zone.size() == 9:
 			var new_sb = StyleBoxFlat.new()
 			new_sb.bg_color = Color(0.882, 0.341, 0.302)
@@ -167,6 +168,7 @@ func calculate_sign_slot(sign_):
 			signn_.get_node("Label").text = "#"
 		recent_sign_slot += 1
 		play_zone.append(signn_)
+		get_tree().root.get_node("main").get_node("SoundEffect").play(0.2)
 
 func display_player_count(count):
 	if count == 1:

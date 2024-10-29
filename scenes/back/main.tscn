@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://bxprnu2uijnhj"]
+[gd_scene load_steps=12 format=3 uid="uid://bxprnu2uijnhj"]
 
 [ext_resource type="Script" path="res://scripts/back/main.gd" id="1_pxi0j"]
 [ext_resource type="PackedScene" uid="uid://00r08b5jr0ki" path="res://scenes/back/client.tscn" id="3_wvk0r"]
@@ -6,6 +6,7 @@
 [ext_resource type="PackedScene" uid="uid://phqqbkxeyk7u" path="res://scenes/front/mainmenu.tscn" id="4_ywqig"]
 [ext_resource type="FontFile" uid="uid://bt5pn0ptnei0q" path="res://fonts/Bungee/Bungee-Regular.ttf" id="5_6ebgq"]
 [ext_resource type="PackedScene" uid="uid://cdaiqvefvgfrt" path="res://scenes/front/practice_mode.tscn" id="6_vwrw7"]
+[ext_resource type="AudioStream" uid="uid://jbdxljqcqikn" path="res://rapid-wind-sound-effect-1-108398.mp3" id="7_v1nww"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_ktq6i"]
 
@@ -119,6 +120,11 @@ theme = SubResource("Theme_tj5ac")
 text = "face down
 "
 alignment = 1
+
+[node name="SoundEffect" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("7_v1nww")
+volume_db = -15.0
+max_polyphony = 20
 
 [connection signal="pressed" from="BecomeHost" to="." method="_on_start_as_server_pressed"]
 [connection signal="pressed" from="JoinAsClient" to="." method="_on_start_as_client_pressed"]

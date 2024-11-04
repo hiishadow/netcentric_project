@@ -264,7 +264,7 @@ func submit():
 	if result != int(%TargetPanel.get_node("Label").text):
 		diff_score = abs(int(%TargetPanel.get_node("Label").text)-result)
 		diff_equation = send_equation()
-		%WrongAnswer.get_node("Label").text = "YOUR Answer is " + str(result)
+		%WrongAnswer.get_node("Label").text = "YOUR Answer is " + (str(result)).pad_decimals(2)
 		%WrongAnswer.visible = true
 		modal_is_on = true
 		%ModalTimer.start()

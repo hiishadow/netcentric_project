@@ -814,4 +814,3 @@ text = "RESET GAME"
 [connection signal="timeout" from="GameTimer" to="GameManager" method="_on_timer_timeout"]
 [connection signal="timeout" from="ModalTimer" to="GameManager" method="_on_modal_timer_timeout"]
 [connection signal="gui_input" from="Reset/ClickArea" to="GameManager" method="reset"]
-[connection signal="pressed" from="ResetGame" to="GameManager" method="_on_reset_game_pressed"]

@@ -59,8 +59,8 @@ func _process(delta: float) -> void:
 					if data.has("clients"):
 						clients = data.clients
 						if get_tree().root.get_node("main").is_server:
-							get_tree().root.get_node("main").get_node("Game").get_node("PlayerCount").visible = true
-							get_tree().root.get_node("main").get_node("Game").get_node("PlayerCount").text = "PLAYERS ONLINE " + str(clients.size())
+							#get_tree().root.get_node("main").get_node("Game").get_node("PlayerCount").visible = true
+							get_tree().root.get_node("main").get_node("ServerWindow").get_node("PlayerCount").text = "PLAYERS ONLINE: " + str(clients.size())
 					updateDisplay()
 					get_parent().get_node("Game").get_node("GameManager").display_player_count(clients.size())
 				Message.getUserCount:

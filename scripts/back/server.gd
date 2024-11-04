@@ -218,8 +218,7 @@ func peer_disconnected(id):
 		"data": "User " + str(id) + " has disconnected."
 	}
 	broadcast_to_all(message)
-	if get_tree().root.get_node("main").has_node("Game"):
-		get_tree().root.get_node("main").get_node("Game").get_node("PlayerCount").text = "PLAYERS ONLINE " + str(clients.size())
+	get_tree().root.get_node("main").get_node("ServerWindow").get_node("PlayerCount").text = "PLAYERS ONLINE: " + str(clients.size())
 
 func send_to_client(id, message):
 	peer.get_peer(id).put_packet(JSON.stringify(message).to_utf8_buffer())

@@ -1,0 +1,41 @@
+[gd_scene load_steps=2 format=3 uid="uid://djgy7folqsfxi"]
+
+[ext_resource type="Script" path="res://scripts/back/server_window.gd" id="1_lbk35"]
+
+[node name="ServerWindow" type="Window"]
+title = "Server"
+initial_position = 1
+size = Vector2i(500, 500)
+script = ExtResource("1_lbk35")
+
+[node name="ResetGame" type="Button" parent="."]
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -114.0
+offset_top = -215.0
+offset_right = 114.0
+offset_bottom = -152.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_font_sizes/font_size = 40
+text = "ResetGame"
+
+[node name="PlayerCount" type="Label" parent="."]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -34.0
+offset_top = -100.0
+offset_right = 34.0
+offset_bottom = -45.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_font_sizes/font_size = 40
+text = "PLAYERS ONLINE: "
+
+[connection signal="pressed" from="ResetGame" to="." method="_on_reset_game_pressed"]

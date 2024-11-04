@@ -29,8 +29,8 @@ var diff_equation = ""
 func _ready() -> void:
 	client = get_tree().root.get_child(0).get_node("Client")
 	main = get_tree().root.get_child(0)
-	if get_tree().root.get_node("main").is_server:
-		%ResetGame.visible = true
+	#if get_tree().root.get_node("main").is_server:
+	#	%ResetGame.visible = true
 	
 	slot_path()
 	

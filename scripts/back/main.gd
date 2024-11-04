@@ -5,11 +5,16 @@ var server = null
 var client = null
 var modal_is_on = false
 var face_down_mode = false
+var server_window = preload("res://scenes/back/server_window.tscn")
 
-
+func _ready():
+	get_viewport().set_embedding_subwindows(false)
 
 func _on_start_as_server_pressed() -> void:
 	if modal_is_on: return
+	var d = server_window.instantiate()
+	add_child(d)
+	
 	%BecomeHost.hide()
 	%JoinAsClient.hide()
 	%Server.startServer()

@@ -1,4 +1,4 @@
-[gd_scene load_steps=50 format=3 uid="uid://yucu3qavvca2"]
+[gd_scene load_steps=51 format=3 uid="uid://yucu3qavvca2"]
 
 [ext_resource type="Script" path="res://scripts/front/game_manager.gd" id="1_76u30"]
 [ext_resource type="FontFile" uid="uid://bt5pn0ptnei0q" path="res://fonts/Bungee/Bungee-Regular.ttf" id="2_2virx"]
@@ -24,6 +24,7 @@
 [ext_resource type="PackedScene" uid="uid://41q8f4vhbp1n" path="res://scenes/front/rule_page.tscn" id="17_jymu3"]
 [ext_resource type="PackedScene" uid="uid://bt8ttmwh8ex8j" path="res://scenes/front/winner.tscn" id="20_akx14"]
 [ext_resource type="Script" path="res://scripts/front/debug_label.gd" id="22_spbk7"]
+[ext_resource type="PackedScene" uid="uid://dk6yan7rnq7uf" path="res://scenes/front/surrender_modal.tscn" id="25_dicck"]
 
 [sub_resource type="VideoStreamTheora" id="VideoStreamTheora_kc4hb"]
 file = "finalallalalaal.ogv"
@@ -632,6 +633,15 @@ offset_top = -721.0
 offset_right = -603.0
 offset_bottom = -515.0
 
+[node name="SurrenderModal" parent="." instance=ExtResource("25_dicck")]
+unique_name_in_owner = true
+visible = false
+z_index = 102
+offset_left = 210.0
+offset_top = 140.0
+offset_right = 210.0
+offset_bottom = 140.0
+
 [node name="DeletePanel" parent="." instance=ExtResource("8_o802d")]
 unique_name_in_owner = true
 visible = false
@@ -781,7 +791,6 @@ offset_right = 210.0
 offset_bottom = 140.0
 
 [node name="DebugLabel" type="Label" parent="."]
-visible = false
 z_index = 4096
 offset_left = 47.0
 offset_top = 23.0
@@ -811,6 +820,19 @@ offset_bottom = 1075.0
 theme_override_font_sizes/font_size = 30
 text = "RESET GAME"
 
+[node name="Surrender" type="Button" parent="."]
+unique_name_in_owner = true
+visible = false
+z_index = 50
+offset_left = 1682.0
+offset_top = 1021.0
+offset_right = 1906.0
+offset_bottom = 1075.0
+theme_override_font_sizes/font_size = 30
+disabled = true
+text = "SURRENDER"
+
 [connection signal="timeout" from="GameTimer" to="GameManager" method="_on_timer_timeout"]
 [connection signal="timeout" from="ModalTimer" to="GameManager" method="_on_modal_timer_timeout"]
 [connection signal="gui_input" from="Reset/ClickArea" to="GameManager" method="reset"]
+[connection signal="pressed" from="Surrender" to="GameManager" method="_on_surrender_pressed"]

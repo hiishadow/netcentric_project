@@ -19,7 +19,8 @@ enum Message {
 	closeModal,
 	updateTimer,
 	forceClosed,
-	resetGame
+	resetGame,
+	clientSurrender
 }
 
 var rng = RandomNumberGenerator.new()
@@ -99,12 +100,24 @@ func handle_message(data, sender_id):
 			for client_id in clients.keys():
 				if client_id != clients.keys()[turn_index]:
 					send_to_client(client_id, {"message": Message.updateTimer, "data": data.data})
+		Message.clientSurrender:
+			for client_id in clients.keys():
+				if client_id != sender_id:
+					clients[int(client_id)].attributes.score += 1
+					send_to_client(client_id, {"message": Message.clientSurrender, "data": sender_id})
 		Message.runningGame:
 			if data.data == "NextTurn":
 				turn_index = (turn_index + 1) % clients.size()
 				runningGame()
 			elif data.data == "NextRound":
 				turn_index = 0
+				if data.has("surrender"):
+					if data.surrender == true:
+						broadcast_to_all({
+							"message": Message.updateUserAttributes,
+							"data": "updateScore",
+							"clients": clients
+						})
 				for client_id in clients.keys():
 					if client_id != sender_id:
 						send_to_client(client_id, {"message": Message.forceClosed})

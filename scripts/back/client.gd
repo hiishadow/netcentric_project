@@ -20,6 +20,7 @@ enum Message {
 	updateTimer,
 	forceClosed,
 	resetGame,
+	clientSurrender
 }
 
 var game = preload("res://scenes/front/game.tscn")
@@ -76,6 +77,7 @@ func _process(delta: float) -> void:
 							get_parent().get_node("Game").get_node("ViewRule").get_node("Label").text ="press ready\nwhen ready"
 						"StartGame":
 							get_parent().get_node("Game").get_node("ViewRule").hide()
+							get_parent().get_node("Game").get_node("Surrender").disabled = false
 				Message.runningGame:
 					#do match on game_manger ccuz i lazy
 					get_parent().get_node("Game").get_node("GameManager").runningGame(data)
@@ -95,10 +97,14 @@ func _process(delta: float) -> void:
 					get_parent().get_node("Game").get_node("ModalTimer").stop()
 					get_parent().get_node("Game").get_node("GameManager").modal_time = 5
 					get_parent().get_node("Game").get_node("Winner").visible = false
+					get_parent().get_node("Game").get_node("SurrenderModal").visible = false
 				Message.resetGame:
 					for i in clients.keys():
 						clients[i].attributes.score = 0
 					get_parent().get_node("Game").get_node("GameManager").resetGame()
+				Message.clientSurrender:
+					var gm = get_parent().get_node("Game")
+					gm.get_node("GameManager").surrender(data.data)
 				_:
 					print("Unknown message type")
 

@@ -29,8 +29,8 @@ var diff_equation = ""
 func _ready() -> void:
 	client = get_tree().root.get_child(0).get_node("Client")
 	main = get_tree().root.get_child(0)
-	#if get_tree().root.get_node("main").is_server:
-	#	%ResetGame.visible = true
+	#if !get_tree().root.get_node("main").is_server:
+	%Surrender.visible = true
 	
 	slot_path()
 	
@@ -409,7 +409,24 @@ func _on_modal_timer_timeout() -> void:
 						"client_id": client.id,
 						"data": "NextRound"
 					})
-			
+		if %SurrenderModal.visible:
+			%SurrenderModal.visible = false
+			if is_clicked:
+				client.send_to_server({
+					"message": client.Message.runningGame,
+					"client_id": client.id,
+					"data": "NextRound",
+					"surrender": true
+				})
+				is_clicked = false
+			elif !is_clicked:
+				if your_turn:
+					client.send_to_server({
+						"message": client.Message.runningGame,
+						"client_id": client.id,
+						"data": "NextRound",
+						"surrender": true
+					})
 		modal_is_on = false
 		modal_time = 5
 		return
@@ -425,6 +442,8 @@ func _on_modal_timer_timeout() -> void:
 		%timeup_answer.get_node("Label3").text = "AUTOCLOSE IN " + str(modal_time) + " SECONDS"
 	if %Winner.visible:
 		%Winner.get_node("Label3").text = "AUTOSTART IN " + str(modal_time) + " SECONDS"
+	if %SurrenderModal.visible:
+		%SurrenderModal.get_node("Label3").text = "AUTOSTART IN " + str(modal_time) + " SECONDS"
 	
 
 func reset(event: InputEvent) -> void:
@@ -563,4 +582,42 @@ func resetGame():
 	seed_answer = null
 	is_clicked = false
 	your_turn = false
+	
+
+func surrender(data):
+	%GameTimer.stop()
+	%VideoStreamPlayer.stop()
+	%AudioStreamPlayer.stop()
+	%timeup_answer.hide()
+	%WrongAnswer.hide()
+	%CorrectAnswer.hide()
+	%Winner.hide()
+	
+	reverse_set_up_card_panel()
+	%SurrenderModal.get_node("Label2").text = str(client.clients[str(data)].attributes.name)
+	%SurrenderModal.visible = true
+	modal_is_on = true
+	modal_time = 5
+	%ModalTimer.start()
+
+func _on_surrender_pressed() -> void:
+	if modal_is_on: return
+	%GameTimer.stop()
+	%VideoStreamPlayer.stop()
+	%AudioStreamPlayer.stop()
+	client.send_to_server({
+		"message": client.Message.clientSurrender, "client_id": client.id
+	})
+	
+	%timeup_answer.hide()
+	%WrongAnswer.hide()
+	%CorrectAnswer.hide()
+	%Winner.hide()
+	
+	reverse_set_up_card_panel()
+	%SurrenderModal.get_node("Label2").text = client.clients[str(client.id)].attributes.name
+	%SurrenderModal.visible = true
+	modal_is_on = true
+	modal_time = 5
+	%ModalTimer.start()
 	

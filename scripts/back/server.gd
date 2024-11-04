@@ -265,6 +265,13 @@ func runningGame():
 		random_from_pool()
 		broadcast_to_all({"message": Message.sendSeed, "used_num": used_num, "target_num": target_num, "seed_answer": seed_answer})
 	
+	#random start
+	var start_player = rng.randi_range(0, 1)
+	var temp_key = clients.keys()[start_player]
+	var temp  = clients[temp_key]
+	clients.erase(temp_key)
+	clients[temp_key] = temp
+	
 	var turn_name = clients[clients.keys()[turn_index]].attributes.name
 	for client_id in clients.keys():
 		if client_id == clients.keys()[turn_index]:

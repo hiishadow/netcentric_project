@@ -1,4 +1,4 @@
-[gd_scene load_steps=53 format=3 uid="uid://bc2cby6tnrrql"]
+[gd_scene load_steps=52 format=3 uid="uid://bc2cby6tnrrql"]
 
 [ext_resource type="Script" path="res://scripts/front/practice_game_manager.gd" id="1_enqkb"]
 [ext_resource type="Texture2D" uid="uid://cgxiwy3ntovsc" path="res://bg.png" id="1_h7sve"]
@@ -23,7 +23,6 @@
 [ext_resource type="PackedScene" uid="uid://bgpv5q10qgg3r" path="res://scenes/front/welcome.tscn" id="18_w787l"]
 [ext_resource type="PackedScene" uid="uid://41q8f4vhbp1n" path="res://scenes/front/rule_page.tscn" id="19_ab213"]
 [ext_resource type="PackedScene" uid="uid://bt8ttmwh8ex8j" path="res://scenes/front/winner.tscn" id="20_cox3v"]
-[ext_resource type="Script" path="res://scripts/front/debug_label.gd" id="21_yrdnh"]
 
 [sub_resource type="VideoStreamTheora" id="VideoStreamTheora_8qxto"]
 file = "finalallalalaal.ogv"
@@ -794,17 +793,6 @@ offset_left = 210.0
 offset_top = 140.0
 offset_right = 210.0
 offset_bottom = 140.0
-
-[node name="DebugLabel" type="Label" parent="."]
-visible = false
-z_index = 4096
-offset_left = 47.0
-offset_top = 23.0
-offset_right = 87.0
-offset_bottom = 92.0
-theme_override_colors/font_color = Color(0, 0, 0, 1)
-theme_override_font_sizes/font_size = 50
-script = ExtResource("21_yrdnh")
 
 [node name="PlayerCount" type="Label" parent="."]
 visible = false

@@ -20,7 +20,8 @@ enum Message {
 	updateTimer,
 	forceClosed,
 	resetGame,
-	clientSurrender
+	clientSurrender,
+	endGame
 }
 
 var rng = RandomNumberGenerator.new()
@@ -249,6 +250,9 @@ func startServer():
 		print("Started Server")
 
 func runningGame():
+	if current_turn == get_parent().total_turn:
+		broadcast_to_all({"message": Message.endGame})
+		return
 	if turn_index == 0: #set new seed only first round
 		#rng.randomize()
 		#rng.seed = 3672018741301020184

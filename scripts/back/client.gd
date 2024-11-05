@@ -20,7 +20,8 @@ enum Message {
 	updateTimer,
 	forceClosed,
 	resetGame,
-	clientSurrender
+	clientSurrender,
+	endGame
 }
 
 var game = preload("res://scenes/front/game.tscn")
@@ -108,6 +109,8 @@ func _process(delta: float) -> void:
 				Message.clientSurrender:
 					var gm = get_parent().get_node("Game")
 					gm.get_node("GameManager").surrender(data.data)
+				Message.endGame:
+					get_parent().get_node("Game").call_deferred("queue_free")
 				_:
 					print("Unknown message type")
 

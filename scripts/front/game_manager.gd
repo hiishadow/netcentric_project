@@ -38,6 +38,10 @@ func _ready() -> void:
 	
 	#set_up_card_panel()
 
+func _process(delta: float) -> void:
+	if modal_is_on:
+		%Surrender.disabled = true
+
 func slot_path():
 	play_zone_card_slot = [
 	$"../PlayZone/PlayCardHolderPanel",
@@ -340,6 +344,7 @@ func _on_modal_timer_timeout() -> void:
 		%ModalTimer.stop()
 		if %WrongAnswer.visible:
 			%WrongAnswer.visible = false
+			%Surrender.disabled = false
 		if %CorrectAnswer.visible:
 			%CorrectAnswer.visible = false
 			if client.turn_num != client.clients_num - 1:
@@ -370,6 +375,7 @@ func _on_modal_timer_timeout() -> void:
 				})
 		if %TurnOfEnemy.visible:
 			if your_turn:
+				reverse_set_up_card_panel()
 				generate_target_and_numbers()
 				set_up_card_panel()
 				%Turn.get_node("Label").text = "your turn"
@@ -377,7 +383,7 @@ func _on_modal_timer_timeout() -> void:
 				%Time.visible = true
 				%GameTimer.start()
 				client.send_to_server({"message": client.Message.updateTimer, "client_id": client.id, "data": "GameTimer"})
-				
+				%Surrender.disabled = false
 			else:
 				reverse_set_up_card_panel()
 				%EnemyTime.visible = true
@@ -465,6 +471,7 @@ func reset(event: InputEvent) -> void:
 
 func runningGame(data):
 	game_time = 60
+	reverse_set_up_card_panel()
 	match data.data:
 		"ShowModalAsTurn": 
 			%TurnOfEnemy.get_node("Label3").text = "AUTOSTART IN " + "5" + " SECONDS"
@@ -493,6 +500,7 @@ func runningGame(data):
 			for client_id in client.clients.keys():
 				if client_id != str(client.id):
 					other_id = client_id
+			%Winner.get_node("Label2").text = "turn " + str(client.current_turn) + " winner is"
 			if get_tree().root.get_node("main").is_server:
 				%Winner.get_node("Player1").get_node("Label").text = str(data.clients[str(client.id)].attributes.name) + "'s equation"
 				%Winner.get_node("Player1").get_node("Label2").text = data.equations[str(client.id)]

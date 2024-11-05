@@ -35,6 +35,7 @@ var used_num = []
 var target_num = 0
 var used_pool = []
 var seed_answer = ""
+var current_turn = 0
 
 func _ready() -> void:
 	rng.randomize()
@@ -99,7 +100,7 @@ func handle_message(data, sender_id):
 		Message.updateTimer:
 			for client_id in clients.keys():
 				if client_id != clients.keys()[turn_index]:
-					send_to_client(client_id, {"message": Message.updateTimer, "data": data.data})
+					send_to_client(client_id, {"message": Message.updateTimer, "data": data.data, "sender_id": sender_id})
 		Message.clientSurrender:
 			for client_id in clients.keys():
 				if client_id != sender_id:
@@ -131,7 +132,7 @@ func handle_message(data, sender_id):
 						winner = i
 				
 				if time_usage[time_usage.keys()[0]] == 999 and time_usage[time_usage.keys()[1]] == 999:
-					if diff_score[time_usage.keys()[0]] == 999 and diff_score[time_usage.keys()[1]] == 999:
+					if diff_score[diff_score.keys()[0]] == 999 and diff_score[diff_score.keys()[1]] == 999:
 						broadcast_to_all({"message": Message.runningGame, "data": "CalculateWinner", 
 							"time_usage": time_usage,
 							"winner": "NO WINNER",
@@ -261,16 +262,17 @@ func runningGame():
 		#	j += 1
 		#used_num.sort()
 		#var target_num = rng.randi_range(1, 9)
-		
+		current_turn += 1
 		random_from_pool()
-		broadcast_to_all({"message": Message.sendSeed, "used_num": used_num, "target_num": target_num, "seed_answer": seed_answer})
-	
-	#random start
-	var start_player = rng.randi_range(0, 1)
-	var temp_key = clients.keys()[start_player]
-	var temp  = clients[temp_key]
-	clients.erase(temp_key)
-	clients[temp_key] = temp
+		broadcast_to_all({"message": Message.sendSeed, "used_num": used_num, "target_num": target_num, "seed_answer": seed_answer\
+		, "current_turn": current_turn})
+		
+	if current_turn == 1:
+		var start_player = rng.randi_range(0, 1)
+		var temp_key = clients.keys()[start_player]
+		var temp  = clients[temp_key]
+		clients.erase(temp_key)
+		clients[temp_key] = temp
 	
 	var turn_name = clients[clients.keys()[turn_index]].attributes.name
 	for client_id in clients.keys():

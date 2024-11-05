@@ -3,8 +3,9 @@ extends Control
 
 func _on_click_area_gui_input(event: InputEvent) -> void:
 	if event is InputEventMouseButton and event.is_pressed():
-		self.visible = false
-		%GameManager.modal_is_on = false
+		%ModalTimer.stop()
+		%GameManager.modal_time = 0
+		%GameManager._on_modal_timer_timeout()
 
 func _on_click_area_mouse_entered() -> void:
 	%Close.modulate.a = 0.8

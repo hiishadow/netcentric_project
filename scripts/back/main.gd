@@ -5,6 +5,7 @@ var server = null
 var client = null
 var modal_is_on = false
 var face_down_mode = false
+var total_turn = 3
 var server_window = preload("res://scenes/back/server_window.tscn")
 
 func _ready():

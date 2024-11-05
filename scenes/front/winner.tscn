@@ -101,7 +101,7 @@ offset_bottom = 165.0
 theme_override_colors/font_color = Color(0.85098, 0.176471, 0.12549, 1)
 theme_override_fonts/font = ExtResource("4_54g4v")
 theme_override_font_sizes/font_size = 60
-text = "the winner is"
+text = "Turn winner is"
 horizontal_alignment = 1
 vertical_alignment = 1
 

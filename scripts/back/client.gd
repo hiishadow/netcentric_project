@@ -32,7 +32,7 @@ var clients_num
 var _name
 var _avatar
 var clients
-
+var current_turn
 
 func _process(delta: float) -> void:
 	peer.poll()
@@ -89,10 +89,13 @@ func _process(delta: float) -> void:
 					get_parent().get_node("Game").get_node("ModalTimer").stop()
 					get_parent().get_node("Game").get_node("GameManager").modal_time = 0
 					get_parent().get_node("Game").get_node("GameManager")._on_modal_timer_timeout()
+					get_parent().get_node("Game").get_node("Surrender").disabled = false
 				Message.updateTimer:
 					get_parent().get_node("Game").get_node(data.data).start()
+					get_parent().get_node("Game").get_node("Surrender").disabled = false
 				Message.sendSeed:
 					get_parent().get_node("Game").get_node("GameManager").setSeed(data.used_num, data.target_num, data.seed_answer)
+					current_turn = data.current_turn
 				Message.forceClosed:
 					get_parent().get_node("Game").get_node("ModalTimer").stop()
 					get_parent().get_node("Game").get_node("GameManager").modal_time = 5

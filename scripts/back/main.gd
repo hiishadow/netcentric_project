@@ -1,5 +1,6 @@
 extends Node
 
+const ip_add: String = "127.0.0.1"
 var is_server = false
 var server = null
 var client = null
@@ -23,7 +24,7 @@ func _on_start_as_server_pressed() -> void:
 	is_server = true
 	
 	#%Client.connectToServer("26.26.253.235")
-	%Client.connectToServer("127.0.0.1")
+	%Client.connectToServer(ip_add)
 
 
 
@@ -35,7 +36,7 @@ func _on_start_as_client_pressed() -> void:
 	%HUD.get_node("header").text = "CLIENT" + str(OS.get_process_id())
 
 	#%Client.connectToServer("26.26.253.235")
-	%Client.connectToServer("127.0.0.1")
+	%Client.connectToServer(ip_add)
 	%Server.queue_free()
 
 

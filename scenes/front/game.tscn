@@ -23,8 +23,8 @@
 [ext_resource type="PackedScene" uid="uid://2sqnqctq3w11" path="res://scenes/front/view_rule.tscn" id="16_he4ce"]
 [ext_resource type="PackedScene" uid="uid://41q8f4vhbp1n" path="res://scenes/front/rule_page.tscn" id="17_jymu3"]
 [ext_resource type="PackedScene" uid="uid://bt8ttmwh8ex8j" path="res://scenes/front/winner.tscn" id="20_akx14"]
-[ext_resource type="Script" path="res://scripts/front/debug_label.gd" id="22_spbk7"]
 [ext_resource type="PackedScene" uid="uid://dk6yan7rnq7uf" path="res://scenes/front/surrender_modal.tscn" id="25_dicck"]
+[ext_resource type="PackedScene" uid="uid://qtateo0lnpbf" path="res://scenes/front/real_winner.tscn" id="26_t63y6"]
 
 [sub_resource type="VideoStreamTheora" id="VideoStreamTheora_kc4hb"]
 file = "finalallalalaal.ogv"
@@ -790,16 +790,6 @@ offset_top = 140.0
 offset_right = 210.0
 offset_bottom = 140.0
 
-[node name="DebugLabel" type="Label" parent="."]
-z_index = 4096
-offset_left = 47.0
-offset_top = 23.0
-offset_right = 87.0
-offset_bottom = 92.0
-theme_override_colors/font_color = Color(0, 0, 0, 1)
-theme_override_font_sizes/font_size = 50
-script = ExtResource("22_spbk7")
-
 [node name="PlayerCount" type="Label" parent="."]
 visible = false
 offset_left = 13.0
@@ -831,6 +821,15 @@ offset_bottom = 1075.0
 theme_override_font_sizes/font_size = 30
 disabled = true
 text = "SURRENDER"
+
+[node name="RealWinner" parent="." instance=ExtResource("26_t63y6")]
+unique_name_in_owner = true
+visible = false
+z_index = 110
+offset_left = 210.0
+offset_top = 140.0
+offset_right = 210.0
+offset_bottom = 140.0
 
 [connection signal="timeout" from="GameTimer" to="GameManager" method="_on_timer_timeout"]
 [connection signal="timeout" from="ModalTimer" to="GameManager" method="_on_modal_timer_timeout"]

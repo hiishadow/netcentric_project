@@ -110,7 +110,12 @@ func _process(delta: float) -> void:
 					var gm = get_parent().get_node("Game")
 					gm.get_node("GameManager").surrender(data.data)
 				Message.endGame:
-					get_parent().get_node("Game").call_deferred("queue_free")
+					get_parent().get_node("Game").get_node("RealWinner").get_node("Label").text = str(data.data)
+					get_parent().get_node("Game").get_node("RealWinner").visible = true
+					get_parent().get_node("Game").get_node("GameManager").modal_is_on = true
+					get_parent().get_node("Game").get_node("GameManager").modal_time = 5
+					get_parent().get_node("Game").get_node("ModalTimer").start()
+					#get_parent().get_node("Game").call_deferred("queue_free")
 				_:
 					print("Unknown message type")
 

@@ -251,7 +251,15 @@ func startServer():
 
 func runningGame():
 	if current_turn == get_parent().total_turn:
-		broadcast_to_all({"message": Message.endGame})
+		var real_winner
+		if clients[clients.keys()[0]].attributes.score == 0 and clients[clients.keys()[1]].attributes.score == 0:
+			broadcast_to_all({"message": Message.endGame, "data": "NO WINNER"})
+		elif clients[clients.keys()[0]].attributes.score == clients[clients.keys()[1]].attributes.score:
+			broadcast_to_all({"message": Message.endGame, "data": "TIE"})
+		elif clients[clients.keys()[0]].attributes.score > clients[clients.keys()[1]].attributes.score:
+			broadcast_to_all({"message": Message.endGame, "data": clients[clients.keys()[0]].attributes.name})
+		elif clients[clients.keys()[0]].attributes.score < clients[clients.keys()[1]].attributes.score:
+			broadcast_to_all({"message": Message.endGame, "data": clients[clients.keys()[1]].attributes.name})
 		return
 	if turn_index == 0: #set new seed only first round
 		#rng.randomize()

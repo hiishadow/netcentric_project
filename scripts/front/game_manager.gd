@@ -433,6 +433,9 @@ func _on_modal_timer_timeout() -> void:
 						"data": "NextRound",
 						"surrender": true
 					})
+		if %RealWinner.visible:
+			%RealWinner.visible = false
+			self.call_deferred("queue_free")
 		modal_is_on = false
 		modal_time = 5
 		return
@@ -450,6 +453,8 @@ func _on_modal_timer_timeout() -> void:
 		%Winner.get_node("Label3").text = "AUTOSTART IN " + str(modal_time) + " SECONDS"
 	if %SurrenderModal.visible:
 		%SurrenderModal.get_node("Label3").text = "AUTOSTART IN " + str(modal_time) + " SECONDS"
+	if %RealWinner.visible:
+		%RealWinner.get_node("Label3").text = "AUTOCLOSE IN " + str(modal_time) + " SECONDS"
 	
 
 func reset(event: InputEvent) -> void:

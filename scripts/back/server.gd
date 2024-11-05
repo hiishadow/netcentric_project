@@ -250,17 +250,6 @@ func startServer():
 		print("Started Server")
 
 func runningGame():
-	if current_turn == get_parent().total_turn:
-		var real_winner
-		if clients[clients.keys()[0]].attributes.score == 0 and clients[clients.keys()[1]].attributes.score == 0:
-			broadcast_to_all({"message": Message.endGame, "data": "NO WINNER"})
-		elif clients[clients.keys()[0]].attributes.score == clients[clients.keys()[1]].attributes.score:
-			broadcast_to_all({"message": Message.endGame, "data": "TIE"})
-		elif clients[clients.keys()[0]].attributes.score > clients[clients.keys()[1]].attributes.score:
-			broadcast_to_all({"message": Message.endGame, "data": clients[clients.keys()[0]].attributes.name})
-		elif clients[clients.keys()[0]].attributes.score < clients[clients.keys()[1]].attributes.score:
-			broadcast_to_all({"message": Message.endGame, "data": clients[clients.keys()[1]].attributes.name})
-		return
 	if turn_index == 0: #set new seed only first round
 		#rng.randomize()
 		#rng.seed = 3672018741301020184
@@ -274,6 +263,18 @@ func runningGame():
 		#	j += 1
 		#used_num.sort()
 		#var target_num = rng.randi_range(1, 9)
+		if current_turn == get_parent().total_turn:
+			var real_winner
+			if clients[clients.keys()[0]].attributes.score == 0 and clients[clients.keys()[1]].attributes.score == 0:
+				broadcast_to_all({"message": Message.endGame, "data": "NO WINNER"})
+			elif clients[clients.keys()[0]].attributes.score == clients[clients.keys()[1]].attributes.score:
+				broadcast_to_all({"message": Message.endGame, "data": "TIE"})
+			elif clients[clients.keys()[0]].attributes.score > clients[clients.keys()[1]].attributes.score:
+				broadcast_to_all({"message": Message.endGame, "data": clients[clients.keys()[0]].attributes.name})
+			elif clients[clients.keys()[0]].attributes.score < clients[clients.keys()[1]].attributes.score:
+				broadcast_to_all({"message": Message.endGame, "data": clients[clients.keys()[1]].attributes.name})
+			return
+		
 		current_turn += 1
 		random_from_pool()
 		broadcast_to_all({"message": Message.sendSeed, "used_num": used_num, "target_num": target_num, "seed_answer": seed_answer\

@@ -23,6 +23,12 @@ func _on_start_as_server_pressed() -> void:
 	%HUD.get_node("header").text = "SERVER" + str(OS.get_process_id())
 	is_server = true
 	
+	var input_text = %LineEdit.text
+	if input_text.is_valid_int() and int(input_text) > 0:
+		total_turn = int(input_text)
+	else:
+		total_turn = 3
+	
 	#%Client.connectToServer("26.26.253.235")
 	%Client.connectToServer(ip_add)
 
@@ -37,7 +43,8 @@ func _on_start_as_client_pressed() -> void:
 
 	#%Client.connectToServer("26.26.253.235")
 	%Client.connectToServer(ip_add)
-	%Server.queue_free()
+	if has_node("Server"):
+		%Server.queue_free()
 
 
 func _on_quick_play_pressed() -> void:

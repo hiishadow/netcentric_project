@@ -115,7 +115,7 @@ func _process(delta: float) -> void:
 					get_parent().get_node("Game").get_node("GameManager").modal_is_on = true
 					get_parent().get_node("Game").get_node("GameManager").modal_time = 5
 					get_parent().get_node("Game").get_node("ModalTimer").start()
-					#get_parent().get_node("Game").call_deferred("queue_free")
+					get_parent().get_node("Game").call_deferred("queue_free")
 				_:
 					print("Unknown message type")
 

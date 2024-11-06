@@ -434,8 +434,9 @@ func _on_modal_timer_timeout() -> void:
 						"surrender": true
 					})
 		if %RealWinner.visible:
+			print("QueueFree")
 			%RealWinner.visible = false
-			self.call_deferred("queue_free")
+			get_tree().root.get_node("main").backToMain()
 		modal_is_on = false
 		modal_time = 5
 		return

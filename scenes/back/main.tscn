@@ -12,7 +12,7 @@
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_82jb4"]
 bg_color = Color(0.882353, 0.341176, 0.301961, 1)
-border_width_left = 11
+border_width_left = 5
 border_width_top = 11
 border_width_right = 11
 border_width_bottom = 11
@@ -24,15 +24,15 @@ corner_radius_bottom_left = 26
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_wb3r7"]
 bg_color = Color(0.882353, 0.341176, 0.301961, 1)
-border_width_left = 11
-border_width_top = 11
-border_width_right = 11
-border_width_bottom = 11
+border_width_left = 5
+border_width_top = 5
+border_width_right = 5
+border_width_bottom = 5
 border_color = Color(0.988235, 0.952941, 0.92549, 1)
-corner_radius_top_left = 26
-corner_radius_top_right = 26
-corner_radius_bottom_right = 26
-corner_radius_bottom_left = 26
+corner_radius_top_left = 16
+corner_radius_top_right = 16
+corner_radius_bottom_right = 16
+corner_radius_bottom_left = 16
 
 [sub_resource type="Theme" id="Theme_tj5ac"]
 default_font = ExtResource("5_6ebgq")
@@ -1541,7 +1541,7 @@ cache/0/12/0/glyphs/10/size = Vector2(5, 6)
 cache/0/12/0/glyphs/10/uv_rect = Rect2(250, 1, 5, 6)
 cache/0/12/0/glyphs/10/texture_idx = 0
 
-[sub_resource type="Image" id="Image_nwrx6"]
+[sub_resource type="Image" id="Image_y2uo8"]
 data = {
 "data": PackedByteArray("////AP///wD///8A////AP///wD///8A////AP///wD///8A////AP///wD///8A////AP///wD///8A////AP///wD///8A////YP///2H///8A////AP///wD///8A////AP///wD///8A////AP///2D///9h////AP///wD///8A////YP///7////+/////Yf///wD///8A////AP///wD///8A////AP///2D///+/////v////2H///8A////AP///2H///+/////v////7////9h////AP///wD///8A////AP///2D///+/////v////7////9g////AP///wD///8A////Yf///7////+/////v////2H///8A////AP///2D///+/////v////7////9g////AP///wD///8A////AP///wD///9h////v////7////+/////Yf///2D///+/////v////7////9g////AP///wD///8A////AP///wD///8A////AP///2H///+/////v////7////+/////v////7////9g////AP///wD///8A////AP///wD///8A////AP///wD///8A////Yf///7////+/////v////7////9g////AP///wD///8A////AP///wD///8A////AP///wD///8A////AP///2D///+/////v////7////+/////Yf///wD///8A////AP///wD///8A////AP///wD///8A////AP///2D///+/////v////7////+/////v////7////9h////AP///wD///8A////AP///wD///8A////AP///2D///+/////v////7////9g////Yf///7////+/////v////2H///8A////AP///wD///8A////AP///2D///+/////v////7////9g////AP///wD///9h////v////7////+/////Yf///wD///8A////AP///2D///+/////v////7////9g////AP///wD///8A////AP///2H///+/////v////7////9h////AP///wD///9h////v////7////9g////AP///wD///8A////AP///wD///8A////Yf///7////+/////YP///wD///8A////AP///2H///9g////AP///wD///8A////AP///wD///8A////AP///wD///9h////YP///wD///8A////AP///wD///8A////AP///wD///8A////AP///wD///8A////AP///wD///8A////AP///wD///8A////AA=="),
 "format": "RGBA8",
@@ -1551,7 +1551,7 @@ data = {
 }
 
 [sub_resource type="ImageTexture" id="ImageTexture_45tpw"]
-image = SubResource("Image_nwrx6")
+image = SubResource("Image_y2uo8")
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_r6s4o"]
 content_margin_left = 4.0

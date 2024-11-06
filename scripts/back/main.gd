@@ -1,7 +1,7 @@
 extends Node
 
-const ip_add: String = "26.26.253.235"
-const be_server: bool = false
+const ip_add: String = ""
+const be_server: bool = true
 var is_server = false
 var server = null
 var client = null
@@ -32,7 +32,6 @@ func _on_start_as_server_pressed() -> void:
 		get_node("Client2").name = "Client"
 		
 	get_node("Server").startServer()
-	%HUD.visible = true
 	%HUD.get_node("header").text = "SERVER" + str(OS.get_process_id())
 	is_server = true
 	
@@ -50,7 +49,6 @@ func _on_start_as_client_pressed() -> void:
 	if modal_is_on: return
 	%BecomeHost.hide()
 	%JoinAsClient.hide()
-	%HUD.visible = true
 	%HUD.get_node("header").text = "CLIENT" + str(OS.get_process_id())
 
 	if has_node("Client2"):

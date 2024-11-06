@@ -1,4 +1,4 @@
-[gd_scene load_steps=51 format=3 uid="uid://yucu3qavvca2"]
+[gd_scene load_steps=54 format=3 uid="uid://yucu3qavvca2"]
 
 [ext_resource type="Script" path="res://scripts/front/game_manager.gd" id="1_76u30"]
 [ext_resource type="FontFile" uid="uid://bt5pn0ptnei0q" path="res://fonts/Bungee/Bungee-Regular.ttf" id="2_2virx"]
@@ -236,6 +236,31 @@ corner_radius_top_left = 8
 corner_radius_top_right = 8
 corner_radius_bottom_right = 8
 corner_radius_bottom_left = 8
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_ktq6i"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_wb3r7"]
+bg_color = Color(0.882353, 0.341176, 0.301961, 1)
+border_width_left = 5
+border_width_top = 5
+border_width_right = 5
+border_width_bottom = 5
+border_color = Color(0.988235, 0.952941, 0.92549, 1)
+corner_radius_top_left = 16
+corner_radius_top_right = 16
+corner_radius_bottom_right = 16
+corner_radius_bottom_left = 16
+
+[sub_resource type="Theme" id="Theme_vcdyd"]
+default_font = ExtResource("2_2virx")
+default_font_size = 64
+Button/colors/font_color = Color(1, 1, 1, 1)
+Button/styles/focus = SubResource("StyleBoxEmpty_ktq6i")
+Button/styles/hover = SubResource("StyleBoxFlat_wb3r7")
+Button/styles/hover_pressed = SubResource("StyleBoxFlat_wb3r7")
+Button/styles/normal = SubResource("StyleBoxFlat_wb3r7")
+Button/styles/pressed = SubResource("StyleBoxFlat_wb3r7")
+CheckButton/font_sizes/font_size = 40
 
 [node name="Game" type="Node"]
 
@@ -812,12 +837,12 @@ text = "RESET GAME"
 
 [node name="Surrender" type="Button" parent="."]
 unique_name_in_owner = true
-visible = false
 z_index = 50
 offset_left = 1682.0
 offset_top = 1021.0
 offset_right = 1906.0
 offset_bottom = 1075.0
+theme = SubResource("Theme_vcdyd")
 theme_override_font_sizes/font_size = 30
 disabled = true
 text = "SURRENDER"

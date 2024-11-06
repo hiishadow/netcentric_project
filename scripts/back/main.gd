@@ -10,8 +10,11 @@ var total_turn = 3
 var server_window = preload("res://scenes/back/server_window.tscn")
 var cli = preload("res://scenes/back/client.tscn")
 var ser = preload("res://scenes/back/server.tscn")
+var name1 = "Steve"
+var name2 = "Alex"
 
 func _ready():
+	random_name()
 	get_viewport().set_embedding_subwindows(false)
 
 func _on_start_as_server_pressed() -> void:
@@ -93,4 +96,17 @@ func backToMain():
 	
 	%BecomeHost.visible = true
 	%JoinAsClient.visible = true
+	random_name()
 	pass
+
+func random_name():
+	randomize()
+	var names = [
+		"James", "Mary", "John", "Patricia", "Robert", "Jennifer", 
+		"Michael", "Linda", "William", "Elizabeth", "David", "Barbara", 
+		"Richard", "Susan", "Joseph", "Jessica", "Thomas", "Sarah", 
+		"Charles", "Karen", "Steve"
+	]
+	names.shuffle()
+	name1 = names[0]
+	name2 = names[1]

@@ -194,7 +194,10 @@ func assignPlayerName() -> void:
 		_name = get_parent().get_node("MainMenu").get_node("MainBox").get_node("LineEdit").text
 		_avatar = get_parent().get_node("MainMenu").get_node("AvatarChange").selected_avatar_number
 		if _name == "":
-			_name = str(id)
+			if get_parent().is_server:
+				_name = get_parent().name1
+			else:
+				_name = get_parent().name2
 		player_attributes["name"] = _name
 		player_attributes["avatar"] = _avatar
 		# Send player attributes to the server

@@ -1541,7 +1541,7 @@ cache/0/12/0/glyphs/10/size = Vector2(5, 6)
 cache/0/12/0/glyphs/10/uv_rect = Rect2(250, 1, 5, 6)
 cache/0/12/0/glyphs/10/texture_idx = 0
 
-[sub_resource type="Image" id="Image_3nj6h"]
+[sub_resource type="Image" id="Image_hfrmn"]
 data = {
 "data": PackedByteArray("////AP///wD///8A////AP///wD///8A////AP///wD///8A////AP///wD///8A////AP///wD///8A////AP///wD///8A////YP///2H///8A////AP///wD///8A////AP///wD///8A////AP///2D///9h////AP///wD///8A////YP///7////+/////Yf///wD///8A////AP///wD///8A////AP///2D///+/////v////2H///8A////AP///2H///+/////v////7////9h////AP///wD///8A////AP///2D///+/////v////7////9g////AP///wD///8A////Yf///7////+/////v////2H///8A////AP///2D///+/////v////7////9g////AP///wD///8A////AP///wD///9h////v////7////+/////Yf///2D///+/////v////7////9g////AP///wD///8A////AP///wD///8A////AP///2H///+/////v////7////+/////v////7////9g////AP///wD///8A////AP///wD///8A////AP///wD///8A////Yf///7////+/////v////7////9g////AP///wD///8A////AP///wD///8A////AP///wD///8A////AP///2D///+/////v////7////+/////Yf///wD///8A////AP///wD///8A////AP///wD///8A////AP///2D///+/////v////7////+/////v////7////9h////AP///wD///8A////AP///wD///8A////AP///2D///+/////v////7////9g////Yf///7////+/////v////2H///8A////AP///wD///8A////AP///2D///+/////v////7////9g////AP///wD///9h////v////7////+/////Yf///wD///8A////AP///2D///+/////v////7////9g////AP///wD///8A////AP///2H///+/////v////7////9h////AP///wD///9h////v////7////9g////AP///wD///8A////AP///wD///8A////Yf///7////+/////YP///wD///8A////AP///2H///9g////AP///wD///8A////AP///wD///8A////AP///wD///9h////YP///wD///8A////AP///wD///8A////AP///wD///8A////AP///wD///8A////AP///wD///8A////AP///wD///8A////AA=="),
 "format": "RGBA8",
@@ -1551,7 +1551,7 @@ data = {
 }
 
 [sub_resource type="ImageTexture" id="ImageTexture_45tpw"]
-image = SubResource("Image_3nj6h")
+image = SubResource("Image_hfrmn")
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_r6s4o"]
 content_margin_left = 4.0
@@ -1646,6 +1646,7 @@ unique_name_in_owner = true
 
 [node name="BecomeHost" type="Button" parent="."]
 unique_name_in_owner = true
+visible = false
 offset_left = 1516.0
 offset_top = 823.0
 offset_right = 1869.0
@@ -1655,6 +1656,7 @@ text = "start as server"
 
 [node name="JoinAsClient" type="Button" parent="."]
 unique_name_in_owner = true
+visible = false
 offset_left = 1519.0
 offset_top = 943.0
 offset_right = 1853.0

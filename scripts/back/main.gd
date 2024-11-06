@@ -1,6 +1,7 @@
 extends Node
 
-const ip_add: String = "127.0.0.1"
+const ip_add: String = "26.26.253.235"
+const be_server: bool = true
 var is_server = false
 var server = null
 var client = null
@@ -65,7 +66,6 @@ func _on_start_as_client_pressed() -> void:
 func _on_quick_play_pressed() -> void:
 	if modal_is_on: return
 	#FIXME fix when show to teacher
-	var be_server = true
 	if be_server:
 		_on_start_as_server_pressed()
 	else:

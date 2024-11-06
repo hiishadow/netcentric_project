@@ -1,7 +1,7 @@
 extends Node
 
 const ip_add: String = "26.26.253.235"
-const be_server: bool = true
+const be_server: bool = false
 var is_server = false
 var server = null
 var client = null
@@ -94,8 +94,6 @@ func backToMain():
 	call_deferred("add_child", a, true)
 	call_deferred("add_child", b, true)
 	
-	%BecomeHost.visible = true
-	%JoinAsClient.visible = true
 	random_name()
 	pass
 

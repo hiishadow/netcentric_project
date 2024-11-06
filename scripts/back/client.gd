@@ -80,6 +80,7 @@ func _process(delta: float) -> void:
 							get_parent().get_node("Game").get_node("ViewRule").hide()
 							get_parent().get_node("Game").get_node("CurrentTurn").visible = true
 							get_parent().get_node("Game").get_node("Surrender").disabled = false
+							get_parent().get_node("Game").get_node("Surrender").visible = true
 				Message.runningGame:
 					#do match on game_manger ccuz i lazy
 					get_parent().get_node("Game").get_node("GameManager").runningGame(data)
@@ -92,9 +93,11 @@ func _process(delta: float) -> void:
 					get_parent().get_node("Game").get_node("GameManager").modal_time = 0
 					get_parent().get_node("Game").get_node("GameManager")._on_modal_timer_timeout()
 					get_parent().get_node("Game").get_node("Surrender").disabled = false
+					get_parent().get_node("Game").get_node("Surrender").visible = true
 				Message.updateTimer:
 					get_parent().get_node("Game").get_node(data.data).start()
 					get_parent().get_node("Game").get_node("Surrender").disabled = false
+					get_parent().get_node("Game").get_node("Surrender").visible = true
 				Message.sendSeed:
 					get_parent().get_node("Game").get_node("GameManager").setSeed(data.used_num, data.target_num, data.seed_answer)
 					current_turn = data.current_turn

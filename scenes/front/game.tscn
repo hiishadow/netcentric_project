@@ -711,7 +711,6 @@ offset_right = 360.0
 offset_bottom = 240.0
 
 [node name="ViewRule" parent="." instance=ExtResource("16_he4ce")]
-visible = false
 z_index = 1
 offset_left = 75.0
 offset_top = 380.0

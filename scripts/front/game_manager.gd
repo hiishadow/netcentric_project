@@ -30,7 +30,7 @@ func _ready() -> void:
 	client = get_tree().root.get_child(0).get_node("Client")
 	main = get_tree().root.get_child(0)
 	#if !get_tree().root.get_node("main").is_server:
-	%Surrender.visible = true
+	%Surrender.visible = false
 	
 	slot_path()
 	
@@ -41,6 +41,7 @@ func _ready() -> void:
 func _process(delta: float) -> void:
 	if modal_is_on:
 		%Surrender.disabled = true
+		%Surrender.visible = false
 
 func slot_path():
 	play_zone_card_slot = [
@@ -345,6 +346,7 @@ func _on_modal_timer_timeout() -> void:
 		if %WrongAnswer.visible:
 			%WrongAnswer.visible = false
 			%Surrender.disabled = false
+			%Surrender.visible = true
 		if %CorrectAnswer.visible:
 			%CorrectAnswer.visible = false
 			if client.turn_num != client.clients_num - 1:
@@ -384,6 +386,7 @@ func _on_modal_timer_timeout() -> void:
 				%GameTimer.start()
 				client.send_to_server({"message": client.Message.updateTimer, "client_id": client.id, "data": "GameTimer"})
 				%Surrender.disabled = false
+				%Surrender.visible = true
 			else:
 				reverse_set_up_card_panel()
 				%EnemyTime.visible = true
@@ -400,6 +403,8 @@ func _on_modal_timer_timeout() -> void:
 			diff_score = 999.99
 			diff_equation = ""
 			%Winner.visible = false
+			%Surrender.disabled = false
+			%Surrender.visible = true
 			#START NEXT GAME
 			if is_clicked:
 				client.send_to_server({

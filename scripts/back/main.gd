@@ -1,7 +1,6 @@
 extends Node
 
-const ip_add: String = ""
-const be_server: bool = true
+@export var ip_add: String = "127.0.0.1"
 var is_server = false
 var server = null
 var client = null
@@ -19,55 +18,35 @@ func _ready():
 	get_viewport().set_embedding_subwindows(false)
 
 func _on_start_as_server_pressed() -> void:
-	if modal_is_on: return
 	var d = server_window.instantiate()
 	add_child(d)
-	
-	%BecomeHost.hide()
-	%JoinAsClient.hide()
-	
-	if has_node("Server2"):
-		get_node("Server2").name = "Server"
-	if has_node("Client2"):
-		get_node("Client2").name = "Client"
-		
-	get_node("Server").startServer()
-	%HUD.get_node("header").text = "SERVER" + str(OS.get_process_id())
+
 	is_server = true
-	
 	var input_text = %LineEdit.text
 	if input_text.is_valid_int() and int(input_text) > 0:
 		total_turn = int(input_text)
 	else:
 		total_turn = 3
-	
 	get_node("Client").connectToServer(ip_add)
 
 
 
 func _on_start_as_client_pressed() -> void:
-	if modal_is_on: return
-	%BecomeHost.hide()
-	%JoinAsClient.hide()
-	%HUD.get_node("header").text = "CLIENT" + str(OS.get_process_id())
-
-	if has_node("Client2"):
-		get_node("Client2").name = "Client"
-	if has_node("Server2"):
-		get_node("Server2").name = "Server"
-		
-	get_node("Client").connectToServer(ip_add)
 	if has_node("Server"):
 		get_node("Server").queue_free()
-
+	get_node("Client").connectToServer(ip_add)
 
 func _on_quick_play_pressed() -> void:
 	if modal_is_on: return
-	#FIXME fix when show to teacher
-	if be_server:
-		_on_start_as_server_pressed()
-	else:
-		_on_start_as_client_pressed()
+	
+	%BecomeHost.hide()
+	%JoinAsClient.hide()
+	if has_node("Server2"):
+		get_node("Server2").name = "Server"
+	if has_node("Client2"):
+		get_node("Client2").name = "Client"
+	
+	get_node("Server").startServer()
 
 
 

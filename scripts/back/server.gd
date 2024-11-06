@@ -245,9 +245,10 @@ func broadcast_to_all(message):
 func startServer():
 	var error = peer.create_server(8888)
 	if error != OK:
-		print("Error starting server: " + str(error))
+		get_parent()._on_start_as_client_pressed()
 	else:
 		print("Started Server")
+		get_parent()._on_start_as_server_pressed()
 
 func runningGame():
 	if turn_index == 0: #set new seed only first round

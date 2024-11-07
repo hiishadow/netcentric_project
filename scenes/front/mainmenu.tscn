@@ -1,4 +1,4 @@
-[gd_scene load_steps=58 format=3 uid="uid://phqqbkxeyk7u"]
+[gd_scene load_steps=59 format=3 uid="uid://phqqbkxeyk7u"]
 
 [ext_resource type="Texture2D" uid="uid://cgxiwy3ntovsc" path="res://bg.png" id="1_3qn0k"]
 [ext_resource type="Shader" path="res://moving.gdshader" id="1_kmq0h"]
@@ -16,6 +16,7 @@
 [ext_resource type="Texture2D" uid="uid://bnf8j05bflh57" path="res://resources/mainmenu/avatar/Gamee Avatar (1).png" id="10_c1vhn"]
 [ext_resource type="Texture2D" uid="uid://y0vk75bsls3g" path="res://resources/mainmenu/avatar/Gamee Avatar (2).png" id="11_6htd2"]
 [ext_resource type="Script" path="res://scripts/front/bald.gd" id="11_odric"]
+[ext_resource type="Texture2D" uid="uid://bg3obwn6kgdki" path="res://icons8-rotate-100.png" id="11_w3igu"]
 [ext_resource type="Script" path="res://scripts/front/bald_2.gd" id="12_d5kww"]
 [ext_resource type="Texture2D" uid="uid://c5g8bt0wpsul4" path="res://resources/mainmenu/avatar/Gamee Avatar 5.png" id="12_ixvdn"]
 [ext_resource type="Texture2D" uid="uid://1rff0llm8aeu" path="res://resources/mainmenu/avatar/Gamee Avatar 6.png" id="13_6ftfs"]
@@ -311,6 +312,20 @@ offset_top = 5.0
 offset_right = 95.0
 offset_bottom = 95.0
 theme_override_styles/panel = SubResource("StyleBoxFlat_0cg0m")
+
+[node name="TextureButton" type="TextureButton" parent="BackgroundColor"]
+layout_mode = 0
+offset_left = 26.0
+offset_top = 25.0
+offset_right = 126.0
+offset_bottom = 125.0
+scale = Vector2(0.5, 0.5)
+texture_normal = ExtResource("11_w3igu")
+
+[node name="Panel4" type="Panel" parent="BackgroundColor"]
+self_modulate = Color(1, 1, 1, 0)
+offset_right = 100.0
+offset_bottom = 100.0
 
 [node name="AvatarChange" type="Control" parent="."]
 visible = false
@@ -730,7 +745,7 @@ offset_bottom = 625.18
 theme = SubResource("Theme_8tnk6")
 text = "confirm"
 
-[connection signal="gui_input" from="BackgroundColor/Panel2" to="BackgroundColor" method="_on_panel_2_gui_input"]
+[connection signal="gui_input" from="BackgroundColor/Panel4" to="BackgroundColor" method="_on_panel_2_gui_input"]
 [connection signal="gui_input" from="AvatarChange/WhiteBox/bald1/Bald" to="MainBox" method="_on_bald_gui_input"]
 [connection signal="gui_input" from="AvatarChange/WhiteBox/bald1/Bald" to="AvatarChange" method="_on_bald_gui_input"]
 [connection signal="gui_input" from="AvatarChange/WhiteBox/bald1/ClickArea" to="AvatarChange" method="_on_click_area_gui_input"]

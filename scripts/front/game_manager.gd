@@ -441,7 +441,6 @@ func _on_modal_timer_timeout() -> void:
 		if %RealWinner.visible:
 			print("QueueFree")
 			%RealWinner.visible = false
-			client.send_to_server({"message": client.Message.checkEndGame})
 			get_tree().root.get_node("main").backToMain()
 		if %PlayerDis.visible:
 			%PlayerDis.visible = false

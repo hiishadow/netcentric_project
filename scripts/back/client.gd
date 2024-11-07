@@ -122,6 +122,7 @@ func _process(delta: float) -> void:
 				Message.endGame:
 					get_parent().get_node("Game").get_node("RealWinner").get_node("Label").text = str(data.data)
 					get_parent().get_node("Game").get_node("RealWinner").visible = true
+					send_to_server({"message": Message.checkEndGame, "client_id": id})
 					get_parent().get_node("Game").get_node("GameManager").modal_is_on = true
 					get_parent().get_node("Game").get_node("GameManager").modal_time = 5
 					get_parent().get_node("Game").get_node("ModalTimer").start()

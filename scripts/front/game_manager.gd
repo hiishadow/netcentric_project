@@ -573,6 +573,7 @@ func resetGame():
 	%WrongAnswer.hide()
 	%CorrectAnswer.hide()
 	%timeup_answer.hide()
+	%EnemyTime.hide()
 	%Winner.hide()
 	$"../ViewRule".visible = true
 	%ReadyPanel.visible = true

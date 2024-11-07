@@ -882,6 +882,7 @@ theme_override_font_sizes/font_size = 30
 text = "Turn 1"
 
 [node name="DebugLabel" type="Label" parent="."]
+visible = false
 z_index = 100
 offset_right = 40.0
 offset_bottom = 23.0

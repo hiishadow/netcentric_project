@@ -6,7 +6,7 @@ var server = null
 var client = null
 var modal_is_on = false
 var face_down_mode = false
-var total_turn = 3
+var total_turn = 1
 var server_window = preload("res://scenes/back/server_window.tscn")
 var cli = preload("res://scenes/back/client.tscn")
 var ser = preload("res://scenes/back/server.tscn")
@@ -20,27 +20,14 @@ func _ready():
 func _on_start_as_server_pressed() -> void:
 	var d = server_window.instantiate()
 	add_child(d)
-
+	
 	is_server = true
-	var input_text = %LineEdit.text
-	if input_text.is_valid_int() and int(input_text) > 0:
-		total_turn = int(input_text)
-	else:
-		total_turn = 3
 	get_node("Client").connectToServer(ip_add)
-
 
 
 func _on_start_as_client_pressed() -> void:
-	if has_node("Server"):
-		get_node("Server").queue_free()
-	get_node("Client").connectToServer(ip_add)
-
-func _on_quick_play_pressed() -> void:
 	if modal_is_on: return
 	
-	%BecomeHost.hide()
-	%JoinAsClient.hide()
 	if has_node("Server2"):
 		get_node("Server2").name = "Server"
 	if has_node("Client2"):
@@ -48,6 +35,19 @@ func _on_quick_play_pressed() -> void:
 	
 	get_node("Server").startServer()
 
+func _on_quick_play_pressed() -> void:
+	if modal_is_on: return
+	
+	if has_node("Server2"):
+		get_node("Server2").name = "Server"
+	if has_node("Client2"):
+		get_node("Client2").name = "Client"
+		
+	var input_text = %LineEdit.text
+	if input_text.is_valid_int() and int(input_text) > 0:
+		total_turn = int(input_text)
+	
+	get_node("Client").connectToServer(ip_add)
 
 
 
@@ -71,6 +71,8 @@ func backToMain():
 	call_deferred("add_child", a, true)
 	call_deferred("add_child", b, true)
 	
+	total_turn = 1
+	is_server = false
 	random_name()
 	pass
 
@@ -80,7 +82,7 @@ func random_name():
 		"James", "Mary", "John", "Patricia", "Robert", "Jennifer", 
 		"Michael", "Linda", "William", "Elizabeth", "David", "Barbara", 
 		"Richard", "Susan", "Joseph", "Jessica", "Thomas", "Sarah", 
-		"Charles", "Karen", "Steve"
+		"Charles", "Steve"
 	]
 	names.shuffle()
 	name1 = names[0]

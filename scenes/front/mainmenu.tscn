@@ -1,10 +1,11 @@
-[gd_scene load_steps=55 format=3 uid="uid://phqqbkxeyk7u"]
+[gd_scene load_steps=58 format=3 uid="uid://phqqbkxeyk7u"]
 
 [ext_resource type="Texture2D" uid="uid://cgxiwy3ntovsc" path="res://bg.png" id="1_3qn0k"]
 [ext_resource type="Shader" path="res://moving.gdshader" id="1_kmq0h"]
 [ext_resource type="Texture2D" uid="uid://dytb7b80up81t" path="res://resources/mainmenu/Gamee IQ180 (2).png" id="2_r0ttp"]
 [ext_resource type="FontFile" uid="uid://bt5pn0ptnei0q" path="res://fonts/Bungee/Bungee-Regular.ttf" id="2_rkpgl"]
 [ext_resource type="Script" path="res://scripts/front/main_box.gd" id="2_yvuct"]
+[ext_resource type="Script" path="res://scripts/back/background_color.gd" id="3_6qx37"]
 [ext_resource type="Texture2D" uid="uid://clcapspghdq6i" path="res://resources/mainmenu/text.png" id="3_qyj06"]
 [ext_resource type="Texture2D" uid="uid://c8rgikyfppuys" path="res://resources/mainmenu/Gamee Line 1.png" id="4_7hxwy"]
 [ext_resource type="Texture2D" uid="uid://bnodvp1mvnn66" path="res://resources/mainmenu/Gamee Frame 45 (1).png" id="5_xbr1l"]
@@ -71,6 +72,20 @@ LineEdit/styles/normal = SubResource("StyleBoxFlat_r56wx")
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_eaqnk"]
 texture = ExtResource("8_o5jtf")
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_bpv0m"]
+bg_color = Color(0.984314, 0.917647, 0.913725, 1)
+corner_radius_top_left = 25
+corner_radius_top_right = 25
+corner_radius_bottom_right = 25
+corner_radius_bottom_left = 25
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_0cg0m"]
+bg_color = Color(0.894118, 0.533333, 0.235294, 1)
+corner_radius_top_left = 25
+corner_radius_top_right = 25
+corner_radius_bottom_right = 25
+corner_radius_bottom_left = 25
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_fftko"]
 bg_color = Color(0.882353, 0.341176, 0.301961, 1)
@@ -273,6 +288,28 @@ offset_top = 1.0
 offset_right = 1093.55
 offset_bottom = 303.0
 texture = ExtResource("2_r0ttp")
+
+[node name="BackgroundColor" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+offset_left = 277.0
+offset_top = 207.0
+offset_right = 317.0
+offset_bottom = 247.0
+script = ExtResource("3_6qx37")
+
+[node name="Panel" type="Panel" parent="BackgroundColor"]
+layout_mode = 0
+offset_right = 100.0
+offset_bottom = 100.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_bpv0m")
+
+[node name="Panel2" type="Panel" parent="BackgroundColor"]
+offset_left = 5.0
+offset_top = 5.0
+offset_right = 95.0
+offset_bottom = 95.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_0cg0m")
 
 [node name="AvatarChange" type="Control" parent="."]
 visible = false
@@ -692,6 +729,7 @@ offset_bottom = 625.18
 theme = SubResource("Theme_8tnk6")
 text = "confirm"
 
+[connection signal="gui_input" from="BackgroundColor/Panel2" to="BackgroundColor" method="_on_panel_2_gui_input"]
 [connection signal="gui_input" from="AvatarChange/WhiteBox/bald1/Bald" to="MainBox" method="_on_bald_gui_input"]
 [connection signal="gui_input" from="AvatarChange/WhiteBox/bald1/Bald" to="AvatarChange" method="_on_bald_gui_input"]
 [connection signal="gui_input" from="AvatarChange/WhiteBox/bald1/ClickArea" to="AvatarChange" method="_on_click_area_gui_input"]

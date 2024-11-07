@@ -21,7 +21,9 @@ enum Message {
 	forceClosed,
 	resetGame,
 	clientSurrender,
-	endGame
+	endGame,
+	checkOpenServer,
+	setTotalTurn
 }
 
 var game = preload("res://scenes/front/game.tscn")
@@ -120,6 +122,8 @@ func _process(delta: float) -> void:
 					get_parent().get_node("Game").get_node("GameManager").modal_is_on = true
 					get_parent().get_node("Game").get_node("GameManager").modal_time = 5
 					get_parent().get_node("Game").get_node("ModalTimer").start()
+				Message.setTotalTurn:
+					get_parent().total_turn = int(data.data)
 				_:
 					print("Unknown message type")
 
@@ -131,11 +135,26 @@ func connectToServer(ip):
 		print("Started client")
 		#wait for client to connect to server (poll to open) or 
 		#just send to server and let it send back as packet and run on client that time
-		var game_instant = game.instantiate()
-		get_parent().add_child(game_instant)
+
 		await get_tree().create_timer(0.5).timeout
 		
+		print("ready state: ", str(peer.get_peer(1).get_ready_state()))
+		if peer.get_peer(1).get_ready_state() == 0:
+			peer = null
+			peer = WebSocketMultiplayerPeer.new()
+			get_parent()._on_start_as_client_pressed()
+			return
 		
+		var game_instant = game.instantiate()
+		var color = get_parent().get_node("MainMenu").get_node("BackgroundColor").color
+		var new_sb = StyleBoxFlat.new()
+		new_sb.bg_color = color
+		var styleBox: StyleBoxFlat = game_instant.get_node("Background").get_node("Panel").get_theme_stylebox("panel")
+		styleBox.set("bg_color", color)
+		game_instant.get_node("Background").get_node("Panel").add_theme_stylebox_override("panel", styleBox)
+		get_parent().add_child(game_instant)
+		
+		send_to_server({"message": Message.setTotalTurn, "client_id": id, "data": get_parent().total_turn})
 		send_to_server({"message": Message.getUserCount,"client_id": id})
 		send_to_server({"message": Message.showModal,"client_id": id})
 		assignPlayerName()

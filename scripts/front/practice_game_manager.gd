@@ -31,6 +31,13 @@ func _ready() -> void:
 	if get_tree().root.get_node("main").is_server:
 		%ResetGame.visible = true
 	
+	var color = main.get_node("MainMenu").get_node("BackgroundColor").color
+	var new_sb = StyleBoxFlat.new()
+	new_sb.bg_color = color
+	var styleBox: StyleBoxFlat = get_parent().get_node("Background").get_node("Panel").get_theme_stylebox("panel")
+	styleBox.set("bg_color", color)
+	get_parent().get_node("Background").get_node("Panel").add_theme_stylebox_override("panel", styleBox)
+	
 	random_from_pool()
 	
 	slot_path()

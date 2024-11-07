@@ -1,4 +1,4 @@
-[gd_scene load_steps=55 format=3 uid="uid://yucu3qavvca2"]
+[gd_scene load_steps=56 format=3 uid="uid://yucu3qavvca2"]
 
 [ext_resource type="Script" path="res://scripts/front/game_manager.gd" id="1_76u30"]
 [ext_resource type="FontFile" uid="uid://bt5pn0ptnei0q" path="res://fonts/Bungee/Bungee-Regular.ttf" id="2_2virx"]
@@ -26,6 +26,7 @@
 [ext_resource type="PackedScene" uid="uid://dk6yan7rnq7uf" path="res://scenes/front/surrender_modal.tscn" id="25_dicck"]
 [ext_resource type="PackedScene" uid="uid://brigpsp82if16" path="res://scenes/front/player_dis.tscn" id="26_o2714"]
 [ext_resource type="PackedScene" uid="uid://qtateo0lnpbf" path="res://scenes/front/real_winner.tscn" id="26_t63y6"]
+[ext_resource type="Script" path="res://scripts/front/debug_label.gd" id="27_7giwb"]
 
 [sub_resource type="VideoStreamTheora" id="VideoStreamTheora_kc4hb"]
 file = "finalallalalaal.ogv"
@@ -879,6 +880,13 @@ offset_right = 1893.0
 offset_bottom = 52.0
 theme_override_font_sizes/font_size = 30
 text = "Turn 1"
+
+[node name="DebugLabel" type="Label" parent="."]
+z_index = 100
+offset_right = 40.0
+offset_bottom = 23.0
+theme_override_font_sizes/font_size = 50
+script = ExtResource("27_7giwb")
 
 [connection signal="timeout" from="GameTimer" to="GameManager" method="_on_timer_timeout"]
 [connection signal="timeout" from="ModalTimer" to="GameManager" method="_on_modal_timer_timeout"]

@@ -42,6 +42,7 @@ var seed_answer = ""
 var current_turn = 0
 var arr_total_turn = []
 var end_game = false
+var player_queue = []
 
 func _ready() -> void:
 	rng.randomize()
@@ -94,18 +95,18 @@ func handle_message(data, sender_id):
 				equations[sender_id] = data.equation
 				#ssend to others
 				for client_id in clients.keys():
-					if client_id != clients.keys()[turn_index]:
+					if client_id != player_queue[turn_index]:
 						send_to_client(client_id, {"message": Message.sendTimeUsage, "data": data.data})
 		Message.sendDiffScore:
 			if data.has("data"):
 				diff_score[sender_id] = data.data
 		Message.closeModal:
 			for client_id in clients.keys():
-				if client_id != clients.keys()[turn_index]:
+				if client_id != player_queue[turn_index]:
 					send_to_client(client_id, {"message": Message.closeModal})
 		Message.updateTimer:
 			for client_id in clients.keys():
-				if client_id != clients.keys()[turn_index]:
+				if client_id != player_queue[turn_index]:
 					send_to_client(client_id, {"message": Message.updateTimer, "data": data.data, "sender_id": sender_id})
 		Message.clientSurrender:
 			for client_id in clients.keys():
@@ -306,24 +307,25 @@ func runningGame():
 		random_from_pool()
 		broadcast_to_all({"message": Message.sendSeed, "used_num": used_num, "target_num": target_num, "seed_answer": seed_answer\
 		, "current_turn": current_turn})
-		
+	
 	if current_turn == 1:
 		var start_player = rng.randi_range(0, 1)
 		var temp_key = clients.keys()[start_player]
-		var temp  = clients[temp_key]
-		clients.erase(temp_key)
-		clients[temp_key] = temp
+		player_queue.append(temp_key)
+		for i in clients.keys():
+			if i != temp_key:
+				player_queue.append(i)
 	
-	var turn_name = clients[clients.keys()[turn_index]].attributes.name
+	var turn_name = clients[player_queue[turn_index]].attributes.name
 	for client_id in clients.keys():
-		if client_id == clients.keys()[turn_index]:
+		if client_id == player_queue[turn_index]:
 			send_to_client(client_id,{
 				"message": Message.runningGame, 
 				"data": "ShowModalAsTurn", 
 				"turn_name": turn_name, 
 				"turn_num": turn_index
 			})
-		elif client_id != clients.keys()[turn_index]:
+		elif client_id != player_queue[turn_index]:
 			send_to_client(client_id,{
 				"message": Message.runningGame, 
 				"data": "ShowModal", 

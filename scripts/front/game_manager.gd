@@ -578,6 +578,7 @@ func resetGame():
 	%ReadyPanel.visible = true
 	%P1Avatar.visible = true
 	%P2Avatar.visible= true
+	%Surrender.hide()
 	
 	reverse_set_up_card_panel()
 	

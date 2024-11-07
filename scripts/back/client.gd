@@ -23,7 +23,8 @@ enum Message {
 	clientSurrender,
 	endGame,
 	checkOpenServer,
-	setTotalTurn
+	setTotalTurn,
+	checkEndGame
 }
 
 var game = preload("res://scenes/front/game.tscn")

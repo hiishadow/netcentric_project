@@ -23,7 +23,8 @@ enum Message {
 	clientSurrender,
 	endGame,
 	checkOpenServer,
-	setTotalTurn
+	setTotalTurn,
+	checkEndGame
 }
 
 var rng = RandomNumberGenerator.new()
@@ -40,6 +41,7 @@ var used_pool = []
 var seed_answer = ""
 var current_turn = 0
 var arr_total_turn = []
+var end_game = false
 
 func _ready() -> void:
 	rng.randomize()
@@ -213,6 +215,9 @@ func handle_message(data, sender_id):
 					broadcast_to_all({"message": Message.setTotalTurn, "data": arr_total_turn[0]})
 				elif arr_total_turn[0] < arr_total_turn[1]:
 					broadcast_to_all({"message": Message.setTotalTurn, "data": arr_total_turn[1]})
+		Message.checkEndGame:
+			end_game = true
+
 
 func peer_connected(id):
 	print("Peer Connected: " + str(id))
@@ -243,7 +248,8 @@ func peer_connected(id):
 
 func peer_disconnected(id):
 	print("Peer Disconnected: " + str(id))
-	get_tree().root.get_node("main").get_node("Game").get_node("GameManager").peerDiscon()
+	if end_game:
+		get_tree().root.get_node("main").get_node("Game").get_node("GameManager").peerDiscon()
 	
 	clients.erase(id)
 	var message = {

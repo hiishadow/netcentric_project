@@ -441,6 +441,7 @@ func _on_modal_timer_timeout() -> void:
 		if %RealWinner.visible:
 			print("QueueFree")
 			%RealWinner.visible = false
+			client.send_to_server({"message": client.Message.checkEndGame})
 			get_tree().root.get_node("main").backToMain()
 		if %PlayerDis.visible:
 			%PlayerDis.visible = false
@@ -579,7 +580,7 @@ func resetGame():
 	%P1Avatar.visible = true
 	%P2Avatar.visible= true
 	%Surrender.hide()
-	
+	%CurrentTurn.visible = false
 	reverse_set_up_card_panel()
 	
 	$"../ViewRule".get_node("Label").text = "WHEN READY\nPRESS READY"
@@ -593,6 +594,8 @@ func resetGame():
 	%TargetPanel.get_node("Label").text = "#"
 	
 	client.updateDisplay()
+	var serv = get_tree().root.get_node("main").get_node("Server")
+	serv.current_turn = 0
 	
 	game_time = 60
 	modal_time = 60

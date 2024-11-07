@@ -59,6 +59,7 @@ grow_vertical = 2
 
 [node name="TextureRect" type="TextureRect" parent="."]
 material = SubResource("ShaderMaterial_sxoj3")
+layout_mode = 0
 offset_left = -805.0
 offset_top = -602.0
 offset_right = 2125.0
@@ -66,11 +67,13 @@ offset_bottom = 1484.0
 texture = ExtResource("2_vjw44")
 
 [node name="Panel" type="Panel" parent="."]
+layout_mode = 0
 offset_right = 1500.0
 offset_bottom = 800.0
 theme_override_styles/panel = SubResource("StyleBoxFlat_n27dx")
 
 [node name="Panel2" type="Panel" parent="."]
+layout_mode = 0
 offset_left = 10.0
 offset_top = 10.0
 offset_right = 1490.0
@@ -78,6 +81,7 @@ offset_bottom = 790.0
 theme_override_styles/panel = SubResource("StyleBoxFlat_pqm34")
 
 [node name="Label" type="Label" parent="."]
+layout_mode = 0
 offset_top = 270.0
 offset_right = 1500.0
 offset_bottom = 520.0
@@ -210,6 +214,7 @@ offset_right = 620.0
 offset_bottom = 100.0
 
 [node name="Label3" type="Label" parent="."]
+layout_mode = 0
 offset_top = 600.0
 offset_right = 1500.0
 offset_bottom = 800.0

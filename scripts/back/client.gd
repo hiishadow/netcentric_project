@@ -36,6 +36,7 @@ var _name
 var _avatar
 var clients
 var current_turn
+var temp_name
 
 func _process(delta: float) -> void:
 	peer.poll()
@@ -52,6 +53,7 @@ func _process(delta: float) -> void:
 					handleConfirmConnection()
 				Message.setID:
 					id = data.data
+					temp_name = data.temp_name
 					print("Assigned ID: " + str(id))
 				Message.newUserConnected:
 					print("User connected: " + str(data.data))
@@ -216,10 +218,8 @@ func assignPlayerName() -> void:
 		_name = get_parent().get_node("MainMenu").get_node("MainBox").get_node("LineEdit").text
 		_avatar = get_parent().get_node("MainMenu").get_node("AvatarChange").selected_avatar_number
 		if _name == "":
-			if get_parent().is_server:
-				_name = get_parent().name1
-			else:
-				_name = get_parent().name2
+			_name = temp_name
+
 		player_attributes["name"] = _name
 		player_attributes["avatar"] = _avatar
 		# Send player attributes to the server

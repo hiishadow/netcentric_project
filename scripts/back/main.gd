@@ -12,6 +12,7 @@ var cli = preload("res://scenes/back/client.tscn")
 var ser = preload("res://scenes/back/server.tscn")
 var name1 = "Steve"
 var name2 = "Alex"
+var name_index = 0
 
 func _ready():
 	random_name()
@@ -71,6 +72,7 @@ func backToMain():
 	call_deferred("add_child", a, true)
 	call_deferred("add_child", b, true)
 	
+	name_index = 0
 	total_turn = 1
 	is_server = false
 	random_name()

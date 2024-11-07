@@ -221,10 +221,16 @@ func peer_connected(id):
 		"attributes": {"name": "Player" + str(id), "score": 0}  # Default attributes for the player
 	}
 	
+	var temp_name
+	if clients.size() == 1:
+		temp_name = get_parent().name1
+	elif clients.size() == 2:
+		temp_name = get_parent().name2
 	# Send the assigned ID back to the client
 	var message = {
 		"message": Message.setID,
-		"data": id  # Send the ID to the client
+		"data": id,  # Send the ID to the client
+		"temp_name": temp_name
 	}
 	send_to_client(id,message)
 	

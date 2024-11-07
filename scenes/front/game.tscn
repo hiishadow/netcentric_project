@@ -1,4 +1,4 @@
-[gd_scene load_steps=54 format=3 uid="uid://yucu3qavvca2"]
+[gd_scene load_steps=55 format=3 uid="uid://yucu3qavvca2"]
 
 [ext_resource type="Script" path="res://scripts/front/game_manager.gd" id="1_76u30"]
 [ext_resource type="FontFile" uid="uid://bt5pn0ptnei0q" path="res://fonts/Bungee/Bungee-Regular.ttf" id="2_2virx"]
@@ -24,6 +24,7 @@
 [ext_resource type="PackedScene" uid="uid://41q8f4vhbp1n" path="res://scenes/front/rule_page.tscn" id="17_jymu3"]
 [ext_resource type="PackedScene" uid="uid://bt8ttmwh8ex8j" path="res://scenes/front/winner.tscn" id="20_akx14"]
 [ext_resource type="PackedScene" uid="uid://dk6yan7rnq7uf" path="res://scenes/front/surrender_modal.tscn" id="25_dicck"]
+[ext_resource type="PackedScene" uid="uid://brigpsp82if16" path="res://scenes/front/player_dis.tscn" id="26_o2714"]
 [ext_resource type="PackedScene" uid="uid://qtateo0lnpbf" path="res://scenes/front/real_winner.tscn" id="26_t63y6"]
 
 [sub_resource type="VideoStreamTheora" id="VideoStreamTheora_kc4hb"]
@@ -237,9 +238,9 @@ corner_radius_top_right = 8
 corner_radius_bottom_right = 8
 corner_radius_bottom_left = 8
 
-[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_ktq6i"]
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_xbegy"]
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_wb3r7"]
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_fkyss"]
 bg_color = Color(0.882353, 0.341176, 0.301961, 1)
 border_width_left = 5
 border_width_top = 5
@@ -255,11 +256,11 @@ corner_radius_bottom_left = 16
 default_font = ExtResource("2_2virx")
 default_font_size = 64
 Button/colors/font_color = Color(1, 1, 1, 1)
-Button/styles/focus = SubResource("StyleBoxEmpty_ktq6i")
-Button/styles/hover = SubResource("StyleBoxFlat_wb3r7")
-Button/styles/hover_pressed = SubResource("StyleBoxFlat_wb3r7")
-Button/styles/normal = SubResource("StyleBoxFlat_wb3r7")
-Button/styles/pressed = SubResource("StyleBoxFlat_wb3r7")
+Button/styles/focus = SubResource("StyleBoxEmpty_xbegy")
+Button/styles/hover = SubResource("StyleBoxFlat_fkyss")
+Button/styles/hover_pressed = SubResource("StyleBoxFlat_fkyss")
+Button/styles/normal = SubResource("StyleBoxFlat_fkyss")
+Button/styles/pressed = SubResource("StyleBoxFlat_fkyss")
 CheckButton/font_sizes/font_size = 40
 
 [node name="Game" type="Node"]
@@ -273,6 +274,10 @@ unique_name_in_owner = true
 
 [node name="ModalTimer" type="Timer" parent="."]
 unique_name_in_owner = true
+
+[node name="ConnectionTimer" type="Timer" parent="."]
+wait_time = 0.6
+autostart = true
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
 unique_name_in_owner = true
@@ -855,6 +860,15 @@ offset_top = 140.0
 offset_right = 210.0
 offset_bottom = 140.0
 
+[node name="PlayerDis" parent="." instance=ExtResource("26_o2714")]
+unique_name_in_owner = true
+visible = false
+z_index = 111
+offset_left = 210.0
+offset_top = 140.0
+offset_right = 210.0
+offset_bottom = 140.0
+
 [node name="CurrentTurn" type="Label" parent="."]
 unique_name_in_owner = true
 visible = false
@@ -868,5 +882,6 @@ text = "Turn 1"
 
 [connection signal="timeout" from="GameTimer" to="GameManager" method="_on_timer_timeout"]
 [connection signal="timeout" from="ModalTimer" to="GameManager" method="_on_modal_timer_timeout"]
+[connection signal="timeout" from="ConnectionTimer" to="GameManager" method="_on_connection_timer_timeout"]
 [connection signal="gui_input" from="Reset/ClickArea" to="GameManager" method="reset"]
 [connection signal="pressed" from="Surrender" to="GameManager" method="_on_surrender_pressed"]

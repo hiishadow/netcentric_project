@@ -442,6 +442,9 @@ func _on_modal_timer_timeout() -> void:
 			print("QueueFree")
 			%RealWinner.visible = false
 			get_tree().root.get_node("main").backToMain()
+		if %PlayerDis.visible:
+			%PlayerDis.visible = false
+			get_tree().root.get_node("main").backToMain()
 		modal_is_on = false
 		modal_time = 5
 		return
@@ -461,6 +464,8 @@ func _on_modal_timer_timeout() -> void:
 		%SurrenderModal.get_node("Label3").text = "AUTOSTART IN " + str(modal_time) + " SECONDS"
 	if %RealWinner.visible:
 		%RealWinner.get_node("Label3").text = "AUTOCLOSE IN " + str(modal_time) + " SECONDS"
+	if %PlayerDis.visible:
+		%PlayerDis.get_node("Label3").text = "AUTOCLOSE IN " + str(modal_time) + " SECONDS"
 	
 
 func reset(event: InputEvent) -> void:
@@ -640,3 +645,23 @@ func _on_surrender_pressed() -> void:
 	modal_time = 5
 	%ModalTimer.start()
 	
+
+func _on_connection_timer_timeout() -> void:
+	if client.peer.get_connection_status() == 0:
+		peerDiscon()
+
+func peerDiscon():
+	%timeup_answer.hide()
+	%WrongAnswer.hide()
+	%CorrectAnswer.hide()
+	%Winner.hide()
+	%Surrender.hide()
+	%RealWinner.hide()
+	%GameTimer.stop()
+	%AudioStreamPlayer.stop()
+	%VideoStreamPlayer.stop()
+	modal_is_on = true
+	modal_time = 5
+	%ModalTimer.start()
+	%PlayerDis.visible = true
+	$"../ConnectionTimer".stop()

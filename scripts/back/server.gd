@@ -237,6 +237,8 @@ func peer_connected(id):
 
 func peer_disconnected(id):
 	print("Peer Disconnected: " + str(id))
+	get_tree().root.get_node("main").get_node("Game").get_node("GameManager").peerDiscon()
+	
 	clients.erase(id)
 	var message = {
 		"message": Message.userDisconnected,

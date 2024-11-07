@@ -305,6 +305,7 @@ offset_bottom = 100.0
 theme_override_styles/panel = SubResource("StyleBoxFlat_bpv0m")
 
 [node name="Panel2" type="Panel" parent="BackgroundColor"]
+layout_mode = 0
 offset_left = 5.0
 offset_top = 5.0
 offset_right = 95.0

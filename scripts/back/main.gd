@@ -85,5 +85,6 @@ func random_name():
 		"Charles", "Steve"
 	]
 	names.shuffle()
+	print(names)
 	name1 = names[0]
 	name2 = names[1]

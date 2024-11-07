@@ -1,0 +1,221 @@
+[gd_scene load_steps=11 format=3 uid="uid://brigpsp82if16"]
+
+[ext_resource type="Shader" path="res://tres/blur_shader.gdshader" id="1_fqbsa"]
+[ext_resource type="Texture2D" uid="uid://drhpp5pp5uh63" path="res://icon.svg" id="2_vjw44"]
+[ext_resource type="FontFile" uid="uid://bt5pn0ptnei0q" path="res://fonts/Bungee/Bungee-Regular.ttf" id="3_6qqlo"]
+[ext_resource type="FontFile" uid="uid://c8fc2cp5fitkg" path="res://fonts/Bungee_Inline/BungeeInline-Regular.ttf" id="4_pm0ey"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_sxoj3"]
+shader = ExtResource("1_fqbsa")
+shader_parameter/lod = 1.0
+shader_parameter/mix_percentage = 0.0
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_n27dx"]
+bg_color = Color(0.894118, 0.533333, 0.235294, 1)
+corner_radius_top_left = 20
+corner_radius_top_right = 20
+corner_radius_bottom_right = 20
+corner_radius_bottom_left = 20
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_pqm34"]
+bg_color = Color(0.988235, 0.952941, 0.92549, 1)
+corner_radius_top_left = 20
+corner_radius_top_right = 20
+corner_radius_bottom_right = 20
+corner_radius_bottom_left = 20
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_w3rwv"]
+resource_local_to_scene = true
+bg_color = Color(1, 1, 1, 1)
+corner_radius_top_left = 12
+corner_radius_top_right = 12
+corner_radius_bottom_right = 12
+corner_radius_bottom_left = 12
+shadow_color = Color(0, 0, 0, 0.0980392)
+shadow_size = 6
+shadow_offset = Vector2(0, 4)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_xkkcm"]
+bg_color = Color(1, 1, 1, 1)
+corner_radius_top_left = 20
+corner_radius_top_right = 20
+corner_radius_bottom_right = 20
+corner_radius_bottom_left = 20
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_c1vr3"]
+bg_color = Color(0.882353, 0.341176, 0.301961, 1)
+corner_radius_top_left = 8
+corner_radius_top_right = 8
+corner_radius_bottom_right = 8
+corner_radius_bottom_left = 8
+
+[node name="PlayerDis" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="TextureRect" type="TextureRect" parent="."]
+material = SubResource("ShaderMaterial_sxoj3")
+offset_left = -805.0
+offset_top = -602.0
+offset_right = 2125.0
+offset_bottom = 1484.0
+texture = ExtResource("2_vjw44")
+
+[node name="Panel" type="Panel" parent="."]
+offset_right = 1500.0
+offset_bottom = 800.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_n27dx")
+
+[node name="Panel2" type="Panel" parent="."]
+offset_left = 10.0
+offset_top = 10.0
+offset_right = 1490.0
+offset_bottom = 790.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_pqm34")
+
+[node name="Label" type="Label" parent="."]
+offset_top = 270.0
+offset_right = 1500.0
+offset_bottom = 520.0
+theme_override_colors/font_color = Color(0.85098, 0.176471, 0.12549, 1)
+theme_override_fonts/font = ExtResource("3_6qqlo")
+theme_override_font_sizes/font_size = 100
+text = "Another PLayer
+Disconnected"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Player1" type="Control" parent="."]
+visible = false
+layout_mode = 3
+anchors_preset = 0
+offset_left = 120.0
+offset_top = 380.0
+offset_right = 160.0
+offset_bottom = 420.0
+
+[node name="Panel2" type="Panel" parent="Player1"]
+layout_mode = 0
+offset_right = 580.0
+offset_bottom = 200.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_w3rwv")
+
+[node name="Label" type="Label" parent="Player1"]
+layout_mode = 0
+offset_top = 10.0
+offset_right = 580.0
+offset_bottom = 65.0
+theme_override_colors/font_color = Color(0.882353, 0.341176, 0.301961, 1)
+theme_override_fonts/font = ExtResource("3_6qqlo")
+theme_override_font_sizes/font_size = 40
+text = "plyr1's equation"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Label2" type="Label" parent="Player1"]
+layout_mode = 0
+offset_top = 65.0
+offset_right = 580.0
+offset_bottom = 135.0
+theme_override_colors/font_color = Color(0.882353, 0.341176, 0.301961, 1)
+theme_override_fonts/font = ExtResource("4_pm0ey")
+theme_override_font_sizes/font_size = 50
+text = "1 + 2 + 3 + 4 + 5 = 15"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Player2" type="Control" parent="."]
+visible = false
+layout_mode = 3
+anchors_preset = 0
+offset_left = 810.0
+offset_top = 380.0
+offset_right = 850.0
+offset_bottom = 420.0
+
+[node name="Panel2" type="Panel" parent="Player2"]
+layout_mode = 0
+offset_right = 580.0
+offset_bottom = 200.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_w3rwv")
+
+[node name="Label" type="Label" parent="Player2"]
+layout_mode = 0
+offset_top = 10.0
+offset_right = 580.0
+offset_bottom = 65.0
+theme_override_colors/font_color = Color(0.882353, 0.341176, 0.301961, 1)
+theme_override_fonts/font = ExtResource("3_6qqlo")
+theme_override_font_sizes/font_size = 40
+text = "plyr2's equation"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Label2" type="Label" parent="Player2"]
+layout_mode = 0
+offset_top = 65.0
+offset_right = 580.0
+offset_bottom = 135.0
+theme_override_colors/font_color = Color(0.882353, 0.341176, 0.301961, 1)
+theme_override_fonts/font = ExtResource("4_pm0ey")
+theme_override_font_sizes/font_size = 50
+text = "1 + 2 + 3 + 4 + 5 = 15"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Close" type="Control" parent="."]
+unique_name_in_owner = true
+visible = false
+layout_mode = 3
+anchors_preset = 0
+offset_left = 440.0
+offset_top = 570.0
+offset_right = 480.0
+offset_bottom = 610.0
+
+[node name="Panel3" type="Panel" parent="Close"]
+layout_mode = 0
+offset_right = 620.0
+offset_bottom = 100.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_xkkcm")
+
+[node name="Panel4" type="Panel" parent="Close"]
+layout_mode = 0
+offset_left = 10.0
+offset_top = 10.0
+offset_right = 610.0
+offset_bottom = 90.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_c1vr3")
+
+[node name="Label3" type="Label" parent="Close"]
+layout_mode = 0
+offset_right = 620.0
+offset_bottom = 100.0
+theme_override_fonts/font = ExtResource("3_6qqlo")
+theme_override_font_sizes/font_size = 55
+text = "START NEXT ROUND"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="ClickArea" type="Panel" parent="Close"]
+unique_name_in_owner = true
+self_modulate = Color(1, 1, 1, 0)
+z_index = 100
+layout_mode = 0
+offset_right = 620.0
+offset_bottom = 100.0
+
+[node name="Label3" type="Label" parent="."]
+offset_top = 600.0
+offset_right = 1500.0
+offset_bottom = 800.0
+theme_override_colors/font_color = Color(0.882353, 0.341176, 0.301961, 1)
+theme_override_fonts/font = ExtResource("3_6qqlo")
+theme_override_font_sizes/font_size = 50
+text = "AUTOCLOSE IN 5 SECONDS"
+horizontal_alignment = 1
+vertical_alignment = 1

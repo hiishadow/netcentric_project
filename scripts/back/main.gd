@@ -6,7 +6,7 @@ var server = null
 var client = null
 var modal_is_on = false
 var face_down_mode = false
-var total_turn = 1
+var total_turn = 2
 var server_window = preload("res://scenes/back/server_window.tscn")
 var cli = preload("res://scenes/back/client.tscn")
 var ser = preload("res://scenes/back/server.tscn")
@@ -73,7 +73,7 @@ func backToMain():
 	call_deferred("add_child", b, true)
 	
 	name_index = 0
-	total_turn = 1
+	total_turn = 2
 	is_server = false
 	random_name()
 	pass

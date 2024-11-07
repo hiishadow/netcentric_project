@@ -324,6 +324,7 @@ texture_normal = ExtResource("11_w3igu")
 
 [node name="Panel4" type="Panel" parent="BackgroundColor"]
 self_modulate = Color(1, 1, 1, 0)
+layout_mode = 0
 offset_right = 100.0
 offset_bottom = 100.0
 

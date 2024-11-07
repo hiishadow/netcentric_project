@@ -251,7 +251,6 @@ func peer_disconnected(id):
 	
 	if end_game == false:
 		get_tree().root.get_node("main").get_node("Game").get_node("GameManager").peerDiscon()
-		return
 	
 	clients.erase(id)
 	var message = {
